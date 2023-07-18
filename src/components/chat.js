@@ -2,8 +2,9 @@ import React, { useEffect, useState, useRef, useContext } from "react";
 import { Context } from "./Context";
 import Messages from "../Api/Mesages";
 import io from 'socket.io-client';
+import { Prev } from "react-bootstrap/esm/PageItem";
 
-function Chat() {
+function Chat(props) {
 
   // Changed variable name from 'setMessage' to 'setMessages' for better clarity
   const [messages, setMessages] = useState("");
@@ -13,15 +14,14 @@ function Chat() {
   const messageListRef = useRef(null);
 
   const inputRef = useRef(null);
+  const socket = props.socket;
 
-const socket = io.connect('http://localhost:5000'); // Use the correct server URL and port
 
-  // 
  useEffect(() => {
    //Handle incoming chat messages from the server
-    socket.on('chatMessage', (data) => {
-      console.log('Received chat message:',data );
-      // Update your React component with the received data
+    socket.on(`user${loginuserid}`, (data) => {
+      console.log('Message Recived', data );
+      setChat(Prev => [...Prev, data]);
     });
     return () => {
       socket.disconnect();
@@ -37,14 +37,10 @@ const socket = io.connect('http://localhost:5000'); // Use the correct server UR
       console.log(res);
       setMessages("");
       setChat(data => [...data, res.data.message]);
-     // socket.emit('chat message', res.data.message);
-      //console.log("chat", chat)
-
     }).catch((err) => {
       console.log(err);
     });
   }
-
 
   const handleChat = (e) => {
     if (e.key === "Enter") {
@@ -88,17 +84,8 @@ const socket = io.connect('http://localhost:5000'); // Use the correct server UR
                 </div>
               ))}
             </div>
-
-
-
-
           </div>
-
-
         </div>
-
-
-
         <div className='chats-actions d-flex align-items-center justify-content-center'>
           <input
             type="text"
@@ -109,7 +96,6 @@ const socket = io.connect('http://localhost:5000'); // Use the correct server UR
             onChange={handleChat}
             onKeyDown={handleChat}
           />
-
         </div>
       </div>
     </section>

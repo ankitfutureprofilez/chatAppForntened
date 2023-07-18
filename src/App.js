@@ -9,21 +9,22 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import { Context } from './components/Context';
-const socket = io.connect('http://localhost:8080');
+import UserList from './components/UserList';
+const socket = io.connect("http://localhost:5000")
 
 function App() {
   const [loginname, setLoginname] = useState(localStorage.getItem('loginname'))
   const [loginuserid, setLoginuserId] = useState(localStorage.getItem('loginuserid'))
 
-
+  socket.on("Data",(data)=>{console.log(data)})
   useEffect(() => {
     // Handle incoming chat messages from the server
-    socket.on('chatMessage', (data) => {
-      console.log('Received chat message:', data);
-      // Update your React component with the received data
-    });
-
-
+    if(socket){ 
+        socket.on('hellouser', (data) => {
+        console.log('Received chat message:', data);
+        // Update your React component with the received data
+      });
+    }
     return () => {
       socket.disconnect();
     };
@@ -36,8 +37,8 @@ function App() {
           <Header />
 
           <Routes>
-            <Route path="/chat" element={<Chat />}></Route>
-
+<Route path='/chats' element={<UserList/>}></Route>
+            <Route path="/chat/naveen/?userid=2&name=naveen" element={<Chat socket={socket} />}></Route>
             <Route path='/reg' element={<Singup />}> </Route>
             <Route path='/login' element={<Login />}></Route>
           </Routes>

@@ -11,8 +11,18 @@ import {
     from 'mdb-react-ui-kit';
 import { Context } from './Context';
 import Singup from '../Api/Signup';
+import io from "socket.io-client";
+
 
 function Login() {
+
+    const socket=io.connect("http://localhost:5000")
+
+    socket.on("Data",(data)=>{console.log(data)})
+    socket.on("chat",(data)=>{console.log(data)})
+  
+    socket.on("tem",(data)=>{console.log(data)})
+  socket.emit("reat","aaaaaaa")
     const { setLoginname, setLoginuserId } = useContext(Context)
 
     const navigate = useNavigate();
