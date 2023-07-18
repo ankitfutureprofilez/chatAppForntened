@@ -4,13 +4,15 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
 import { Context } from './Context';
+import { UserContext } from '../context/UserContextProvider';
 
 function Header() {
-    const { loginname, setLoginname } = useContext(Context)
+    //const { loginname, setLoginname } = useContext(Context)
+  const{loginUser,setLoginUser}=  useContext(UserContext)
     const Navigate = useNavigate()
     function handlelogout(e) {
-        localStorage.removeItem('loginname')
-        setLoginname(localStorage.getItem('loginname'))
+        localStorage.removeItem('loginUser')
+        setLoginUser(localStorage.getItem('loginUser'))
         Navigate('/login')
     }
     return (
@@ -29,7 +31,11 @@ function Header() {
                                 <Nav className="me-auto mr-2 ml-2">
 
 
-
+                                <Link className='text-dark font-bold  me-2' to="/chats">
+                                        <button>
+                                            ChatLists
+                                        </button>
+                                    </Link>
 
                                     <Link className='text-dark font-bold me-2' to="/login">
                                         <button>Login
@@ -43,7 +49,7 @@ function Header() {
                                 </Nav>
 
                                 <div className='rightactions d-flex align-items-center' >
-                                    <strong className='me-3 d-inline-block text-capitalize'><button>{loginname}</button></strong>
+                                    <strong className='me-3 d-inline-block text-capitalize'><button>{loginUser}</button></strong>
                                     <button onClick={(e) => { handlelogout(e) }}
                                         className='btn btn-danger' ><i class="bi bi-box-arrow-right  ">Logout</i></button>
                                 </div>

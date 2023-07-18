@@ -1,42 +1,46 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
-import { Context } from "./Context";
 import Messages from "../Api/Mesages";
 import io from 'socket.io-client';
-import { Prev } from "react-bootstrap/esm/PageItem";
-
+import { useLocation } from 'react-router-dom'
+import { UserContext } from "../context/UserContextProvider";
 function Chat(props) {
+  const { socketIO, loginUser } = useContext(UserContext);
 
-  // Changed variable name from 'setMessage' to 'setMessages' for better clarity
+  const search = useLocation().search;
+  const userid = new URLSearchParams(search).get('userid');
+  const username = new URLSearchParams(search).get('name');
+
   const [messages, setMessages] = useState("");
   const [chat, setChat] = useState([]);
-  const { loginname, loginuserid } = useContext(Context)
+
+  const loginuserid= loginUser && loginUser.userId;
+  const loginname= loginUser && loginUser.username;
 
   const messageListRef = useRef(null);
-
   const inputRef = useRef(null);
-  const socket = props.socket;
 
-
- useEffect(() => {
-   //Handle incoming chat messages from the server
-    socket.on(`user${loginuserid}`, (data) => {
-      console.log('Message Recived', data );
-      setChat(Prev => [...Prev, data]);
-    });
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+  useEffect(() => {
+    if(socketIO){
+      socketIO.on('user-1', (data) => {
+        console.log('Message Recived', data);
+      });
+    }
+  }, [socketIO]);
 
   function handleSubmit() {
     const main = new Messages();
     const formData = new FormData();
     formData.append("message", messages);
+    formData.append("userid", userid);
     const Chatss = main.MessageChat(formData);
     Chatss.then((res) => {
       console.log(res);
       setMessages("");
       setChat(data => [...data, res.data.message]);
+      if(socketIO){
+        console.log("Has socket")
+        socketIO.emit('user-1', "heelo from 1");
+      }
     }).catch((err) => {
       console.log(err);
     });
@@ -68,13 +72,12 @@ function Chat(props) {
   }, [chat, messages]);
 
 
-
   return (
     <section id="chat">
       <div className='chat warpper'>
         <div className="chats-list  mt-2">
 
-          <h6>Username:{loginname}   UserId:{loginuserid}</h6>
+          <h6>USername:{username} USerId: {userid}</h6>
           <div ref={messageListRef}
             style={{ maxHeight: '300px', overflowY: 'auto' }}>
             <div className="message-container" >
