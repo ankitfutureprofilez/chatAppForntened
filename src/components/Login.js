@@ -35,7 +35,6 @@ function Login() {
 
     async function handleForms(e) {
         e.preventDefault(); // Prevent form submission
-
         const main = new Singup();
         try {
             const res = await main.Loginshow(Regs);
@@ -43,23 +42,9 @@ function Login() {
             setRegs(res.data.user);
             if (res.data.user) {
                 setLoginUser(res.data.user);
-                //  console.log(d)
-                const f = (res && res.data.user.userId)
-                console.log(f)
-                localStorage.setItem('loginuserid', f)
-                const users = localStorage.getItem('loginuserid')
-                const d = (res && res.data.user.username)
-                localStorage.setItem('loginUser', d)
-                const logins = localStorage.getItem('loginUser')
-                // console.log(logins)
-                setLoginUser(logins);
                 localStorage.setItem("token", res.data.token);
                 navigate('/chat');
             }
-
-
-
-            // Navigating to the chat page
         } catch (err) {
             console.log(err);
         }
