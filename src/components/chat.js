@@ -1,49 +1,83 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import Messages from "../Api/Mesages";
-import io from 'socket.io-client';
-import { useLocation } from 'react-router-dom'
+import { io } from 'socket.io-client';
+import { useLocation } from 'react-router-dom';
 import { UserContext } from "../context/UserContextProvider";
-function Chat(props) {
-  const { socketIO, loginUser } = useContext(UserContext);
+
+function Chat() {
+  const { loginUser } = useContext(UserContext);
 
   const search = useLocation().search;
   const userid = new URLSearchParams(search).get('userid');
   const username = new URLSearchParams(search).get('name');
 
-  const [messages, setMessages] = useState("");
+  const [messages, setMessages] = useState('');
   const [chat, setChat] = useState([]);
-
-  const loginuserid= loginUser && loginUser.userId;
-  const loginname= loginUser && loginUser.username;
+  const [socketId, setSocketId] = useState(""); // New state for socket ID
 
   const messageListRef = useRef(null);
   const inputRef = useRef(null);
+  const socketRef = useRef(null);
 
+
+  const [message, setMessage] = useState([])
+  const socket = io.connect('http://localhost:8080/api');
   useEffect(() => {
-    if(socketIO){
-      socketIO.on('user-1', (data) => {
-        console.log('Message Recived', data);
-      });
-    }
-  }, [socketIO]);
+    // Handle incoming chat messages from the se
+    socket.on('user-1', (data) => {
+      console.log('Received chat message:', data);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  },[]);
+
+
+  // const handleSendMessage = (message) => {
+  //   socket.emit('chat message', message);
+  // }
+
+  // useEffect(() => {
+  // let socket =socketRef&&socketRef.current;
+  //   socket= io("http://localhost:5000");
+  //   socket.on(`connect`, () => {
+  //     console.log('Socket connected');
+  //     setSocketId(socket.id); // Set the socket ID
+  //   });
+  //   socket.on('message', ({ message, userid }) => {
+  //     console.log('Received message:', message);
+  //     console.log('User ID:', userid);
+  //     // Process the message and user ID as needed
+  //   });
+
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
 
   function handleSubmit() {
-    const main = new Messages();
-    const formData = new FormData();
-    formData.append("message", messages);
-    formData.append("userid", userid);
-    const Chatss = main.MessageChat(formData);
-    Chatss.then((res) => {
-      console.log(res);
-      setMessages("");
-      setChat(data => [...data, res.data.message]);
-      if(socketIO){
-        console.log("Has socket")
-        socketIO.emit('user-1', "heelo from 1");
-      }
-    }).catch((err) => {
-      console.log(err);
-    });
+    // socket.emit('chatMessage', message);
+    setMessages("");
+    if (!messages) {
+      return;
+    }
+   
+    // const main = new Messages();
+    // const formData = new FormData();
+    // formData.append("message", messages);
+    // formData.append("userid", userid);
+
+    // const chatInstance = main.MessageChat(formData);
+    // chatInstance
+    //   .then((res) => {
+    //     console.log(res);
+    //     setMessages("");
+    //     // socketRef.current.emit('message', { message: res.data.message, userid }); // Emit the message and userid
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }
 
   const handleChat = (e) => {
@@ -54,35 +88,36 @@ function Chat(props) {
     }
   };
 
-  useEffect(() => {
-    const main = new Messages();
-    const resp = main.MessageChatShow();
-    resp.then((res) => {
-      setChat(res.data.data)
-      //   console.log(res.data.userId)
-      //   scrollToBottom();
-    }).catch((err) => {
-      console.log(err)
-    })
-  }, [])
+  // useEffect(() => {
+  //   const main = new Messages();
+  //   const resp = main.MessageChatShow();
+  //   resp
+  //     .then((res) => {
+  //       setChat(res.data.data);
+  //       messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   useEffect(() => {
     inputRef.current.focus();
     messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
   }, [chat, messages]);
 
-
   return (
     <section id="chat">
       <div className='chat warpper'>
-        <div className="chats-list  mt-2">
-
-          <h6>USername:{username} USerId: {userid}</h6>
-          <div ref={messageListRef}
-            style={{ maxHeight: '300px', overflowY: 'auto' }}>
-            <div className="message-container" >
-              {chat && chat.map((res, i) => (
-                <div key={i} >
+        <div className="chats-list mt-2">
+          <h6>
+            Username: {username} UserID: {userid}
+          </h6>
+        
+          <div ref={messageListRef} style={{ maxHeight: '300px', overflowY: 'auto' }}>
+            <div className="message-container">
+              {chat.map((res, i) => (
+                <div key={i}>
                   <div className="message-content">{res.message}</div>
                 </div>
               ))}
@@ -94,7 +129,7 @@ function Chat(props) {
             type="text"
             ref={inputRef}
             value={messages}
-            placeholder="enter the message"
+            placeholder="Enter the message"
             name="messages"
             onChange={handleChat}
             onKeyDown={handleChat}
@@ -106,3 +141,4 @@ function Chat(props) {
 }
 
 export default Chat;
+

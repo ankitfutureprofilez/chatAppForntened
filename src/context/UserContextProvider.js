@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 export const UserContext = createContext(); 
 
 export default function UserContextProvider(props) {
-    const [socketIO, setSocketIO] = useState();
+    const [socketIO, setSocketIO] = useState(null);
     const [name, setName] = useState('WhoUInto');
     const [loginUser,setLoginUser] = useState();
     const [loginuserid,setLoginUserId] = useState();

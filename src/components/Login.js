@@ -8,17 +8,17 @@ import {
     MDBIcon,
     MDBInput
 }
-from 'mdb-react-ui-kit';
+    from 'mdb-react-ui-kit';
 import Singup from '../Api/Signup';
-import io from "socket.io-client";
+import io, { Socket } from "socket.io-client";
 import UserContextProvider, { UserContext } from '../context/UserContextProvider';
 
 
 function Login() {
 
-    const socket=io.connect("http://localhost:5000")
+    // const socket=io.connect("http://localhost:5000")
 
- const{setLoginUser}=   useContext(UserContext)
+    const { setLoginUser } = useContext(UserContext)
     //const { setLoginname, setLoginuserId } = useContext(Context)
     const navigate = useNavigate();
     const [Regs, setRegs] = useState({
@@ -33,6 +33,7 @@ function Login() {
         console.table(Regs);
     };
 
+
     async function handleForms(e) {
         e.preventDefault(); // Prevent form submission
         const main = new Singup();
@@ -41,9 +42,16 @@ function Login() {
             console.log(res.data.user);
             setRegs(res.data.user);
             if (res.data.user) {
-                setLoginUser(res.data.user);
+                console.log(res.data.user)
+                //  setLoginUser(res.data.user.username);
+                const d = (res && res.data.user.username)
+                const e= (res && res.data.user.password)
+                console.log(d,"ddfdddd",e)
+                localStorage.setItem('loginuser', d)
+                const logins = localStorage.getItem('loginuser')
+                setLoginUser(logins);
                 localStorage.setItem("token", res.data.token);
-                navigate('/chat');
+                navigate('/chats')
             }
         } catch (err) {
             console.log(err);

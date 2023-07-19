@@ -7,28 +7,24 @@ import Singup from './components/Singup';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Login from './components/Login';
-import { Context } from './components/Context';
 import ChatLists from './components/ChatLists';
-import UserContextProvider, { UserContext } from './context/UserContextProvider';
 import PrivateRoute from './Api/PrivateRoute';
+import UserContextProvider, { UserContext } from "./context/UserContextProvider";
+import Messages from './Api/Mesages';
+import Chatmessage from './components/message';
+
 function App() {
-  // const [loginname, setLoginname] = useState(localStorage.getItem('loginname'))
-  // const [loginuserid, setLoginuserId] = useState(localStorage.getItem('loginuserid'))
-  ///const { setSocketIO } = useContext(UserContext);
-  const socket = io.connect("http://localhost:5000")
-  useEffect(() => {
-    if (socket) {
-      // setSocketIO(socket)
-    }
-  }, []);
+const socket=io.connect("http://localhost:8080/api")
   return (
     <div>
+
       <UserContextProvider>
         <Router>
           <Header />
           <Routes>
+            <Route path='/message' element={<Chatmessage socket={socket}/>}></Route>
             <Route path='/chats' element={<PrivateRoute><ChatLists /></PrivateRoute>}></Route>
-            <Route path='/chat/:username' element={<Chat socket={socket} />} />
+            <Route path='/chat/:username' element={<Chat />} />
             <Route path='/reg' element={<Singup />}> </Route>
             <Route path='/login' element={<Login />}></Route>
           </Routes>

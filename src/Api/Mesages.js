@@ -9,5 +9,16 @@ class Messages extends Component {
     async MessageChatShow() {
         return Api.get('/chat');
     }
-}
+
+
+    render() {
+       
+        return (
+            <div >
+              <></>
+            </div>
+        )
+}}
+
 export default Messages;
+
