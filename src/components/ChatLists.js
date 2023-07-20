@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import Singup from "../Api/Signup";
 import { Link } from "react-router-dom";
 
-function ChatLink({ username, userId }) {
-  const chatUrl = `/chat/${username}?userid=${userId}&name=${username}`;
-
-  return (
-    <Link to={chatUrl}>Chat</Link>
-  );
-}
 
 function ChatLists() {
+  function ChatLink({ username, userId }) {
+  const chatUrl = `/${username}?userid=${userId}&name=${username}`;
+  
+    return (
+      <Link to={chatUrl}>Chat</Link>
+    );
+  }
   const [list, setList] = useState([]);
 
   useEffect(() => {

@@ -10,16 +10,15 @@ import {
 }
     from 'mdb-react-ui-kit';
 import Singup from '../Api/Signup';
-import io, { Socket } from "socket.io-client";
-import UserContextProvider, { UserContext } from '../context/UserContextProvider';
+import  { UserContext } from '../context/UserContextProvider';
 
 
 function Login() {
 
-    // const socket=io.connect("http://localhost:5000")
+  
 
-    const { setLoginUser } = useContext(UserContext)
-    //const { setLoginname, setLoginuserId } = useContext(Context)
+    const { setLoginUser, setLoginUserId } = useContext(UserContext)
+
     const navigate = useNavigate();
     const [Regs, setRegs] = useState({
         password: "",
@@ -43,15 +42,19 @@ function Login() {
             setRegs(res.data.user);
             if (res.data.user) {
                 console.log(res.data.user)
-                //  setLoginUser(res.data.user.username);
+              
                 const d = (res && res.data.user.username)
-                const e= (res && res.data.user.password)
-                console.log(d,"ddfdddd",e)
+                const e = (res && res.data.user.userId)
+
+                console.log(d, "ddfdddd", e)
+                localStorage.setItem('loginuserid', e)
+                const UserID = localStorage.getItem('loginuserid')
+                setLoginUserId(UserID)
                 localStorage.setItem('loginuser', d)
                 const logins = localStorage.getItem('loginuser')
                 setLoginUser(logins);
                 localStorage.setItem("token", res.data.token);
-                navigate('/chats')
+                navigate('/Join')
             }
         } catch (err) {
             console.log(err);
