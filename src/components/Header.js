@@ -28,55 +28,51 @@ function Header() {
 
     return (
         <section id="header">
-        <div>
-          <div className="rightactions">
-            <div ><img src="logo.png" alt="Logo" className="logo-img"  /></div>
-            {loginUser ? (
-              <>
-                <Link className="text-dark font-bold mt-2 mb-2" to="/Join">
-                  <button>Join Msg.</button>
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link className="text-dark font-bold mt-2 mb-2" to="/login">
-                  <button>Login</button>
-                </Link>
-                <Link className="text-dark font-bold  mt-2 mb-2" to="/reg">
-                  <button>Registration</button>
-                </Link>
-              </>
-            )}
-          </div>
-          {loginUser ? (
-            <div className="rightactions" id="user">
-              <strong className="d-inline-block text-capitalize">
-                <button>
-                  <div className="user-avatar">{wrapFirstLetterInDiv(loginUser)}</div>
-                  {loginUser}
-                </button>
-              </strong>
+            <div className="rightactions">
+                <div className='logo'><img src="logo.png" alt="Logo" className="logo-img" /></div>
+
             </div>
-          ) : (
-            <></>
-          )}
-  
-  {loginUser ? (
-          <div className="logout-action">
-            <button
-              onClick={(e) => {
-                handlelogout(e);
-              }}
-              className="btn btn-danger mt-2 mb-3"
-            >
-                <i class="bi bi-power"></i>
-            </button>
-          </div>
-        ) : (
-          <></>
-        )}
-        </div>
-      </section>
+            <div className='middle-menu'>
+                <ul>
+                {loginUser ? (
+                    <>
+                        <li><Link className="text-dark font-bold mt-2 mb-2" to="/Join">
+                           Join Msg.
+                        </Link></li>
+                    </>
+                ) : (
+                    <>
+                        <li><Link className="text-dark font-bold mt-2 mb-2" to="/login">
+                             Login 
+                        </Link></li>
+                        <li><Link className="text-dark font-bold  mt-2 mb-2" to="/reg">
+                             Registration 
+                        </Link></li>
+                    </>
+                )}
+                </ul>
+            </div>
+            {loginUser ? (
+                <div className="logout-action">
+                    <div className="d-flex m-auto mb-2 text-capitalize">
+                            <div className="user-avatar">{wrapFirstLetterInDiv(loginUser)}</div>
+                           
+                    </div>
+
+                    <button
+                        onClick={(e) => {
+                            handlelogout(e);
+                        }}
+                        className="btn btn-danger"
+                    >
+                        <i class="bi bi-power"></i>
+                    </button>
+                </div>
+            ) : (
+                <></>
+            )}
+
+        </section>
     );
 }
 
