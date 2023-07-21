@@ -29,7 +29,8 @@ function Header() {
     return (
         <section id="header">
         <div>
-          <div className="mt-2 mb-3">
+          <div className="rightactions">
+            <div ><img src="logo.png" alt="Logo" className="logo-img"  /></div>
             {loginUser ? (
               <>
                 <Link className="text-dark font-bold mt-2 mb-2" to="/Join">
@@ -48,7 +49,7 @@ function Header() {
             )}
           </div>
           {loginUser ? (
-            <div className="rightactions">
+            <div className="rightactions" id="user">
               <strong className="d-inline-block text-capitalize">
                 <button>
                   <div className="user-avatar">{wrapFirstLetterInDiv(loginUser)}</div>

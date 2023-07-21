@@ -73,7 +73,7 @@ function Msgdata({ socket, username, userId }) {
               event.key === "Enter" && sendMessage();
             }}
           />
-          <button onClick={sendMessage}>Send</button>
+          <button onClick={sendMessage}><i class="bi bi-send"></i></button>
         </div>
       </div>
   
