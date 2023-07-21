@@ -16,55 +16,66 @@ function Header() {
         setLoginUser(localStorage.getItem('loginUser'))
         Navigate('/login')
     }
-
+    const wrapFirstLetterInDiv = (loginUser) => {
+        const firstLetter = loginUser.charAt(0).toUpperCase();
+        return (
+            <div style={{ display: "inline-block", borderRadius: "50%", width: "30px", height: "30px", textAlign: "center", lineHeight: "25px", background: "gray", color: "white", fontWeight: "bold" }}>
+                {firstLetter}
+            </div>
+        );
+    };
 
 
     return (
         <section id="header">
-            <div className='container'>
-                <div className='row'>
-                    <header >
-                        <Navbar bg="white" data-bs-theme="dark">
-                            <Container>
-                                <Navbar.Brand href="#"><img src='logo192.png' width="50px" height="50px" className='me-2' /></Navbar.Brand>
-                                <Nav className="me-auto mr-2 ml-2">
-                                    {loginUser ? <>
-                                        <Link className='text-dark font-bold  me-2' to="/Join">
-                                            <button>
-                                                Join Msg.
-                                            </button>
-                                        </Link>
-                                        <Link className='text-dark font-bold  me-2' to="/chats">
-                                            <button>
-                                                ChatLists
-                                            </button>
-                                        </Link>
-                                    </> : <>
-                                        <Link className='text-dark font-bold me-2' to="/login">
-                                            <button>Login
-                                            </button></Link>
-                                        <Link className='text-dark font-bold  me-2' to="/reg">
-                                            <button>
-                                                Registration
-                                            </button>
-                                        </Link>
-                                    </>}
-                                </Nav>
-                                {loginUser?<>
-                                    <div className='rightactions d-flex align-items-center' >
-                                    <strong className='me-3 d-inline-block text-capitalize'><button>{loginUser}</button></strong>
-                                    <button onClick={(e) => { handlelogout(e) }}
-                                        className='btn btn-danger' ><i class="bi bi-box-arrow-right  ">Logout</i></button>
-                                </div>
-                                </>:<>
-                                </>}
-
-                            </Container>
-                        </Navbar>
-                    </header>
-                </div>
+        <div>
+          <div className="mt-2 mb-3">
+            {loginUser ? (
+              <>
+                <Link className="text-dark font-bold mt-2 mb-2" to="/Join">
+                  <button>Join Msg.</button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link className="text-dark font-bold mt-2 mb-2" to="/login">
+                  <button>Login</button>
+                </Link>
+                <Link className="text-dark font-bold  mt-2 mb-2" to="/reg">
+                  <button>Registration</button>
+                </Link>
+              </>
+            )}
+          </div>
+          {loginUser ? (
+            <div className="rightactions">
+              <strong className="d-inline-block text-capitalize">
+                <button>
+                  <div className="user-avatar">{wrapFirstLetterInDiv(loginUser)}</div>
+                  {loginUser}
+                </button>
+              </strong>
             </div>
-        </section>
+          ) : (
+            <></>
+          )}
+  
+  {loginUser ? (
+          <div className="logout-action">
+            <button
+              onClick={(e) => {
+                handlelogout(e);
+              }}
+              className="btn btn-danger mt-2 mb-3"
+            >
+                <i class="bi bi-power"></i>
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
+        </div>
+      </section>
     );
 }
 

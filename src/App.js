@@ -19,7 +19,6 @@ const socket=io.connect("http://localhost:8080/api")
 
       <UserContextProvider>
         <Router>
-          <Header />
           <Routes>
             <Route path='/chats' element={<PrivateRoute><ChatLists/></PrivateRoute>}></Route>
             <Route path='/reg' element={<Singup />}> </Route>
@@ -27,7 +26,6 @@ const socket=io.connect("http://localhost:8080/api")
             <Route path="/Mesg" element={<Msgdata/>}></Route>
             <Route path="/Join" element={<Reciver/>}></Route>
           </Routes>
-          <Footer />
         </Router>
       </UserContextProvider>
     </div>
