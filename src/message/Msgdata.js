@@ -55,7 +55,7 @@ function Msgdata({ socket, username, userId }) {
     return () => {
       socket.off("receive-message");
     };
-  }, [socket, userId]);
+  }, [socket]);
 
   return (
     <div className="chat-window">

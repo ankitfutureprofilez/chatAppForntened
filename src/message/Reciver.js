@@ -13,15 +13,16 @@ function Reciver(props) {
     const [list, setList] = useState([]);
     const [selectedUsername, setSelectedUsername] = useState("");
     const [selectedUserId, setSelectedUserId] = useState("");
-
-    const socket = io.connect("http://localhost:8080");
+    const socketRef = useRef(null);
+    let socket = socketRef.current
+    socket = io.connect("http://localhost:8080");
 
     // Helper function to wrap the first letter of a username in a <div>
     const wrapFirstLetterInDiv = (username) => {
         const firstLetter = username.charAt(0).toUpperCase();
         return (
             <div style={{ display: "inline-block", borderRadius: "50%", width: "34px", height: "34px", textAlign: "center", lineHeight: "34px", background: "#b2bed5", color: "white", fontWeight: "bold" }}>
-              
+
                 {firstLetter}
             </div>
         );
@@ -38,7 +39,7 @@ function Reciver(props) {
 
     // Function to handle the button click and set selected username and userId
     const handleSendButtonClick = (username, userId) => {
-        console.log("axsdassfdfdg")
+        //  console.log("axsdassfdfdg")
         // Perform any actions you need with the selected username and userId
         if (username !== "" && userId !== "") {
             setSelectedUsername(username);
@@ -51,45 +52,45 @@ function Reciver(props) {
     return (
         <section id="app">
             <div className="chat-wrapper">
-                    <div className="sidebar">
-                        <div className="sidebar-content">
+                <div className="sidebar">
+                    <div className="sidebar-content">
                         <Header />
+                    </div>
+                </div>
+                <div className="sidebar-chats">
+                    <div className="px-4 pt-4">
+                        <h4 className="mt-0 mb-4">Chats</h4>
+                        <MDBCol className="mb-3">
+                            <input className="mb-3 form-control mt-2 mb-2" type="text" placeholder="Search" aria-label="Search" />
+                        </MDBCol>
+                    </div>
+
+                    <div className="px-2">
+                        <div ref={listRef} className="chat-message-list">
+                            <ListGroup as="ul" className="border-0" >
+                                {list.map((User) => (
+                                    <ListGroup.Item as="li" key={User.userId} onClick={() => handleSendButtonClick(User.username, User.userId)}>
+                                        {/* Use the helper function to display the modified username */}
+
+                                        <div className="rightactions d-flex align-items-center" >
+                                            <div className="user-avatar">
+                                                {wrapFirstLetterInDiv(User.username)}
+                                            </div>
+
+                                            <div className="user-details ps-2">
+                                                <h6 className="mb-0 text-capitalize" >{User.name}</h6>
+                                                <p className="mb-0" >@{User.username}</p>
+                                            </div>
+                                        </div>
+                                    </ListGroup.Item>
+                                ))}
+                            </ListGroup>
                         </div>
                     </div>
-                    <div  className="sidebar-chats">
-                        <div className="px-4 pt-4">
-                            <h4 className="mt-0 mb-4">Chats</h4>
-                            <MDBCol className="mb-3">
-                                <input className="mb-3 form-control mt-2 mb-2" type="text" placeholder="Search" aria-label="Search" />
-                            </MDBCol>
-                        </div>
-                    
-                       <div className="px-2">
-                            <div ref={listRef} className="chat-message-list">
-                                    <ListGroup as="ul" className="border-0" >
-                                        {list.map((User) => (
-                                            <ListGroup.Item as="li" key={User.userId} onClick={() => handleSendButtonClick(User.username, User.userId)}>
-                                                {/* Use the helper function to display the modified username */}
-                                                
-                                                <div className="rightactions d-flex align-items-center" >
-                                                    <div className="user-avatar">
-                                                    {wrapFirstLetterInDiv(User.username)}
-                                                    </div>
-                                                    
-                                                    <div className="user-details ps-2">
-                                                        <h6 className="mb-0 text-capitalize" >{User.name}</h6>
-                                                        <p className="mb-0" >@{User.username}</p>
-                                                    </div>
-                                                </div>
-                                            </ListGroup.Item>
-                                        ))}
-                                    </ListGroup>
-                                </div>
-                       </div>
-                    </div>
-                    <div  className="chat_panel">
-                        <Msgdata socket={socket} username={selectedUsername} userId={selectedUserId} />
-                    </div>
+                </div>
+                <div className="chat_panel">
+                    <Msgdata socket={socket} username={selectedUsername} userId={selectedUserId} />
+                </div>
             </div>
         </section>
     );
