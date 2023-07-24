@@ -12,7 +12,7 @@ function Header() {
     function handlelogout(e) {
         localStorage.removeItem('loginUser')
         setLoginUser(localStorage.getItem('loginUser'))
-        Navigate('/login')
+        Navigate('/')
     }
     const wrapFirstLetterInDiv = (loginUser) => {
         if (loginUser && typeof loginUser === 'object' && loginUser.username) {
@@ -41,7 +41,7 @@ function Header() {
                     {loginUser ? (
                         <>
                             <li><Link className="text-dark font-bold mt-2 mb-2" to="/Join">
-                                Join Msg.
+                            <i class="bi bi-chat"></i>
                             </Link></li>
                         </>
                     ) : (

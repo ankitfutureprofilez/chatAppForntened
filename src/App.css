@@ -234,3 +234,18 @@ img {
   border: none;
   border-radius: 0 5px 5px 0;
 }
+
+.msg-data-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:#683415cf;
+  height: 100vh;
+  width: auto; /* Adjust the height to fit your requirement */
+}
+
+.msg {
+  text-align: center;
+  
+}
+

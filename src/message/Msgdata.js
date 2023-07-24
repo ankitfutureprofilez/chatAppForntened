@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { UserContext } from "../context/UserContextProvider";
-import Singup from "../Api/Signup";
-
+import Messages from "../Api/Mesages";
 function Msgdata({ socket, username, userId, receiveId }) {
 
   const [currentMessage, setCurrentMessage] = useState("");
@@ -18,26 +17,12 @@ function Msgdata({ socket, username, userId, receiveId }) {
       </div>
     );
   };
-
-
-
-  // const fetchOldMessages = async () => {
-  //   try {
-  //     const response = await axios.get(`http://localhost:8080/api/chat/${loginUser.userId}/${userId}`);
-  //     console.log("fetchOldMessages:",response.data)
-  //     setMessageList("fetchOldMessages:", response.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-
   const sendMessage = () => {
     console.log("loginUser", loginUser)
     if (currentMessage.trim() !== "") {
       const messageData = {
         sender: loginUser && loginUser.userId,
-        receiveId :receiveId,
+        receiveId: receiveId,
         author: username,
         message: currentMessage,
         time: new Date().toLocaleTimeString(),
@@ -53,11 +38,11 @@ function Msgdata({ socket, username, userId, receiveId }) {
 
   const [UserUID, setUserUID] = useState(receiveId);
   console.log("UserUID", receiveId)
-  
 
-  const fetchChats  = (e,ReceiverId) =>{ 
-    const main = new Singup();
-    const resp = main.MessageList(e,receiveId);
+
+  const fetchChats = (e, receiveId) => {
+    const main = new Messages();
+    const resp = main.MessageList(e, receiveId);
     resp.then((res) => {
       let chat = res.data.chats
       setMessageList(chat);
@@ -91,67 +76,92 @@ function Msgdata({ socket, username, userId, receiveId }) {
     return () => {
       socket && socket.off("test-event");
     };
-  }, [socket, userId,receiveId]);
+  }, [socket, userId, receiveId]);
 
 
   return (
-    <div className="chat-window">
-      <div className="chat-header">
-        <h3>Live Chat</h3>
-        <div className="d-flex align-items-center">
-          <div className="user-avatar">
-            {wrapFirstLetterInDiv(username)}
-          </div>
+ <>
+ {username ?(<>
+ 
 
-          <div className="user-details ps-2">
-            <h6 className="mb-0 text-capitalize" >{username}</h6>
-            <p className="mb-0" >{userId}</p>
-          </div>
-        </div>
+  <div className="chat-window">
+  <div className="chat-header">
+
+
+    <h3>Live Chat</h3>
+    <div className="d-flex align-items-center">
+      <div className="user-avatar">
+        {wrapFirstLetterInDiv(username)}
       </div>
-      <div className="chat-body">
 
-        <ScrollToBottom className="message-container">
-
-          {messageList.map((msg, i) => {
-            const message = msg?.message || "";
-            const author = msg?.author || "";
-            const id = username === author ? "sender" : "reciver";
-            return (
-              <div
-                key={i}
-                className={`message mb-5 ${id === "sender" ? "sender-message" : "test-event"}`}
-              >
-                {/* Message Content */}
-                <div className="message-content">
-                  <strong>{msg.author}</strong>
-                  <p>{message}</p>
-                </div>
-                <div className="message-meta">
-                  <p className="mb-0 p-1 text-small text-muted" id="time">{msg.time}</p>
-                </div>
-
-              </div>
-            );
-          })}
-        </ScrollToBottom>
-
-
-
-      </div>
-      <div className="chat-footer">
-        <input
-          type="text"
-          placeholder="Type your message..."
-          value={currentMessage}
-          onChange={(e) => setCurrentMessage(e.target.value)}
-          onKeyPress={(event) => {
-            event.key === "Enter" && sendMessage();
-          }}
-        />
-        <button onClick={sendMessage}><i class="bi bi-send"></i></button>
+      <div className="user-details ps-2">
+        <h6 className="mb-0 text-capitalize" >{username}</h6>
+        <p className="mb-0" >{userId}</p>
       </div>
     </div>
+  </div>
+
+  <div className="chat-body">
+
+
+
+
+    <ScrollToBottom className="message-container">
+
+      {messageList.map((msg, i) => {
+        const message = msg?.message || "";
+        const author = msg?.author || "";
+        const id = username === author ? "sender" : "reciver";
+        return (
+          <div
+            key={i}
+            className={`message mb-5 ${id === "sender" ? "sender-message" : "test-event"}`}
+          >
+            {/* Message Content */}
+            <div className="message-content">
+              <strong>{msg.author}</strong>
+              <p>{message}</p>
+            </div>
+            <div className="message-meta">
+              <p className="mb-0 p-1 text-small text-muted" id="time">{msg.time}</p>
+            </div>
+
+          </div>
+        );
+      })}
+    </ScrollToBottom>
+
+
+
+  </div>
+  <div className="chat-footer">
+    <input
+      type="text"
+      placeholder="Type your message..."
+      value={currentMessage}
+      onChange={(e) => setCurrentMessage(e.target.value)}
+      onKeyPress={(event) => {
+        event.key === "Enter" && sendMessage();
+      }}
+    />
+    <button onClick={sendMessage}><i class="bi bi-send"></i></button>
+
+  </div>
+</div>
+
+
+
+ </>)  :(<>
+ < div className="msg-data-container">
+ <div classMNmae="msg">
+  <h1>Welcome user's</h1>
+  <p>Please Select the user's for Conversions</p>
+ </div>
+ </div>
+
+ </>)}
+ </>
+
 
   );
 }

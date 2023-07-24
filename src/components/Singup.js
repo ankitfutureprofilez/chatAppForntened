@@ -33,7 +33,7 @@ function Sing() {
         const resp = main.Regshow(Regs)
         resp.then((res) => {
             console.log(res.data.user)
-            navigate('/login')
+            navigate('/')
         }).then((err) => {
             console.log(err)
         })
