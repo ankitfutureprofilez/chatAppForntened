@@ -1,38 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
-import axios from "axios";
+import { UserContext } from "../context/UserContextProvider";
+import Singup from "../Api/Signup";
 
+function Msgdata({ socket, username, userId, receiveId }) {
 
-function Msgdata({ socket, username, userId }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-
-
-  const sendMessage = () => {
-    if (currentMessage.trim() !== "") {
-      const messageData = {
-        userId: userId,
-        author: username,
-        message: currentMessage,
-        time: new Date().toLocaleTimeString(),
-      };
-      socket.emit("send-message", messageData);
-      console.log("send-mse",messageData)
-      setCurrentMessage("");
-    }
-  };
-
-  // const fetchChatHistory = async () => {
-  //   try {
-  //     const response = await axios.get(`/api/chat-history/${userId}`);
-  //     const messages = response.data.messages;
-  //     setMessageList(messages);
-  //   } catch (error) {
-  //     console.log("Error fetching chat history:", error);
-  //   }
-  // };
-
-
+  const { loginUser } = useContext(UserContext);
 
   const wrapFirstLetterInDiv = (username) => {
     const firstLetter = username.charAt(0).toUpperCase();
@@ -44,18 +19,80 @@ function Msgdata({ socket, username, userId }) {
     );
   };
 
+
+
+  // const fetchOldMessages = async () => {
+  //   try {
+  //     const response = await axios.get(`http://localhost:8080/api/chat/${loginUser.userId}/${userId}`);
+  //     console.log("fetchOldMessages:",response.data)
+  //     setMessageList("fetchOldMessages:", response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+
+  const sendMessage = () => {
+    console.log("loginUser", loginUser)
+    if (currentMessage.trim() !== "") {
+      const messageData = {
+        sender: loginUser && loginUser.userId,
+        receiveId :receiveId,
+        author: username,
+        message: currentMessage,
+        time: new Date().toLocaleTimeString(),
+      };
+      socket.emit("send-message", messageData);
+      setMessageList((prevMessageList) => [...prevMessageList, messageData]);
+      console.log("sent msg on send-message", messageData);
+      setCurrentMessage("");
+    }
+  };
+
+
+
+  const [UserUID, setUserUID] = useState(receiveId);
+  console.log("UserUID", receiveId)
+  
+
+  const fetchChats  = (e,ReceiverId) =>{ 
+    const main = new Singup();
+    const resp = main.MessageList(e,receiveId);
+    resp.then((res) => {
+      let chat = res.data.chats
+      setMessageList(chat);
+      console.log("res.data.chats", chat);
+    }).catch((err) => {
+      console.log("err", err)
+    })
+  }
+
   useEffect(() => {
+    setMessageList([]);
+    if (receiveId) {
+      fetchChats(receiveId);
+    }
+  }, [receiveId]);
 
-   // fetchChatHistory();
-    socket.on("receive-message", (data) => {
-      console.log("senreceive-messaged-mse",data)
+  useEffect(() => {
+    // fetchOldMessages();
+    if (socket) {
+      // Join the room corresponding to the current user ID
+      socket.emit('join-room', userId);
+      // Listen for incoming messages in the room
+      socket.on('test-event', (data) => {
+        console.log('Test event received:', data);
 
-      setMessageList((list) => [...list, data]);
-    });
+        // Update messageList state with the received message
+        setMessageList((prevMessageList) => [...prevMessageList, data]);
+      });
+    }
+
     return () => {
-      socket.off("receive-message");
+      socket && socket.off("test-event");
     };
-  }, [socket]);
+  }, [socket, userId,receiveId]);
+
 
   return (
     <div className="chat-window">
@@ -73,16 +110,17 @@ function Msgdata({ socket, username, userId }) {
         </div>
       </div>
       <div className="chat-body">
+
         <ScrollToBottom className="message-container">
+
           {messageList.map((msg, i) => {
             const message = msg?.message || "";
             const author = msg?.author || "";
             const id = username === author ? "sender" : "reciver";
-
             return (
               <div
                 key={i}
-                className={`message mb-5 ${id === "sender" ? "sender-message" : "reciver-message"}`}
+                className={`message mb-5 ${id === "sender" ? "sender-message" : "test-event"}`}
               >
                 {/* Message Content */}
                 <div className="message-content">
@@ -97,6 +135,9 @@ function Msgdata({ socket, username, userId }) {
             );
           })}
         </ScrollToBottom>
+
+
+
       </div>
       <div className="chat-footer">
         <input

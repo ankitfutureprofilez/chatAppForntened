@@ -1,7 +1,6 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, {  useState, useEffect, useRef } from "react";
 import { io } from 'socket.io-client';
 import Msgdata from "./Msgdata";
-import { UserContext } from "../context/UserContextProvider";
 import Singup from "../Api/Signup";
 import ListGroup from 'react-bootstrap/ListGroup';
 import { MDBCol } from "mdbreact";
@@ -13,13 +12,16 @@ function Reciver(props) {
     const [list, setList] = useState([]);
     const [selectedUsername, setSelectedUsername] = useState("");
     const [selectedUserId, setSelectedUserId] = useState("");
+    const [selectRecive,setSelectrecive]=useState("")
     const socketRef = useRef(null);
-    let socket = socketRef.current
+    let socket = socketRef.current;
+    
     socket = io.connect("http://localhost:8080");
 
     // Helper function to wrap the first letter of a username in a <div>
     const wrapFirstLetterInDiv = (username) => {
-        const firstLetter = username.charAt(0).toUpperCase();
+        // const firstLetter = username.charAt(0).toUpperCase();
+        const firstLetter = "B";
         return (
             <div style={{ display: "inline-block", borderRadius: "50%", width: "34px", height: "34px", textAlign: "center", lineHeight: "34px", background: "#b2bed5", color: "white", fontWeight: "bold" }}>
 
@@ -38,13 +40,14 @@ function Reciver(props) {
     }, []);
 
     // Function to handle the button click and set selected username and userId
-    const handleSendButtonClick = (username, userId) => {
+    const handleSendButtonClick = (username, userId,receiverId) => {
         //  console.log("axsdassfdfdg")
         // Perform any actions you need with the selected username and userId
-        if (username !== "" && userId !== "") {
+        if (username !== "" && userId !== "" ) {
             setSelectedUsername(username);
             setSelectedUserId(userId);
-            socket.emit("join-room", userId);
+            setSelectrecive(userId);
+            socket.emit("join-room", receiverId);
             setshowchat(true);
         }
     };
@@ -64,7 +67,6 @@ function Reciver(props) {
                             <input className="mb-3 form-control mt-2 mb-2" type="text" placeholder="Search" aria-label="Search" />
                         </MDBCol>
                     </div>
-
                     <div className="px-2">
                         <div ref={listRef} className="chat-message-list">
                             <ListGroup as="ul" className="border-0" >
@@ -89,8 +91,7 @@ function Reciver(props) {
                     </div>
                 </div>
                 <div className="chat_panel">
-                    <Msgdata socket={socket} username={selectedUsername} userId={selectedUserId} />
-                </div>
+                    <Msgdata socket={socket} username={selectedUsername} userId={selectedUserId} receiveId={selectRecive}/></div>
             </div>
         </section>
     );

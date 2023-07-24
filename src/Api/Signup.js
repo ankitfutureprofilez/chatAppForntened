@@ -10,8 +10,17 @@ class Singup extends Component {
         return Api.post('/login', key)
     }
     async List() {
-        return Api.get('/chats')
+        return Api.get('/chatmassges')
     }
+
+    async user() {
+        return Api.get('/user')
+    }
+
+    async MessageList(receiverId) {
+        return Api.get(`/chat/${receiverId}`)
+    }
+    
 }
 
 

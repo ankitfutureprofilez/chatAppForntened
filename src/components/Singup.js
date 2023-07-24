@@ -7,10 +7,10 @@ import {
     MDBInput
 }
     from 'mdb-react-ui-kit';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Singup from '../Api/Signup';
 function Sing() {
-
+    const navigate = useNavigate()
 
     const [Regs, SetRegs] = useState({
         name: '',
@@ -33,6 +33,7 @@ function Sing() {
         const resp = main.Regshow(Regs)
         resp.then((res) => {
             console.log(res.data.user)
+            navigate('/login')
         }).then((err) => {
             console.log(err)
         })

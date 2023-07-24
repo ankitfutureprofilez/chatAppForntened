@@ -5,21 +5,22 @@ import {
     MDBContainer,
     MDBRow,
     MDBCol,
-    MDBIcon,
     MDBInput
 }
     from 'mdb-react-ui-kit';
 import Singup from '../Api/Signup';
-import  { UserContext } from '../context/UserContextProvider';
+import { UserContext } from '../context/UserContextProvider';
 
 
 function Login() {
 
-  
 
-    const { setLoginUser, setLoginUserId } = useContext(UserContext)
+
+    const { setLoginUser} = useContext(UserContext)
 
     const navigate = useNavigate();
+
+
     const [Regs, setRegs] = useState({
         password: "",
         username: "",
@@ -36,29 +37,21 @@ function Login() {
     async function handleForms(e) {
         e.preventDefault(); // Prevent form submission
         const main = new Singup();
-        try {
-            const res = await main.Loginshow(Regs);
-            console.log(res.data.user);
-            setRegs(res.data.user);
-            if (res.data.user) {
-                console.log(res.data.user)
-              
-                const d = (res && res.data.user.username)
-                const e = (res && res.data.user.userId)
-
-                console.log(d, "ddfdddd", e)
-                localStorage.setItem('loginuserid', e)
-                const UserID = localStorage.getItem('loginuserid')
-                setLoginUserId(UserID)
-                localStorage.setItem('loginuser', d)
-                const logins = localStorage.getItem('loginuser')
-                setLoginUser(logins);
-                localStorage.setItem("token", res.data.token);
-                navigate('/Join')
+        const resp = main.Loginshow(Regs);
+        resp.then((res) => {
+            if (res.data.status) {
+              //  console.log("logged in user", res.data)
+                navigate('/join');
+                if (res.data.user) {
+                    setLoginUser(res.data.user);
+                    localStorage.setItem("token", res.data.token);
+                }
+            } else {
+                console.error("status login error", res);
             }
-        } catch (err) {
-            console.log(err);
-        }
+        }).catch((err) => {
+            console.log("login err", err)
+        });
     }
 
 

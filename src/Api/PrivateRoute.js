@@ -1,13 +1,32 @@
-import { useContext } from 'react';
-import { useNavigate, Route, Routes, Navigate } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import Singup from './Signup';
+import { useState } from 'react';
+import { UserContext } from '../context/UserContextProvider';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 
-export default function PrivateRoute({ element: Element, ...rest }) {
-  const navigate = useNavigate();
-  const isAuthenticated = Boolean(localStorage.getItem('loginuser') && localStorage.getItem('token'));
+export default function PrivateRoute(props) {
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" />;
-  }
+  const { setLoginUser, auth, setAuth } = useContext(UserContext);
+  const Navigate = useNavigate();
 
-  return <Route {...rest} element={<Element />} />;
+  useEffect(() => {
+    const main = new Singup();
+    const resp = main.user();
+    resp.then((res) => {
+      console.log("user", res);
+      if (res.data.status) {
+        setAuth(res.data.status);
+        setLoginUser(res.data.user);
+      } else {
+        <Navigate to="/login" />
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, []);
+
+  return <>
+    {props.children}
+  </>
+
 }
