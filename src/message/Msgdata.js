@@ -34,12 +34,6 @@ function Msgdata({ socket, username, userId, receiveId }) {
     }
   };
 
-
-
-  const [UserUID, setUserUID] = useState(receiveId);
-  console.log("UserUID", receiveId)
-
-
   const fetchChats = (e, receiveId) => {
     const main = new Messages();
     const resp = main.MessageList(e, receiveId);
@@ -67,7 +61,7 @@ function Msgdata({ socket, username, userId, receiveId }) {
       // Listen for incoming messages in the room
       socket.on('test-event', (data) => {
         console.log('Test event received:', data);
-
+      
         // Update messageList state with the received message
         setMessageList((prevMessageList) => [...prevMessageList, data]);
       });
@@ -121,9 +115,11 @@ function Msgdata({ socket, username, userId, receiveId }) {
             <div className="message-content">
               <strong>{msg.author}</strong>
               <p>{message}</p>
+              <p className="mb-0 p-1 text-small text-muted" id="time">{msg.username}</p>
+              <p className="mb-0 p-1 text-small text-muted" id="time">{msg.time}</p>
             </div>
             <div className="message-meta">
-              <p className="mb-0 p-1 text-small text-muted" id="time">{msg.time}</p>
+         
             </div>
 
           </div>
@@ -144,7 +140,7 @@ function Msgdata({ socket, username, userId, receiveId }) {
         event.key === "Enter" && sendMessage();
       }}
     />
-    <button onClick={sendMessage}><i class="bi bi-send"></i></button>
+    <button onClick={sendMessage}><i className="bi bi-send"></i></button>
 
   </div>
 </div>

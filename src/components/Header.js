@@ -35,7 +35,7 @@ function Header() {
                     {loginUser ? (
                         <>
                             <li><Link className="text-dark font-bold mt-2 mb-2" to="/Join">
-                            <i class="bi bi-chat"></i>
+                            <i className="bi bi-chat"></i>
                             </Link></li>
                         </>
                     ) : (
@@ -63,7 +63,7 @@ function Header() {
                         }}
                         className="btn btn-danger"
                     >
-                        <i class="bi bi-power"></i>
+                        <i className="bi bi-power"></i>
                     </button>
                 </div>
             ) : (

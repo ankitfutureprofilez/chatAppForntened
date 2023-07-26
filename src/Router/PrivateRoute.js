@@ -1,12 +1,12 @@
 import { useContext, useEffect } from 'react';
-import Singup from './Signup';
-import { useState } from 'react';
+
 import { UserContext } from '../context/UserContextProvider';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Singup from '../Api/Signup';
 
 export default function PrivateRoute(props) {
 
-  const { setLoginUser, auth, setAuth } = useContext(UserContext);
+  const { setLoginUser} = useContext(UserContext);
   const Navigate = useNavigate();
 
   useEffect(() => {
@@ -14,8 +14,7 @@ export default function PrivateRoute(props) {
     const resp = main.user();
     resp.then((res) => {
       console.log("user", res);
-      if (res.data.status) {
-        setAuth(res.data.status);
+      if (res.data) {
         setLoginUser(res.data.user);
       } else {
         <Navigate to="/login" />
