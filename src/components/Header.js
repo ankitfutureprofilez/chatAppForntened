@@ -28,7 +28,10 @@ function Header() {
     return (
         <section id="header">
             <div className="rightactions">
-                <div className='logo'><img src="logo.png" alt="Logo" className="logo-img" /></div>
+                <div className='logo'>
+                    <Link to="/join">
+                    <img src="logo.png" alt="Logo" className="logo-img" />
+                        </Link></div>
             </div>
             <div className='middle-menu'>
                 <ul>
