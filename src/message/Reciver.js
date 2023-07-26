@@ -80,7 +80,8 @@ function Reciver(props) {
                             <ListGroup as="ul" className="border-0" >
                                 {list.map((User) => (
                                     <ListGroup.Item  
-                                    className={(loginUser && loginUser.userId) === (User  &&  User.userId) ? `d-none` : ''}   as="li" key={User.userId} onClick={() => handleSendButtonClick(User.username, User.userId)}>
+                                    className={(loginUser && loginUser.userId) === (User  &&  User.userId) ? `d-none` : ''} 
+                                      as="li" key={User.userId} onClick={() => handleSendButtonClick(User.username, User.userId)}>
                                         {/* Use the helper function to display the modified username */}
                                         <div className="rightactions d-flex align-items-center" >
                                             <div className="user-avatar">
