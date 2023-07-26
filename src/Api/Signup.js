@@ -17,9 +17,6 @@ class Singup extends Component {
         return Api.get('/user')
     }
 
-    async MessageList(receiverId) {
-        return Api.get(`/chat/${receiverId}`)
-    }
     
 }
 

@@ -6,7 +6,6 @@ import { UserContext } from '../context/UserContextProvider';
 
 
 function Header() {
-
     const { loginUser, setLoginUser } = useContext(UserContext)
     const Navigate = useNavigate()
     function handlelogout(e) {
@@ -26,15 +25,10 @@ function Header() {
             return null;
         }
     };
-
-
-
-
     return (
         <section id="header">
             <div className="rightactions">
                 <div className='logo'><img src="logo.png" alt="Logo" className="logo-img" /></div>
-
             </div>
             <div className='middle-menu'>
                 <ul>
@@ -62,10 +56,7 @@ function Header() {
                         <div>
                         <div className="user-avatar">{wrapFirstLetterInDiv(loginUser)}</div>
                         </div>
-                        
-
                     </div>
-
                     <button
                         onClick={(e) => {
                             handlelogout(e);
@@ -78,7 +69,6 @@ function Header() {
             ) : (
                 <></>
             )}
-
         </section>
     );
 }
