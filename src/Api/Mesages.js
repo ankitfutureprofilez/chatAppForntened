@@ -8,7 +8,7 @@ class Messages extends Component {
     }
 
     
-    async MessageList(receiverId) {
+    async ListMessage(receiverId) {
       return Api.get(`/chat/${receiverId}`)
   }
   

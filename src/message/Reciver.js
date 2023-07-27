@@ -78,7 +78,7 @@ function Reciver(props) {
 
                         <div ref={listRef} className="chat-message-list">
                             <ListGroup as="ul" className="border-0" >
-                                {list.map((User) => (
+                                {list && list.map((User) => (
                                     <ListGroup.Item  
                                     className={(loginUser && loginUser.userId) === (User  &&  User.userId) ? `d-none` : ''} 
                                       as="li" key={User.userId} onClick={() => handleSendButtonClick(User.username, User.userId)}>

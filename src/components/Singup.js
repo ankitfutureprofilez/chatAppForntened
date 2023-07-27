@@ -111,7 +111,7 @@ function Sing() {
                             <input placeholder="Password" title="Inpit title"
                                 defaultValue={Regs.confirmPassword}
                                 onChange={handleInputs}
-                                name="confirmpassword"
+                                name="confirmPassword"
                                 type="password"
                                 className="input_field" id="password_field" />
                         </div>

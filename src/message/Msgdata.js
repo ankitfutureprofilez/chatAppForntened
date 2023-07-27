@@ -7,7 +7,7 @@ function Msgdata({ socket, username, userId, receiveId }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const { loginUser } = useContext(UserContext);
-  console.log(loginUser)
+  console.log("loginUser", loginUser)
   const wrapFirstLetterInDiv = (username) => {
     const firstLetter = username.charAt(0).toUpperCase();
     return (
@@ -21,7 +21,7 @@ function Msgdata({ socket, username, userId, receiveId }) {
     console.log("loginUser", loginUser)
     if (currentMessage.trim() !== "") {
       const messageData = {
-        sender: loginUser && loginUser.userId,
+        userId: loginUser && loginUser.userId,
         receiveId: receiveId,
         author: username,
         message: currentMessage,
@@ -36,8 +36,9 @@ function Msgdata({ socket, username, userId, receiveId }) {
 
   const fetchChats = (e, receiveId) => {
     const main = new Messages();
-    const resp = main.MessageList(e, receiveId);
+    const resp = main.ListMessage(e, receiveId);
     resp.then((res) => {
+      console.log("chat res", res)
       let chat = res.data.chats
       setMessageList(chat);
       console.log("res.data.chats", chat);
@@ -102,21 +103,22 @@ function Msgdata({ socket, username, userId, receiveId }) {
 
             <ScrollToBottom class="message-container">
 
-              {messageList.map((msg, i) => {
+              {messageList && messageList.map((msg, i) => {
                 const message = msg?.message || "";
                 const author = msg?.author || "";
                 const id = username === author ? "sender" : "reciver";
                 return (
                   <div
                     key={i}
-                    className={`message mb-5 ${(loginUser && loginUser.username) === (msg && msg.author) ? `d-none` : ''}`}
-                    class={`message mb-5 ${id === "sender" ? "sender-message" : "test-event"}`}
+                    class={`message mb-5 ${id === "sender" ?"sender-message" :"test-event" }`}
                   >
                     {/* Message Content */}
                     <div class="message-content">
                       <strong>{msg.author}</strong>
                       <p>{message}</p>
-                      <p class="mb-0 p-1 text-small text-muted" id="time">SenderId: {msg.userId}</p>
+                      <p class="mb-0 p-1 text-small text-muted" id="time">{`receiveId:${msg.receiveId
+                        }`}</p>
+                      <p class="mb-0 p-1 text-small text-muted" id="time">{`Sender:${msg.userId}`}</p>
                       <p class="mb-0 p-1 text-small text-muted" id="time">{msg.time}</p>
                     </div>
                     <div class="message-meta">

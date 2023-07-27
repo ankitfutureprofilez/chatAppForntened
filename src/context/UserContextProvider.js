@@ -5,9 +5,9 @@ export default function UserContextProvider(props) {
     const [socketIO, setSocketIO] = useState(null);
     const [name, setName] = useState('WhoUInto');
     const [loginUser, setLoginUser] = useState();
-  
+  const [auth,setauth]=useState();
 
-    let values = { name, setName, socketIO, setSocketIO, loginUser, setLoginUser };
+    let values = { auth,setauth,name, setName, socketIO, setSocketIO, loginUser, setLoginUser };
 
     return <>
         <UserContext.Provider value={values} >
