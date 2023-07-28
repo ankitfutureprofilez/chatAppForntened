@@ -36,7 +36,8 @@ function Msgdata({ socket, username, userId, receiveId }) {
 
   const fetchChats = (e, receiveId) => {
     const main = new Messages();
-    const resp = main.ListMessage(e, receiveId);
+    const resp = main.ListMessage(e, receiveId,userId);
+    console.log(resp)
     resp.then((res) => {
       console.log("chat res", res)
       let chat = res.data.chats
@@ -71,7 +72,7 @@ function Msgdata({ socket, username, userId, receiveId }) {
     return () => {
       socket && socket.off("test-event");
     };
-  }, [socket, userId, receiveId,username]);
+  }, [socket, userId, receiveId, username]);
 
 
   return (
@@ -110,13 +111,14 @@ function Msgdata({ socket, username, userId, receiveId }) {
                 return (
                   <div
                     key={i}
-                    class={`message mb-5 ${id === "sender" ?"sender-message" :"test-event" }`}
+
+                    class={`message mb-5 ${id === "sender" ? "send-message" : "test-event"}`}
                   >
                     {/* Message Content */}
                     <div class="message-content">
                       <strong>{msg.author}</strong>
                       <p>{message}</p>
-            <p class="mb-0 p-1 text-small text-muted" id="time">{`receiveId:${msg.receiveId
+                      <p class="mb-0 p-1 text-small text-muted" id="time">{`receiveId:${msg.receiveId
                         }`}</p>
                       <p class="mb-0 p-1 text-small text-muted" id="time">{`Sender:${msg.userId}`}</p>
                       <p class="mb-0 p-1 text-small text-muted" id="time">{msg.time}</p>

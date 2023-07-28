@@ -200,7 +200,8 @@ img {
  
 }
 
-.message.mb-5.sender-message { display: flex;  align-self: flex-start; }
+.message.mb-5.sender-message { display: flex;  align-self: flex-start;  
+ }
 /* Styles for the receiver's (other user's) message */
 
 .message .test-event .message-content {
