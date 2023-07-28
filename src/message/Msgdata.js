@@ -23,7 +23,7 @@ function Msgdata({ socket, username, userId, receiveId }) {
       const messageData = {
         userId: loginUser && loginUser.userId,
         receiveId: receiveId,
-        author: username,
+        author: loginUser && loginUser.username,
         message: currentMessage,
         time: new Date().toLocaleTimeString(),
       };
@@ -71,7 +71,7 @@ function Msgdata({ socket, username, userId, receiveId }) {
     return () => {
       socket && socket.off("test-event");
     };
-  }, [socket, userId, receiveId]);
+  }, [socket, userId, receiveId,username]);
 
 
   return (
@@ -116,7 +116,7 @@ function Msgdata({ socket, username, userId, receiveId }) {
                     <div class="message-content">
                       <strong>{msg.author}</strong>
                       <p>{message}</p>
-                      <p class="mb-0 p-1 text-small text-muted" id="time">{`receiveId:${msg.receiveId
+            <p class="mb-0 p-1 text-small text-muted" id="time">{`receiveId:${msg.receiveId
                         }`}</p>
                       <p class="mb-0 p-1 text-small text-muted" id="time">{`Sender:${msg.userId}`}</p>
                       <p class="mb-0 p-1 text-small text-muted" id="time">{msg.time}</p>
