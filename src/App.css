@@ -59,14 +59,22 @@ img {
 .middle-menu ul li:last-child {
   border: none;
 }
-
+.message.sender {
+  justify-content: flex-end;
+}
 .middle-menu ul li a {
-  display: block;
   text-decoration: none;
-  padding: 5px 10px;
+  padding: 0;
   font-weight: 500;
-  color: #3e3d3d;
-  background: #f3f3f3;
+  color: #7f8591 !important;
+  background: #e6ebf5;
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
 }
 
 .logout-action {
@@ -185,12 +193,17 @@ img {
 
 
 .message-content {
-  background-color: #f0f0f0;
-  padding: 8px;
-  border-radius: 8px;
   max-width: 60%;
+  width: 100%;
 }
+.message-content  .mesage-box{background-color: #e6ebf5; padding: 10px 15px; border-radius: 8px; display: inline-block;}
+.message-content .meassge{margin: 0; color: #5c5c5c; font-size: 16px;}
+.message-content .chatid{margin: 0; color: #818181; font-size: 14px;}
+.message-content .time-msg{margin: 0; color: #9098a7; font-size: 12px;}
+.message-content .author { font-size: 15px; font-weight: 600; color: #2083c9; padding-left: 4px; text-transform: capitalize; }
 
+.sender .message-content .mesage-box {  float: right;background:#e2f3ff; }
+.sender .message-content .author {   width: 100%;   clear: both;   text-align: right; }
 
 
 
@@ -412,3 +425,7 @@ img {
   color: #8B8E98;
   text-decoration: underline;
 }
+
+
+#login{height: 100vh;;}
+.form_container{width: 100%;;}

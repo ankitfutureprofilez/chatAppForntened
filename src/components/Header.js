@@ -6,6 +6,7 @@ import { UserContext } from '../context/UserContextProvider';
 
 
 function Header() {
+
     const { loginUser, setLoginUser } = useContext(UserContext)
     const Navigate = useNavigate()
     function handlelogout(e) {
@@ -30,7 +31,7 @@ function Header() {
             <div className="rightactions">
                 <div className='logo'>
                     <Link to="/join">
-                    <img src="logo.png" alt="Logo" className="logo-img" />
+                    <img src="chat-logo.png" height="60px" alt="Logo" className="logo-img" />
                         </Link></div>
             </div>
             <div className='middle-menu'>
