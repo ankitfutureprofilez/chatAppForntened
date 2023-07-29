@@ -3,7 +3,7 @@ const tokens = localStorage.getItem("token");
 const baseURL=process.env.URL
 console.log(baseURL)
 let Api = axios.create({
-    baseURL: baseURL,
+    baseURL: "http://localhost:8080/api",
     headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${tokens}`
