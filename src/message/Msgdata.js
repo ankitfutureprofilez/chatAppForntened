@@ -158,10 +158,10 @@ function Msgdata({ socket, username, userId, receiveId }) {
                       </div>
                       <div className="author">{msg.author}</div>
                     </div>
-{/*                    
+                 
                     <div class="message-meta">
                        
-                    </div> */}
+                    </div> 
 
                   </div>
                 );
