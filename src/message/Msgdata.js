@@ -18,16 +18,15 @@ function Msgdata({ socket, username, userId, receiveId }) {
     );
   };
   const sendMessage = () => {
-    console.log("loginUser", loginUser)
     if (currentMessage.trim() !== "") {
       const messageData = {
         userId: loginUser && loginUser.userId,
         receiveId: receiveId,
-        author: loginUser && loginUser.username,
+        username: loginUser && loginUser.username, // Add the username to the message data
         message: currentMessage,
         time: new Date().toLocaleTimeString(),
       };
-      socket.emit("send-message", messageData);
+      socket.emit("send-message", messageData); // Emit 'send-message' event
       setMessageList((prevMessageList) => [...prevMessageList, messageData]);
       console.log("sent msg on send-message", messageData);
       setCurrentMessage("");
@@ -55,24 +54,15 @@ function Msgdata({ socket, username, userId, receiveId }) {
     }
   }, [receiveId]);
 
-  useEffect(() => {
-    // fetchOldMessages();
-    if (socket) {
-      // Join the room corresponding to the current user ID
-      socket.emit('join-room', userId);
-      // Listen for incoming messages in the room
-      socket.on('test-event', (data) => {
-        console.log('Test event received:', data);
-
-        // Update messageList state with the received message
-        setMessageList((prevMessageList) => [...prevMessageList, data]);
-      });
-    }
-
-    return () => {
-      socket && socket.off("test-event");
-    };
-  }, [socket, userId, receiveId, username]);
+// Use 'send-message' instead of 'test-event' in useEffect to listen for incoming messages
+useEffect(() => {
+  // ...
+  socket.on('send-message', (data) => {
+    console.log('Received message:', data);
+    setMessageList((prevMessageList) => [...prevMessageList, data]);
+  });
+  // ...
+}, [socket, userId, receiveId, username]);
 
 
   return (
