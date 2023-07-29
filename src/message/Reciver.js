@@ -23,7 +23,7 @@ function Reciver(props) {
     let socket = socketRef.current;
 
     socket = io.connect("https://localhost:8080");
-
+console.log(socket)
     // Helper function to wrap the first letter of a username in a <div>
     const wrapFirstLetterInDiv = (username) => {
       const firstLetter = username.charAt(0).toUpperCase();

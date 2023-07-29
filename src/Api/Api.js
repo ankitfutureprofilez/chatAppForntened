@@ -1,8 +1,9 @@
 import axios from 'axios';
 const tokens = localStorage.getItem("token");
-
+const baseURL=process.env.URL
+console.log(baseURL)
 let Api = axios.create({
-    baseURL: "https://localhost:8080/api",
+    baseURL: {baseURL},
     headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${tokens}`
