@@ -11,24 +11,31 @@ import { UserContext } from "../context/UserContextProvider";
 
 function Reciver(props) {
     const { loginUser } = useContext(UserContext);
-  
-  // const userss= (loginUser.userId)
-   console.log(loginUser)
+
+    // const userss= (loginUser.userId)
+    console.log(loginUser)
     const [showchat, setshowchat] = useState(false);
     const [list, setList] = useState([]);
-    const [selectedUsername, setSelectedUsername] = useState("");
-    const [selectedUserId, setSelectedUserId] = useState("");
-    const [selectRecive, setSelectrecive] = useState("")
+  const [selectedUsername, setSelectedUsername] = useState("");
+  const [selectedUserId, setSelectedUserId] = useState("");
+  const [selectRecive, setSelectrecive] = useState("");
+  const [socket, setSocket] = useState(null);
     const socketRef = useRef(null);
-    let socket = socketRef.current;
-
-    const Socket_URL=process.env.
-    socket = io.connect(Socket_URL);
-console.log(socket)
+    useEffect(() => {
+       // let sockets = socketRef.current;
+        const socket = io.connect("http://localhost:8080");
+        setSocket(socket);
+    
+        // Clean up the socket connection on component unmount
+        return () => {
+          socket.disconnect();
+        };
+      }, []);
+    // const Socket_URL=process.env.
     // Helper function to wrap the first letter of a username in a <div>
     const wrapFirstLetterInDiv = (username) => {
-      const firstLetter = username.charAt(0).toUpperCase();
-     
+        const firstLetter = username.charAt(0).toUpperCase();
+
         return (
             <div style={{ display: "inline-block", borderRadius: "50%", width: "34px", height: "34px", textAlign: "center", lineHeight: "34px", background: "#b2bed5", color: "white", fontWeight: "bold" }}>
 
@@ -80,9 +87,9 @@ console.log(socket)
                         <div ref={listRef} className="chat-message-list">
                             <ListGroup as="ul" className="border-0" >
                                 {list && list.map((User) => (
-                                    <ListGroup.Item  
-                                    className={(loginUser && loginUser.userId) === (User  &&  User.userId) ? `d-none` : ''} 
-                                      as="li" key={User.userId} onClick={() => handleSendButtonClick(User.username, User.userId)}>
+                                    <ListGroup.Item
+                                        className={(loginUser && loginUser.userId) === (User && User.userId) ? `d-none` : ''}
+                                        as="li" key={User.userId} onClick={() => handleSendButtonClick(User.username, User.userId)}>
                                         {/* Use the helper function to display the modified username */}
                                         <div className="rightactions d-flex align-items-center" >
                                             <div className="user-avatar">
