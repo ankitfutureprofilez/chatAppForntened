@@ -6,6 +6,7 @@ import UserContextProvider from "./context/UserContextProvider";
 import Reciver from './message/Reciver';
 import Msgdata from './message/Msgdata';
 import PrivateRoute from './Router/PrivateRoute';
+import OpenAi from './openai/OpenAi';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path='/reg' element={<Singup/>}> </Route>
             <Route path='/' element={<Login/>}></Route>
+            <Route path="/OpenApi" element={<PrivateRoute><OpenAi/></PrivateRoute>}></Route>
             <Route path="/msg" element={<Msgdata/>}></Route>
             <Route path="/join" element={<PrivateRoute><Reciver/></PrivateRoute>}></Route>
           </Routes>

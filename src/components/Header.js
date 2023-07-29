@@ -31,16 +31,22 @@ function Header() {
             <div className="rightactions">
                 <div className='logo'>
                     <Link to="/join">
-                    <img src="chat-logo.png" height="60px" alt="Logo" className="logo-img" />
-                        </Link></div>
+                        <img src="chat-logo.png" height="60px" alt="Logo" className="logo-img" />
+                    </Link></div>
             </div>
             <div className='middle-menu'>
                 <ul>
                     {loginUser ? (
                         <>
                             <li><Link className="text-dark font-bold mt-2 mb-2" to="/Join">
-                            <i className="bi bi-chat"></i>
+                                <i className="bi bi-chat"></i>
                             </Link></li>
+                            <>
+                                <li><Link className="text-dark font-bold mt-2 mb-2" to="/OpenApi">
+                                    <i class="bi bi-filetype-ai"></i>
+                                </Link></li>
+                            </>
+
                         </>
                     ) : (
                         <>
@@ -58,7 +64,7 @@ function Header() {
                 <div className="logout-action">
                     <div className="d-flex m-auto mb-2 text-capitalize">
                         <div>
-                        <div className="user-avatar">{wrapFirstLetterInDiv(loginUser)}</div>
+                            <div className="user-avatar">{wrapFirstLetterInDiv(loginUser)}</div>
                         </div>
                     </div>
                     <button

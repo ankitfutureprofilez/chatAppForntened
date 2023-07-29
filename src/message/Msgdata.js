@@ -101,18 +101,18 @@ function Msgdata({ socket, username, userId, receiveId }) {
 
 
 
-
-            <ScrollToBottom class="message-container">
+{username?(<>
+ <ScrollToBottom class="message-container">
 
               {messageList && messageList.map((msg, i) => {
                 const message = msg?.message || "";
                 const author = msg?.author || "";
-                const id = username === author ? "send-message" : "test-event";
+                const id = username === author ? "sender" : "reciver";
                 return (
                   <div
                     key={i}
 
-                    class={`message mb-5  ${id === "send-message" ? "send-message" : "test-event"}`}
+                    class={`message mb-5  ${id === "sender" ? "send-message" : "test-event"}`}
                   >
                     {/* Message Content */}
                     <div class="message-content">                      
@@ -133,6 +133,44 @@ function Msgdata({ socket, username, userId, receiveId }) {
                 );
               })}
             </ScrollToBottom>
+</>):(<>
+
+
+    <ScrollToBottom class="message-container">
+
+              {messageList && messageList.map((msg, i) => {
+                const message = msg?.message || "";
+                const author = msg?.author || "";
+                const id = username === author ? "sender" : "reciver";
+                return (
+                  <div
+                    key={i}
+
+                    class={`message mb-5  ${id === "sender" ? "send-message" : "test-event"}`}
+                  >
+                    {/* Message Content */}
+                    <div class="message-content">                      
+                      <div className="mesage-box">
+                          <p className="meassge">{message}</p>
+                          <p class="chatid" id="time">{`Receiver: ${msg.receiveId
+                            }`} | {`Sender: ${msg.userId}`}</p>
+                          <p class="time-msg" id="time">{msg.time}</p>
+                      </div>
+                      <div className="author">{msg.author}</div>
+                    </div>
+{/*                    
+                    <div class="message-meta">
+                       
+                    </div> */}
+
+                  </div>
+                );
+              })}
+            </ScrollToBottom>
+
+
+</>)}
+            
 
 
 
