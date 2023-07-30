@@ -96,7 +96,7 @@ function Msgdata({ socket, username, userId, receiveId }) {
                 return (
                   <div
                     key={i}
-                    class={`message mb-5  ${id === "sender" ? "test-event" : "send-message"}`}
+                    class={`message mb-5  ${id === "receiver" ? "send-message" : "test-event"}`}
                   >
                     <div class="message-content">
                       <div className="message-box">
