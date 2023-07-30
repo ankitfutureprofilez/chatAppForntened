@@ -20,10 +20,11 @@ function Reciver(props) {
   const [selectedUserId, setSelectedUserId] = useState("");
   const [selectRecive, setSelectrecive] = useState("");
     const socketRef = useRef(null);
+    console.log("socketRef.current",socketRef.current)
     let socket = socketRef.current;
-
+  
     // const Socket_URL=process.env.
-    socket = io.connect("http://localhost:8080");
+    socket = io.connect("https://chat-appbackend.vercel.app");
     console.log(socket)
     // Helper function to wrap the first letter of a username in a <div>
     const wrapFirstLetterInDiv = (username) => {
@@ -101,7 +102,7 @@ function Reciver(props) {
                     </div>
                 </div>
                 <div className="chat_panel">
-                    <Msgdata socket={socket} username={selectedUsername} userId={selectedUserId} receiveId={selectRecive} /></div>
+                <Msgdata socket={socket} username={selectedUsername} userId={selectedUserId} receiverId={selectedUserId} /></div>
             </div>
         </section>
     );

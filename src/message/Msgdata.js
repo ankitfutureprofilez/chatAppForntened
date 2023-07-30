@@ -2,8 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { UserContext } from "../context/UserContextProvider";
 import Messages from "../Api/Mesages";
-function Msgdata({ socket, username, userId, receiveId }) {
-
+function Msgdata({ socket, username, userId, receiverId }) {
+console.log("socket, username, userId, receiveId",socket, username, userId, receiverId)
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const { loginUser } = useContext(UserContext);
@@ -21,7 +21,7 @@ function Msgdata({ socket, username, userId, receiveId }) {
     if (currentMessage.trim() !== "") {
       const messageData = {
         userId: loginUser && loginUser.userId,
-        receiveId: receiveId,
+        receiverId: receiverId,
         username: loginUser && loginUser.username, // Add the username to the message data
         message: currentMessage,
         time: new Date().toLocaleTimeString(),
@@ -49,10 +49,10 @@ function Msgdata({ socket, username, userId, receiveId }) {
 
   useEffect(() => {
     setMessageList([]);
-    if (receiveId) {
-      fetchChats(receiveId);
+    if (receiverId) {
+      fetchChats(receiverId);
     }
-  }, [receiveId]);
+  }, [receiverId]);
 
   // Use 'send-message' instead of 'test-event' in useEffect to listen for incoming messages
   useEffect(() => {
@@ -96,12 +96,12 @@ function Msgdata({ socket, username, userId, receiveId }) {
                 return (
                   <div
                     key={i}
-                    class={`message mb-5  ${id === "receiver" ? "send-message" : "test-event"}`}
+                    class={`message mb-5  ${id === "sender" ? "send-message" : "test-event"}`}
                   >
                     <div class="message-content">
                       <div className="message-box">
                         <p className="message">{message}</p>
-                        <p class="chatid" id="time">{`Receiver: ${msg.receiveId}`} | {`Sender: ${msg.userId}`}</p>
+                        <p class="chatid" id="time">{`Receiver: ${msg.receiverId}`} | {`Sender: ${msg.userId}`}</p>
                         <p class="time-msg" id="time">{msg.time}</p>
                       </div>
                       <div className="author">{msg.username}</div>
