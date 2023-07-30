@@ -19,19 +19,12 @@ function Reciver(props) {
   const [selectedUsername, setSelectedUsername] = useState("");
   const [selectedUserId, setSelectedUserId] = useState("");
   const [selectRecive, setSelectrecive] = useState("");
-  const [socket, setSocket] = useState(null);
     const socketRef = useRef(null);
-    useEffect(() => {
-       // let sockets = socketRef.current;
-        const socket = io.connect("http://localhost:8080");
-        setSocket(socket);
-    
-        // Clean up the socket connection on component unmount
-        return () => {
-          socket.disconnect();
-        };
-      }, []);
+    let socket = socketRef.current;
+
     // const Socket_URL=process.env.
+    socket = io.connect("http://localhost:8080");
+    console.log(socket)
     // Helper function to wrap the first letter of a username in a <div>
     const wrapFirstLetterInDiv = (username) => {
         const firstLetter = username.charAt(0).toUpperCase();

@@ -26,7 +26,7 @@ function Msgdata({ socket, username, userId, receiveId }) {
         message: currentMessage,
         time: new Date().toLocaleTimeString(),
       };
-      socket.emit('send-message', messageData);; // Emit 'send-message' event
+      socket.emit('send-message', messageData); // Emit 'send-message' event
       setMessageList((prevMessageList) => [...prevMessageList, messageData]);
       console.log("sent msg on send-message", messageData);
       setCurrentMessage("");
@@ -35,7 +35,7 @@ function Msgdata({ socket, username, userId, receiveId }) {
 
   const fetchChats = (e, receiveId) => {
     const main = new Messages();
-    const resp = main.ListMessage(e, receiveId,userId);
+    const resp = main.ListMessage(e, receiveId);
     console.log(resp)
     resp.then((res) => {
       console.log("chat res", res)
@@ -54,20 +54,20 @@ function Msgdata({ socket, username, userId, receiveId }) {
     }
   }, [receiveId]);
 
-// Use 'send-message' instead of 'test-event' in useEffect to listen for incoming messages
-useEffect(() => {
-  if (socket) {
-    socket.on('test-event', (data) => {
-      console.log('Received message:', data);
-      setMessageList((prevMessageList) => [...prevMessageList, data]);
-    });
-  }
-  return () => {
+  // Use 'send-message' instead of 'test-event' in useEffect to listen for incoming messages
+  useEffect(() => {
     if (socket) {
-      socket.off('test-event');
+      socket.on('test-event', (data) => {
+        console.log('test-event:', data);
+        setMessageList((prevMessageList) => [...prevMessageList, data]);
+      });
     }
-  };
-}, [socket]);
+    return () => {
+      if (socket) {
+        socket.off('test-event');
+      }
+    };
+  }, [socket]);
 
 
 
@@ -89,14 +89,14 @@ useEffect(() => {
           </div>
           <div class="chat-body">
             <ScrollToBottom class="message-container">
-            {messageList && messageList.map((msg, i) => {
+              {messageList && messageList.map((msg, i) => {
                 const message = msg?.message || "";
                 const author = msg?.username || ""; // Change 'author' to 'username'
                 const id = loginUser && loginUser.username === author ? "sender" : "receiver";
                 return (
                   <div
                     key={i}
-                    class={`message mb-5  ${id === "sender" ? "send-message" : "test-event"}`}
+                    class={`message mb-5  ${id === "sender" ? "test-event" : "send-message"}`}
                   >
                     <div class="message-content">
                       <div className="message-box">
