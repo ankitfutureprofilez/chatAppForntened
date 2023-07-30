@@ -24,7 +24,7 @@ function Reciver(props) {
     let socket = socketRef.current;
   
     // const Socket_URL=process.env.
-    socket = io.connect("https://localhost:8080");
+    socket = io.connect("https://localhost:8080/");
     console.log(socket)
     // Helper function to wrap the first letter of a username in a <div>
     const wrapFirstLetterInDiv = (username) => {
