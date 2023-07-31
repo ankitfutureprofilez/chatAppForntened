@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import {  useNavigate } from 'react-router-dom';
+import {  Link, useNavigate } from 'react-router-dom';
 import Singup from '../Api/Signup';
 function Sing() {
     const navigate = useNavigate()
@@ -123,14 +123,14 @@ function Sing() {
                             </button>
 
                             <button title="Login" type="submit"
-                            
                                 className="sign-in_btn">
-                                <span>Login</span>
+                            <Link to="/">
+                               <span>Login</span>
+                               </Link>   
                             </button>
                         </form>
                     </div>
                     <div className="col-md-3">
-
                     </div>
                 </div>
             </div>
