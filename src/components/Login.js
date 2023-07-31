@@ -28,7 +28,6 @@ function Login() {
 
 
     async function handleForms(e) {
-        e.preventDefault(); // Prevent form submission
         const main = new Singup();
         const resp = main.Loginshow(Regs);
         resp.then((res) => {
@@ -56,7 +55,7 @@ function Login() {
 
                     </div>
                     <div className="col-md-4">
-                        <form className="form_container">
+                        <div className="form_container">
                             <div className="logo_container">
 
                                 <img src="chat-logo.png" alt="Logo" height="60px" />
@@ -91,7 +90,7 @@ function Login() {
                                     onChange={handleInputs}
                                     value={Regs.password} type="password" className="input_field" id="password_field" />
                             </div>
-                            <button title="Sign In" type="submit"
+                            <button title="Sign In" 
                                 onClick={handleForms}
                                 className="sign-in_btn">
                                 <span>Login</span>
@@ -103,7 +102,7 @@ function Login() {
                                 <span>SingUp</span>
                             </button>
                         </Link>
-                        </form>
+                        </div>
                     </div>
                     <div className="col-md-4">
 
