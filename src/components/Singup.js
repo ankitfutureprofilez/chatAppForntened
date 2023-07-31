@@ -122,15 +122,16 @@ function Sing() {
                                 <span>Sign Up</span>
                             </button>
 
-                            <button title="Login" type="submit"
+                        
+                        </form>
+                    </div>
+                    <div className="col-md-3">
+                    <button title="Login" type=""
                                 className="sign-in_btn">
                             <Link to="/">
                                <span>Login</span>
                                </Link>   
                             </button>
-                        </form>
-                    </div>
-                    <div className="col-md-3">
                     </div>
                 </div>
             </div>
