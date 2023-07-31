@@ -21,7 +21,6 @@ function Reciver(props) {
     const [selectRecive, setSelectrecive] = useState("")
     const socketRef = useRef(null);
     let socket = socketRef.current;
-
     socket = io.connect("http://localhost:8080");
 
     // Helper function to wrap the first letter of a username in a <div>
