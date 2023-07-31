@@ -2,7 +2,7 @@ import axios from 'axios';
 const tokens = localStorage.getItem("token");
 
 let Api = axios.create({
-    baseURL: "http://chat-appbackend.vercel.app/api",
+    baseURL: "https://localhost:8080/Api",
     headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${tokens}`
