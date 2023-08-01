@@ -12,7 +12,6 @@ import OpenAi from './openai/OpenAi';
 
 
 function App() {
-console.log("Socketurl",process.env.REACT_APP_SOCKET_URL)
 console.log("Socketurl",process.env.REACT_APP_BASE_URL)
 
 

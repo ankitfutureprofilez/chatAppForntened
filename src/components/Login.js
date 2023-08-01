@@ -35,10 +35,10 @@ function Login() {
         resp.then((res) => {
             if (res.data.status) {
                 //  console.log("logged in user", res.data)
-                toast.success(res && res.data && res.data.msg);
 
                 navigate('/join');
                 if (res.data.user) {
+                    toast.success(res && res.data && res.data.msg);
                     setLoginUser(res.data.user);
                     localStorage.setItem("token", res.data.token);
                 }
