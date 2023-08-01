@@ -3,6 +3,7 @@ import { Toaster, toast } from 'react-hot-toast';
 
 import { Link, useNavigate } from 'react-router-dom';
 import Singup from '../Api/Signup';
+import Header from './Header';
 function Sing() {
     const navigate = useNavigate()
 
@@ -47,14 +48,10 @@ function Sing() {
             <div className='container m-auto'>
                 <div className='row'>
                     <div className="col-md-3">
-
+<Header/>
                     </div>
                     <div className="col-md-6">
                               
-                    <Toaster
-                            position="top-center"
-                            reverseOrder={false}
-                        />
                         <form className="form_container">
                             <div className="logo_container">
 
@@ -137,6 +134,10 @@ function Sing() {
                             </button>
                             
                         </form>
+                            <Toaster
+                                    position="top-center"
+                                    reverseOrder={false}
+                                />
                         <Link to="/">
                         <button title="Login" type=""
                             className="sign-in_btn">
