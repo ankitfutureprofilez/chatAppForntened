@@ -23,10 +23,11 @@ function Reciver(props) {
     let socket = socketRef.current;
 
     useEffect(()=>{
-        console.log("process.env.REACT_APP_BASE_URLSocket",process.env.REACT_APP_BASE_URL)
-        socket = io.connect("https://chat-appbackend.vercel.app/");
-        console.log("socket",socket.id);
-    },[]);
+        if(socketRef){
+            socket = io.connect("https://chat-appbackend.vercel.app/");
+            console.log("socket",socket.id);
+        }
+    },[socketRef]);
     
 
     // Helper function to wrap the first letter of a username in a <div>
