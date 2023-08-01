@@ -135,6 +135,10 @@ function Sing() {
                                 reverseOrder={false}
                             /></div>
                         </form>
+                        <Toaster
+              position="top-center"
+              reverseOrder={false}
+            />
                     </div>
                     <div className="col-md-3">
                         <button title="Login" type=""

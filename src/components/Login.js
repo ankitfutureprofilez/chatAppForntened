@@ -2,8 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Singup from '../Api/Signup';
-import { toast } from 'react-hot-toast';
-
+import {Toaster, toast } from 'react-hot-toast';
 import { UserContext } from '../context/UserContextProvider';
 
 
@@ -109,6 +108,11 @@ function Login() {
                             </button>
                         </Link>
                         </div>
+                       
+                        <Toaster
+              position="top-center"
+              reverseOrder={false}
+            />
                     </div>
                     <div className="col-md-4">
 

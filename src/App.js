@@ -19,7 +19,7 @@ function App() {
     <div>
       <UserContextProvider>
         <Router>
-          <Header/>
+       
           <Routes>
             <Route path='/reg' element={<Singup/>}> </Route>
             <Route path='/' element={<Login/>}></Route>
