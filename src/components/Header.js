@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { UserContext } from '../context/UserContextProvider';
+import { ToastBar } from 'react-hot-toast';
 
 
 function Header() {
@@ -79,6 +80,11 @@ function Header() {
             ) : (
                 <></>
             )}
+            
+              <Toaster
+              position="top-center"
+              reverseOrder={false}
+            />
         </section>
     );
 }
