@@ -23,7 +23,7 @@ function Reciver(props) {
     let socket = socketRef.current;
     console.log("process.env.REACT_APP_BASE_URL Api", process.env.REACT_APP_BASE_URL)
     //socket = io.connect("http://localhost:8080/");
-    socket = io.connect("http://chat-appbackend.vercel.app/");
+    socket = io.connect("https://chat-appbackend.vercel.app");
     // Helper function to wrap the first letter of a username in a <div>
     const wrapFirstLetterInDiv = (username) => {
         const firstLetter = username.charAt(0).toUpperCase();
