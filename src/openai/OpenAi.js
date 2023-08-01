@@ -54,7 +54,12 @@ function OpenAi() {
                       <div className="message-content">
                         <div className="message-box">
                           <p className="message">
+                            <div>
+                         {userQuestion}
+                            </div>
+                            <div>
                             {assistantAnswer}
+                            </div>
                           </p>
                         </div>
                         <div className="author">
