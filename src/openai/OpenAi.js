@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { UserContext } from "../context/UserContextProvider";
 import OpenAis from "../Api/OpenAi";
@@ -7,10 +7,10 @@ import Header from "../components/Header";
 function OpenAi() {
   const [userQuestion, setUserQuestion] = useState('');
   const [assistantAnswer, setAssistantAnswer] = useState('');
-
-  const { loginUser } = useContext(UserContext)
-  console.log(loginUser)
-
+  const [chatHistory, setChatHistory] = useState([]);
+  const { loginUser } = useContext(UserContext);
+  console.log("loginUser", loginUser)
+ 
 
   async function handleQuestionSubmit(e) {
     e.preventDefault();
@@ -19,6 +19,11 @@ function OpenAi() {
     resp.then((res) => {
       console.log("res.data.data", res.data.data)
       setAssistantAnswer(res.data.data);
+
+      setChatHistory(prevChatHistory => [
+        ...prevChatHistory,
+        { userQuestion, assistantAnswer: res.data.data }
+      ]);
     }).catch((err) => {
       console.log("login err", err)
     });
@@ -35,59 +40,45 @@ function OpenAi() {
               <div className="chat-window">
                 {/* Chat Header */}
                 <div className="chat-header">
-                  <h3>Live Chat</h3>
+                  <h3>Live Ai  Chat</h3>
                   <div className="d-flex align-items-center">
                     <div className="user-avatar">
-                      {/* User Avatar */}
+                    
                     </div>
                     <div className="user-details ps-2">
-                      <h6 className="mb-0 text-capitalize"></h6>
+                      <h6 className="mb-0 text-capitalize" >{loginUser.username}</h6>
                     </div>
                   </div>
                 </div>
-
                 {/* Chat Body */}
                 <div className="chat-body">
                   <ScrollToBottom className="message-container">
-                  <div className={"message mb-5 sender"}>
-                      {/* Message Content */}
-                      <div className="message-content">
-                        <div className="message-box">
-                          <p className="message">
-                            <div>
-                         {userQuestion}
-                            </div>
-                          
-                          </p>
-                        </div>
-                        <div className="author">
-                          {/* Author Information */}
+                    {/* Display the chat history */}
+                    {chatHistory.map((chat, index) => (
+                      <>
+                      <div key={index} className={"message mb-5"}>
+                        {/* User's Message */}
+                        <div className="message-content">
+                          <div className="message-box">
+                            <p className="message">
+                              {chat.userQuestion}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                      <div className="message-meta">
-                        {/* Message Meta Data */}
-                      </div>
-                    </div>
-                    <div className={"message mb-5"}>
-                      {/* Message Content */}
-                      <div className="message-content">
-                        <div className="message-box">
-                          <p className="message">
-                          
-                            <div>
-                            {assistantAnswer}
-                            </div>
-                          </p>
-                        </div>
-                        <div className="author">
-                          {/* Author Information */}
-                        </div>
-                      </div>
-                      <div className="message-meta">
-                        {/* Message Meta Data */}
-                      </div>
-                    </div>
-                    
+                      <div key={index + 1000} className={"message mb-5 sender"}>
+              {/* AI Assistant's Message */}
+              <div className="message-content">
+                <div className="message-box">
+                  <p className="message">
+                    {chat.assistantAnswer}
+                  </p>
+                </div>
+             
+            </div>
+            </div>
+                      </>
+                    ))}
                   </ScrollToBottom>
                 </div>
 

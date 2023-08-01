@@ -1,7 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
-import { io } from 'socket.io-client';
-
 import { UserContext } from "../context/UserContextProvider";
 import Messages from "../Api/Mesages";
 function Msgdata({ socket, username, userId, receiveId }) {
@@ -80,31 +78,26 @@ function Msgdata({ socket, username, userId, receiveId }) {
   return (
     <>
       {username ? (<>
-
-
-        <div class="chat-window">
-          <div class="chat-header">
-
-
+        <div className="chat-window">
+          <div className="chat-header">
             <h3>Live Chat</h3>
-            <div class="d-flex align-items-center">
-              <div class="user-avatar">
+            <div className="d-flex align-items-center">
+              <div className="user-avatar">
                 {wrapFirstLetterInDiv(username)}
               </div>
-
-              <div class="user-details ps-2">
-                <h6 class="mb-0 text-capitalize" >{username}</h6>
-                <p class="mb-0" >{userId}</p>
+              <div className="user-details ps-2">
+                <h6 className="mb-0 text-capitalize" >{username}</h6>
+                <p className="mb-0" >{userId}</p>
               </div>
             </div>
           </div>
 
-          <div class="chat-body">
+          <div className="chat-body">
 
 
 
 
-            <ScrollToBottom class="message-container">
+            <ScrollToBottom className="message-container">
 
               {messageList && messageList.map((msg, i) => {
                 const message = msg?.message || "";
@@ -114,20 +107,20 @@ function Msgdata({ socket, username, userId, receiveId }) {
                   <div
                     key={i}
 
-                    class={`message mb-5  ${id === "send-message" ? "send-message" : "test-event"}`}
+                    className={`message mb-5  ${id === "send-message" ? "send-message" : "test-event"}`}
                   >
                     {/* Message Content */}
-                    <div class="message-content">                      
+                    <div className="message-content">                      
                       <div className="mesage-box">
                           <p className="meassge">{message}</p>
-                          <p class="chatid" id="time">{`Receiver: ${msg.receiveId
+                          <p className="chatid" id="time">{`Receiver: ${msg.receiveId
                             }`} | {`Sender: ${msg.userId}`}</p>
-                          <p class="time-msg" id="time">{msg.time}</p>
+                          <p className="time-msg" id="time">{msg.time}</p>
                       </div>
                       <div className="author">{msg.author}</div>
                     </div>
 {/*                    
-                    <div class="message-meta">
+                    <div className="message-meta">
                        
                     </div> */}
 
@@ -139,7 +132,7 @@ function Msgdata({ socket, username, userId, receiveId }) {
 
 
           </div>
-          <div class="chat-footer">
+          <div className="chat-footer">
             <input
               type="text"
               placeholder="Type your message..."
@@ -149,7 +142,7 @@ function Msgdata({ socket, username, userId, receiveId }) {
                 event.key === "Enter" && sendMessage();
               }}
             />
-            <button onClick={sendMessage}><i class="bi bi-send"></i></button>
+            <button onClick={sendMessage}><i className="bi bi-send"></i></button>
 
           </div>
         </div>
@@ -157,7 +150,7 @@ function Msgdata({ socket, username, userId, receiveId }) {
 
 
       </>) : (<>
-        < div class="msg-data-container">
+        < div className="msg-data-container">
           <div classMNmae="msg">
             <h1>Welcome user's</h1>
             <p>Please Select the user's for Conversions</p>

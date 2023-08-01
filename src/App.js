@@ -7,7 +7,6 @@ import Reciver from './message/Reciver';
 import Msgdata from './message/Msgdata';
 import PrivateRoute from './Router/PrivateRoute';
 import OpenAi from './openai/OpenAi';
-import Header from './components/Header';
 
 
 
