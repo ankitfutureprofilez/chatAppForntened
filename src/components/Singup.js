@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { Toaster, toast } from 'react-hot-toast';
 
 import { Link, useNavigate } from 'react-router-dom';
 import Singup from '../Api/Signup';
@@ -26,19 +26,19 @@ function Sing() {
         const main = new Singup();
         const resp = main.Regshow(Regs)
         resp
-        .then((res) => {
-          if (res.data.user) {
-            console.log(res.data.msg);
-            toast.success(res.data.msg);
-          } else {
-            toast.error(res.data.msg);
-          }
-          console.log(res.data.user);
-          navigate('/');
-        })
-        .then((err) => {
-          console.log(err);
-        });
+            .then((res) => {
+                if (res.data.user) {
+                    console.log(res.data.msg);
+                    toast.success(res.data.msg);
+                } else {
+                    toast.error(res.data.msg);
+                }
+                console.log(res.data.user);
+                navigate('/');
+            })
+            .then((err) => {
+                console.log(err);
+            });
     };
 
     return (
@@ -130,8 +130,10 @@ function Sing() {
                                 className="sign-in_btn">
                                 <span>Sign Up</span>
                             </button>
-
-
+                            <div><Toaster
+                                position="top-center"
+                                reverseOrder={false}
+                            /></div>
                         </form>
                     </div>
                     <div className="col-md-3">
