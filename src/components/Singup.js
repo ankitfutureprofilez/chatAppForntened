@@ -25,20 +25,20 @@ function Sing() {
         e.preventDefault();
         const main = new Singup();
         const resp = main.Regshow(Regs)
-        resp.then((res) => {
-            if (res.data.user) {
-                console.log(res.data.msg)
-                toast.success(res.data.msg);
-            }
-            else {
-                toast.error(res.data.msg);
-            }
-
-            console.log(res.data.user)
-            navigate('/')
-        }).then((err) => {
-            console.log(err)
+        resp
+        .then((res) => {
+          if (res.data.user) {
+            console.log(res.data.msg);
+            toast.success(res.data.msg);
+          } else {
+            toast.error(res.data.msg);
+          }
+          console.log(res.data.user);
+          navigate('/');
         })
+        .then((err) => {
+          console.log(err);
+        });
     };
 
     return (
