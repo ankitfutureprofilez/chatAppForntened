@@ -25,10 +25,10 @@ function Reciver(props) {
    // const socket = io("https://chat-appbackend.vercel.app");
 
     //socket = io.connect("http://localhost:8080/");
-   const  socket = io("https://chat-appbackend.vercel.app");
+   const  socket = io("ttp://localhost:8080");
 
 
-   
+
     // Helper function to wrap the first letter of a username in a <div>
     const wrapFirstLetterInDiv = (username) => {
         const firstLetter = username.charAt(0).toUpperCase();

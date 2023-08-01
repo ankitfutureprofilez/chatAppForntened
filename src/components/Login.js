@@ -38,6 +38,7 @@ function Login() {
 
                 navigate('/join');
                 if (res.data.user) {
+                    console.log(res.data.msg)
                     toast.success(res && res.data && res.data.msg);
                     setLoginUser(res.data.user);
                     localStorage.setItem("token", res.data.token);
