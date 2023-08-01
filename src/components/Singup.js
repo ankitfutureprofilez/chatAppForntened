@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Singup from '../Api/Signup';
-import Header from './Header';
-function Sing() {
-    const navigate = useNavigate()
 
+function Sing() {
     const [Regs, SetRegs] = useState({
         name: '',
         password: '',
@@ -46,7 +44,6 @@ function Sing() {
             <div className='container m-auto'>
                 <div className='row'>
                     <div className="col-md-3">
-                        <Header />
                     </div>
                     <div className="col-md-6">
 
