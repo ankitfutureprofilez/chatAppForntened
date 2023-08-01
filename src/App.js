@@ -13,7 +13,7 @@ import Header from './components/Header';
 
 
 function App() {
-  console.log("REACT_APP_BASE_URL Apiss",process.env.REACT_APP_BASE_URL)
+  console.log("REACT_APP_BASE_URL ffff",process.env.REACT_APP_BASE_URL)
 
   return (
     <div>
