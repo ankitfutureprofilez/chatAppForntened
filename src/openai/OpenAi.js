@@ -49,7 +49,7 @@ function OpenAi() {
                 {/* Chat Body */}
                 <div className="chat-body">
                   <ScrollToBottom className="message-container">
-                    <div className={"message mb-5"}>
+                  <div className={"message mb-5 sender"}>
                       {/* Message Content */}
                       <div className="message-content">
                         <div className="message-box">
@@ -57,6 +57,23 @@ function OpenAi() {
                             <div>
                          {userQuestion}
                             </div>
+                          
+                          </p>
+                        </div>
+                        <div className="author">
+                          {/* Author Information */}
+                        </div>
+                      </div>
+                      <div className="message-meta">
+                        {/* Message Meta Data */}
+                      </div>
+                    </div>
+                    <div className={"message mb-5"}>
+                      {/* Message Content */}
+                      <div className="message-content">
+                        <div className="message-box">
+                          <p className="message">
+                          
                             <div>
                             {assistantAnswer}
                             </div>
@@ -70,6 +87,7 @@ function OpenAi() {
                         {/* Message Meta Data */}
                       </div>
                     </div>
+                    
                   </ScrollToBottom>
                 </div>
 
