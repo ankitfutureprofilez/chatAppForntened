@@ -7,6 +7,7 @@ import Reciver from './message/Reciver';
 import Msgdata from './message/Msgdata';
 import PrivateRoute from './Router/PrivateRoute';
 import OpenAi from './openai/OpenAi';
+import Header from './components/Header';
 
 
 
@@ -18,6 +19,7 @@ function App() {
     <div>
       <UserContextProvider>
         <Router>
+          <Header/>
           <Routes>
             <Route path='/reg' element={<Singup/>}> </Route>
             <Route path='/' element={<Login/>}></Route>
