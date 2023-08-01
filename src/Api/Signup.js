@@ -7,7 +7,7 @@ class Singup extends Component {
     }
 
     async Loginshow(key) {
-        return Api.post('/login', key)
+        return Api.post('/', key)
     }
     async List() {
         return Api.get('/chatmassges')
