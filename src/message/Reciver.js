@@ -28,9 +28,11 @@ function Reciver(props) {
     useEffect(() => {
         socketRef.current = io.connect("https://chat-appbackend.vercel.app/");
         console.log("socket", socketRef.current);
+
         // Clean up the socket connection when the component unmounts
         return () => {
             if (socketRef.current) {
+                console.log("disconnected")
                 socketRef.current.disconnect();
             }
         };
