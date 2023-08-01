@@ -22,8 +22,20 @@ function Reciver(props) {
     const socketRef = useRef(null);
     let socket = socketRef.current;
 
-    socket = io.connect("https://chat-appbackend.vercel.app/");
-    console.log("socket",socket);
+    // socket = io.connect("https://chat-appbackend.vercel.app/");
+    // console.log("socket",socket);
+
+    useEffect(() => {
+        socketRef.current = io.connect("https://chat-appbackend.vercel.app/");
+        console.log("socket", socketRef.current);
+        // Clean up the socket connection when the component unmounts
+        return () => {
+            if (socketRef.current) {
+                socketRef.current.disconnect();
+            }
+        };
+    }, []);
+
     
 
     // Helper function to wrap the first letter of a username in a <div>
