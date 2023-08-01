@@ -35,9 +35,9 @@ function Sing() {
                     toast.error(res.data.msg);
                 }
                 console.log(res.data.user);
-                navigate('/');
+          
             })
-            .then((err) => {
+            .Catch((err) => {
                 console.log(err);
             });
     };
@@ -48,10 +48,10 @@ function Sing() {
             <div className='container m-auto'>
                 <div className='row'>
                     <div className="col-md-3">
-<Header/>
+                        <Header />
                     </div>
                     <div className="col-md-6">
-                              
+
                         <form className="form_container">
                             <div className="logo_container">
 
@@ -132,22 +132,22 @@ function Sing() {
                                 className="sign-in_btn">
                                 <span>Sign Up</span>
                             </button>
-                            
+
                         </form>
-                            <Toaster
-                                    position="top-center"
-                                    reverseOrder={false}
-                                />
+                        <Toaster
+                            position="top-center"
+                            reverseOrder={false}
+                        />
                         <Link to="/">
-                        <button title="Login" type=""
-                            className="sign-in_btn">
+                            <button title="Login" type=""
+                                className="sign-in_btn">
                                 <span>Login</span>
-                        </button>
-                            </Link>
-                     
+                            </button>
+                        </Link>
+
                     </div>
                     <div className="col-md-3">
-                        
+
                     </div>
                 </div>
             </div>
