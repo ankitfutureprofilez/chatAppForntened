@@ -39,13 +39,13 @@ function Login() {
                 navigate('/join');
                 if (res.data.user) {
                     console.log(res.data.msg)
-                    toast.success(res && res.data && res.data.msg);
+                    toast.success(res.data.msg);
                     setLoginUser(res.data.user);
                     localStorage.setItem("token", res.data.token);
                 }
             } else {
                 console.error("status login error", res);
-                toast.error(res && res.data && res.data.msg);
+                toast.error(res.data.msg);
             }
         }).catch((err) => {
             console.log("login err", err)

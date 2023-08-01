@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
-import {  Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Singup from '../Api/Signup';
 function Sing() {
     const navigate = useNavigate()
@@ -26,12 +26,12 @@ function Sing() {
         const main = new Singup();
         const resp = main.Regshow(Regs)
         resp.then((res) => {
-            if(res.data.user){
-
-                toast.success(res && res.data && res.data.msg);
+            if (res.data.user) {
+                console.log(res.data.msg)
+                toast.success(res.data.msg);
             }
-            else{
-                toast.error(res && res.data && res.data.msg);
+            else {
+                toast.error(res.data.msg);
             }
 
             console.log(res.data.user)
@@ -43,7 +43,7 @@ function Sing() {
 
     return (
 
-        <section id="login"  className='d-flex items-center justify-content-center'>
+        <section id="login" className='d-flex items-center justify-content-center'>
             <div className='container m-auto'>
                 <div className='row'>
                     <div className="col-md-3">
@@ -131,16 +131,16 @@ function Sing() {
                                 <span>Sign Up</span>
                             </button>
 
-                        
+
                         </form>
                     </div>
                     <div className="col-md-3">
-                    <button title="Login" type=""
-                                className="sign-in_btn">
+                        <button title="Login" type=""
+                            className="sign-in_btn">
                             <Link to="/">
-                               <span>Login</span>
-                               </Link>   
-                            </button>
+                                <span>Login</span>
+                            </Link>
+                        </button>
                     </div>
                 </div>
             </div>
