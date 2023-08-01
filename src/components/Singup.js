@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 import {  Link, useNavigate } from 'react-router-dom';
 import Singup from '../Api/Signup';
@@ -25,6 +26,14 @@ function Sing() {
         const main = new Singup();
         const resp = main.Regshow(Regs)
         resp.then((res) => {
+            if(res.data.user){
+
+                toast.success(res && res.data && res.data.msg);
+            }
+            else{
+                toast.error(res && res.data && res.data.msg);
+            }
+
             console.log(res.data.user)
             navigate('/')
         }).then((err) => {

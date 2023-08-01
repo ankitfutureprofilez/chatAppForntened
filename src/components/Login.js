@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Singup from '../Api/Signup';
+import { toast } from 'react-hot-toast';
+
 import { UserContext } from '../context/UserContextProvider';
 
 
@@ -33,6 +35,8 @@ function Login() {
         resp.then((res) => {
             if (res.data.status) {
                 //  console.log("logged in user", res.data)
+                toast.success(res && res.data && res.data.msg);
+
                 navigate('/join');
                 if (res.data.user) {
                     setLoginUser(res.data.user);
@@ -40,6 +44,7 @@ function Login() {
                 }
             } else {
                 console.error("status login error", res);
+                toast.error(res && res.data && res.data.msg);
             }
         }).catch((err) => {
             console.log("login err", err)
