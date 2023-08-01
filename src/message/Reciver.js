@@ -21,7 +21,7 @@ function Reciver(props) {
     const [selectRecive, setSelectrecive] = useState("")
     const socketRef = useRef(null);
     let socket = socketRef.current;
-   
+   console.log("process.env.REACT_APP_BASE_URLSocket",process.env.REACT_APP_BASE_URL)
     socket = io.connect(process.env.REACT_APP_BASE_URL);
 
     // Helper function to wrap the first letter of a username in a <div>
