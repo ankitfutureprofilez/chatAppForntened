@@ -12,7 +12,7 @@ import OpenAi from './openai/OpenAi';
 
 
 function App() {
-  console.log("REACT_APP_BASE_URL Api",process.env.REACT_APP_BASE_URL)
+  console.log("REACT_APP_BASE_URL Apiss",process.env.REACT_APP_BASE_URL)
 
   return (
     <div>
