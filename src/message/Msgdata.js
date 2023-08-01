@@ -10,7 +10,9 @@ function Msgdata({ socket, username, userId, receiveId }) {
   console.log("loginUser", loginUser)
   const wrapFirstLetterInDiv = (username) => {
     const firstLetter = username.charAt(0).toUpperCase();
+    console.log("process.env.REACT_APP_BASE_URLSocket",process.env.REACT_APP_BASE_URL)
     return (
+
       <div style={{ display: "inline-block", borderRadius: "50%", width: "34px", height: "34px", textAlign: "center", lineHeight: "34px", background: "#b2bed5", color: "white", fontWeight: "bold" }}>
 
         {firstLetter}
