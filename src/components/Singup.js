@@ -25,21 +25,19 @@ function Sing() {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         const main = new Singup();
-        const resp = main.Regshow(Regs)
-        resp
-            .then((res) => {
-                if (res.data.user) {
-                    console.log(res.data.msg);
-                    toast.success(res.data.msg);
-                } else {
-                    toast.error(res.data.msg);
-                }
-                console.log(res.data.user);
-          
-            })
-            .Catch((err) => {
-                console.log(err);
-            });
+        const response = main.Regshow(Regs)
+        response.then((res) => {
+            if (res.data.status) {
+                toast.success(res && res.data && res.data.msg);
+            } else {
+                toast.error(res && res.data && res.data.msg);
+            }
+            console.log(res);
+        }).catch((err) => {
+            const error = err.errors;
+            console.log(error);
+
+        });
     };
 
     return (
