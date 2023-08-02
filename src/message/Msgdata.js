@@ -2,7 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import { UserContext } from "../context/UserContextProvider";
 import Messages from "../Api/Mesages";
-function Msgdata({ socket, username, userId, receiveId }) {
+function Msgdata({  username, userId, receiveId }) {
+  const socket = io("https://chat-appbackend.vercel.app");
   console.log("socket",socket)
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
