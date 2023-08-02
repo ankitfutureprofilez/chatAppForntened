@@ -21,7 +21,7 @@ function App() {
        
           <Routes>
             <Route path='/reg' element={<Singup/>}> </Route>
-            <Route path='/' element={<Login/>}></Route>
+            <Route path='/login' element={<Login/>}></Route>
             <Route path="/OpenApi" element={<PrivateRoute><OpenAi/></PrivateRoute>}></Route>
             <Route path="/msg" element={<Msgdata/>}></Route>
             <Route path="/join" element={<PrivateRoute><Reciver/></PrivateRoute>}></Route>
