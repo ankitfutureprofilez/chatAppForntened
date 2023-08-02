@@ -13,7 +13,7 @@ function Header() {
     function handlelogout(e) {
         localStorage.removeItem('loginUser')
         setLoginUser(localStorage.getItem('loginUser'))
-        Navigate('/')
+        Navigate('/login')
     }
     const wrapFirstLetterInDiv = (loginUser) => {
         if (loginUser && typeof loginUser === 'object' && loginUser.username) {

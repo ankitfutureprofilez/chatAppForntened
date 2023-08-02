@@ -133,7 +133,7 @@ function Sing() {
                             position="top-center"
                             reverseOrder={false}
                         />
-                        <Link to="/">
+                        <Link to="/login">
                             <button title="Login" type=""
                                 className="sign-in_btn">
                                 <span>Login</span>
