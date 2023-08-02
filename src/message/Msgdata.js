@@ -4,9 +4,7 @@ import io from "socket.io-client";
 
 import { UserContext } from "../context/UserContextProvider";
 import Messages from "../Api/Mesages";
-function Msgdata({  username, userId, receiveId }) {
-  const socket = io("https://chat-appbackend.vercel.app");
-  console.log("socket",socket)
+function Msgdata({socket,  username, userId, receiveId }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const { loginUser } = useContext(UserContext);
