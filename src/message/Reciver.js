@@ -25,7 +25,7 @@ function Reciver(props) {
    // const socket = io("https://chat-appbackend.vercel.app");
 
     //socket = io.connect("http://localhost:8080/");
-   const  socket = io(process.env.REACT_APP_BASE_URL);
+    const socket = io("https://chat-appbackend.vercel.app", {withCredentials: true,}).connect();
 
 
 
