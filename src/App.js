@@ -12,7 +12,8 @@ import OpenAi from './openai/OpenAi';
 
 
 function App() {
-  console.log("REACT_APP_BASE_URL ffff",process.env.REACT_APP_BASE_URL)
+  const URL=process.env.REACT_APP_BASE_URL
+  console.log("REACT_APP_BASE_URL ffff",URL)
 
   return (
     <div>
@@ -21,7 +22,7 @@ function App() {
        
           <Routes>
             <Route path='/reg' element={<Singup/>}> </Route>
-            <Route path='/login' element={<Login/>}></Route>
+            <Route path='/' element={<Login/>}></Route>
             <Route path="/OpenApi" element={<PrivateRoute><OpenAi/></PrivateRoute>}></Route>
             <Route path="/msg" element={<Msgdata/>}></Route>
             <Route path="/join" element={<PrivateRoute><Reciver/></PrivateRoute>}></Route>
