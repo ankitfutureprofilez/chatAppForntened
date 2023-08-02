@@ -3,6 +3,7 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import { UserContext } from "../context/UserContextProvider";
 import Messages from "../Api/Mesages";
 function Msgdata({ socket, username, userId, receiveId }) {
+  console.log("socket",socket)
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const { loginUser } = useContext(UserContext);

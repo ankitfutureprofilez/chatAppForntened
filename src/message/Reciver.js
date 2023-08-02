@@ -104,7 +104,7 @@ function Reciver(props) {
                     </div>
                 </div>
                 <div className="chat_panel">
-                    <Msgdata socket={socket} username={selectedUsername} userId={selectedUserId} receiveId={selectRecive} /></div>
+                    <Msgdata  username={selectedUsername} userId={selectedUserId} receiveId={selectRecive} /></div>
             </div>
         </section>
     );
