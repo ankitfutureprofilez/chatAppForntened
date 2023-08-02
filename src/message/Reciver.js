@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { io } from 'socket.io-client';
+import io from "socket.io-client";
 import Msgdata from "./Msgdata";
 import Singup from "../Api/Signup";
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -25,8 +25,7 @@ function Reciver(props) {
    // const socket = io("https://chat-appbackend.vercel.app");
 
     //socket = io.connect("http://localhost:8080/");
-    const socket = io("https://chat-appbackend.vercel.app", {withCredentials: true,}).connect();
-
+    const socket = io(process.env.REACT_APP_BASE_URL);
 
 
     // Helper function to wrap the first letter of a username in a <div>

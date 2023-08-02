@@ -22,7 +22,7 @@ export default function PrivateRoute(props) {
     }).catch((err) => {
       console.log(err);
     });
-  }, []);
+  }, [setLoginUser]);
 
   return <>
     {props.children}
