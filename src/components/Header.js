@@ -51,7 +51,7 @@ function Header() {
                         </>
                     ) : (
                         <>
-                            <li><Link className="text-dark font-bold mt-2 mb-2" to="/">
+                            <li><Link className="text-dark font-bold mt-2 mb-2" to="/login">
                                 Login
                             </Link></li>
                             <li><Link className="text-dark font-bold  mt-2 mb-2" to="/reg">
