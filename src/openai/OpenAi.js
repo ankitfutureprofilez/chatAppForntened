@@ -10,8 +10,7 @@ function OpenAi() {
   const [chatHistory, setChatHistory] = useState([]);
   const { loginUser } = useContext(UserContext);
   console.log("loginUser", loginUser)
- 
-
+  
   async function handleQuestionSubmit(e) {
     e.preventDefault();
     const Main = new OpenAis();
