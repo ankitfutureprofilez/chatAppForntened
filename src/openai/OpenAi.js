@@ -46,7 +46,7 @@ function OpenAi() {
                     
                     </div>
                     <div className="user-details ps-2">
-                      <h6 className="mb-0 text-capitalize" >{loginUser.username}</h6>
+                      <h6 className="mb-0 text-capitalize" ></h6>
                     </div>
                   </div>
                 </div>
