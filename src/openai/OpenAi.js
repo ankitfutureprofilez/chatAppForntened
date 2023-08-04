@@ -1,87 +1,119 @@
-import { useContext, useState } from "react";
-import ScrollToBottom from "react-scroll-to-bottom";
+import { useContext, useState,useRef,useEffect } from "react";
+// import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bottom';
 import { UserContext } from "../context/UserContextProvider";
 import OpenAis from "../Api/OpenAi";
 import Header from "../components/Header";
 
 function OpenAi() {
   const [userQuestion, setUserQuestion] = useState('');
-  const [assistantAnswer, setAssistantAnswer] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
   const { loginUser } = useContext(UserContext);
-  console.log("loginUser", loginUser)
+  const [loading, setLoading]= useState(false)
   
+  const messageRef = useRef();
+  function scrollToBottom(e) {
+    if(e && e.current){
+        e.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+            inline: 'end'
+        });   
+    }
+  } 
+
+
+  const renderTextWithLinks = (text) => {
+    const linkRegex = /(https?:\/\/[^\s]+)/g;
+    return text.split(linkRegex).map((part, index) => {
+      if (part.match(linkRegex)) {
+        return (
+          <a href={part} key={index} target="_blank" rel="noopener noreferrer">
+            {part}
+          </a>
+        );
+      } else {
+        return <span key={index}>{part}</span>;
+      }
+    });
+  };
+
   async function handleQuestionSubmit(e) {
     e.preventDefault();
+    let question = userQuestion;
+    setUserQuestion('');
+    setLoading(true);
+    setChatHistory((prev)=>[...prev, { 
+      sender: true,
+      content: userQuestion
+    }]);
+    setTimeout(()=>{
+      scrollToBottom(messageRef);
+    }, 500);
     const Main = new OpenAis();
-    const resp = Main.OpenAiChat({ question: userQuestion })
+    const resp = Main.OpenAiChat({ question: question })
     resp.then((res) => {
-      console.log("res.data.data", res.data.data)
-      setAssistantAnswer(res.data.data);
-
-      setChatHistory(prevChatHistory => [
-        ...prevChatHistory,
-        { userQuestion, assistantAnswer: res.data.data }
-      ]);
+      setTimeout(()=>{
+        setChatHistory(prevChatHistory => [
+          ...prevChatHistory,
+          { 
+            sender: false,
+            content: res.data.data
+          }
+        ]);
+        setLoading(false);
+        setTimeout(()=>{
+          scrollToBottom(messageRef);
+        }, 200);
+      },1000)
     }).catch((err) => {
       console.log("login err", err)
     });
   }
   return (
     <>
-      <section id="chat">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-1">
-              <Header />
+      <section className="livechat px-3 m-auto">
+          <div className="chat-window">
+            {/* Chat Header */}
+            <div className="chat-header">
+              <h3>FP GPT</h3>
             </div>
-            <div className="col-md-11">
-              <div className="chat-window">
-                {/* Chat Header */}
-                <div className="chat-header">
-                  <h3>Live Ai  Chat</h3>
-                  <div className="d-flex align-items-center">
-                    <div className="user-avatar">
-                    
-                    </div>
-                    <div className="user-details ps-2">
-                      <h6 className="mb-0 text-capitalize" ></h6>
+            {/* Chat Body */}
+            <div className="chat-body">
+              <div  className="message-container" ref={messageRef}  >
+                {chatHistory.map((chat, index) => (
+                  <div key={`${index}-chat-message`} className={`chatmsg-${index} message pb-3 pt-3 ${chat.sender ? 'sender':''}`}>
+                    <div className="message-content">
+                      <div className="message-box">
+                        <p className="message">
+                        {renderTextWithLinks(chat.content)}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                {/* Chat Body */}
-                <div className="chat-body">
-                  <ScrollToBottom className="message-container">
-                    {/* Display the chat history */}
-                    {chatHistory.map((chat, index) => (
-                      <>
-                      <div key={index} className={"message mb-5"}>
-                        {/* User's Message */}
-                        <div className="message-content">
-                          <div className="message-box">
-                            <p className="message">
-                              {chat.userQuestion}
-                            </p>
+                ))}
+                {chatHistory.length < 1 ? <>
+                  <div className="w-100 welcomeMsg" >
+                    <p className="mb-0" >Welcome to <br></br>Future Profilez AI Assistant</p>
+                  </div>
+                </> :''}
+                {loading ? <div key={`chat-message`} className={`message pb-5 `}>
+                  <div className="message-content ">
+                    <div className="message-box">
+                      <p className="message">
+                        <div class="snippet ms-3" data-title="dot-flashing">
+                          <div class="stage my-3 px-3">
+                            <div class="dot-flashing"></div>
                           </div>
                         </div>
-                      </div>
-                      <div key={index + 1000} className={"message mb-5 sender"}>
-              {/* AI Assistant's Message */}
-              <div className="message-content">
-                <div className="message-box">
-                  <p className="message">
-                    {chat.assistantAnswer}
-                  </p>
-                </div>
-             
+                      </p>
+                    </div>
+                  </div>
+                </div> :''}
+              </div>
             </div>
-            </div>
-                      </>
-                    ))}
-                  </ScrollToBottom>
-                </div>
 
-                {/* Chat Footer */}
+            {/* Chat Footer */}
+            <form onSubmit={handleQuestionSubmit}>
                 <div className="chat-footer">
                   <input
                     type="text"
@@ -89,14 +121,13 @@ function OpenAi() {
                     onChange={(e) => setUserQuestion(e.target.value)}
                     placeholder="Enter your question"
                   />
-                  <button onClick={handleQuestionSubmit}>
+                  <button type="submit" >
                     <i className="bi bi-send"></i>
                   </button>
                 </div>
-              </div>
-            </div>
+            </form>
+
           </div>
-        </div>
       </section>
     </>
   );

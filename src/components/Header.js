@@ -43,7 +43,7 @@ function Header() {
                                 <i className="bi bi-chat"></i>
                             </Link></li>
                             <>
-                                <li><Link className="text-dark font-bold mt-2 mb-2" to="/OpenApi">
+                                <li><Link className="text-dark font-bold mt-2 mb-2" to="/ai">
                                     <i class="bi bi-filetype-ai"></i>
                                 </Link></li>
                             </>
