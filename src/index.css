@@ -2,7 +2,9 @@
 section.livechat .chat-body{height:calc(100vh - 140px) !important;}
 .welcomeMsg{width:100%;background:#e6ebf5;margin:100px auto;max-width:410px;padding:40px;border-radius:20px;text-align:center;}
 .welcomeMsg p{font-size:20px;font-weight:700;}
-body{background:#f4f4f4;}
+body {
+  background: #e1e3eb !important;
+}
 section.livechat .message-container .message:not(.sender) .message-content{background:#fff !important;}
 section.livechat .chat-header{padding:15px 10px !important;border-bottom-right-radius:20px;border-bottom-left-radius:20px;}
 section.livechat .chat-header h3{margin:0;}
