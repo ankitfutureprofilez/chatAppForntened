@@ -13,7 +13,7 @@ function Header() {
     function handlelogout(e) {
         localStorage.removeItem('loginUser')
         setLoginUser(localStorage.getItem('loginUser'))
-        Navigate('/login')
+        Navigate('/')
     }
     const wrapFirstLetterInDiv = (loginUser) => {
         if (loginUser && typeof loginUser === 'object' && loginUser.username) {
@@ -51,7 +51,7 @@ function Header() {
                         </>
                     ) : (
                         <>
-                            <li><Link className="text-dark font-bold mt-2 mb-2" to="/login">
+                            <li><Link className="text-dark font-bold mt-2 mb-2" to="/">
                                 Login
                             </Link></li>
                             <li><Link className="text-dark font-bold  mt-2 mb-2" to="/reg">

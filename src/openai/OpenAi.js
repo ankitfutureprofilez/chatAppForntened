@@ -29,7 +29,7 @@ function OpenAi() {
     setTimeout(()=>{
       setChatHistory((prev)=>[...prev, { 
         sender: false,
-        content: "Hii, I'm Future Profilez AI Assistant !!. We offer all Web Development solutions. How may i help you !!"
+        content: "I'm Future Profilez AI Assistant. How may i help you !!"
       }]);
       setLoading(false)
     }, 5000);

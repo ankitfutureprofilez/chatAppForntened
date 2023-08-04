@@ -34,10 +34,10 @@ function App() {
         <Router>
           <Routes>
             <Route path='/reg' element={<Singup/>}> </Route>
-            <Route path='/login' element={<Login/>}></Route>
+            <Route path='/' element={<Login/>}></Route>
             <Route path="/ai" element={ <OpenAi/>}></Route>
             <Route path="/msg" element={<Msgdata />}></Route>
-            <Route path="/" element={<PrivateRoute><Reciver/></PrivateRoute>}></Route>
+            <Route path="/join" element={<PrivateRoute><Reciver/></PrivateRoute>}></Route>
           </Routes>
         </Router>
       </UserContextProvider>
