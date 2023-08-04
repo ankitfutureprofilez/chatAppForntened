@@ -1,4 +1,4 @@
-import { useContext, useState,useRef,useEffect } from "react";
+import { useContext, useState,useRef,useMemo   } from "react";
 // import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bottom';
 import { UserContext } from "../context/UserContextProvider";
 import OpenAis from "../Api/OpenAi";
@@ -21,10 +21,23 @@ function OpenAi() {
     }
   } 
 
+  useMemo(()=>{
+    setTimeout(()=>{
+      setLoading(true)
+    }, 3000);
+
+    setTimeout(()=>{
+      setChatHistory((prev)=>[...prev, { 
+        sender: false,
+        content: "Hii, I'm Future Profilez AI Assistant !!. We offer all Web Development solutions. How may i help you !!"
+      }]);
+      setLoading(false)
+    }, 5000);
+  }, []);
 
   const renderTextWithLinks = (text) => {
     const linkRegex = /(https?:\/\/[^\s]+)/g;
-    return text.split(linkRegex).map((part, index) => {
+    return text && text.split(linkRegex).map((part, index) => {
       if (part.match(linkRegex)) {
         return (
           <a href={part} key={index} target="_blank" rel="noopener noreferrer">
@@ -52,19 +65,31 @@ function OpenAi() {
     const Main = new OpenAis();
     const resp = Main.OpenAiChat({ question: question })
     resp.then((res) => {
-      setTimeout(()=>{
-        setChatHistory(prevChatHistory => [
-          ...prevChatHistory,
+      if(res.data.data){
+        setTimeout(()=>{
+          setChatHistory(prevChatHistory => [
+            ...prevChatHistory,
+            { 
+              sender: false,
+              content: res.data.data
+            }
+          ]);
+          setLoading(false);
+          setTimeout(()=>{
+            scrollToBottom(messageRef);
+          }, 200);
+        },800);
+        
+      }  else{
+        setChatHistory(pv => [
+          ...pv,
           { 
             sender: false,
-            content: res.data.data
+            content: "Sorry !! I can't help you at that moment."
           }
         ]);
         setLoading(false);
-        setTimeout(()=>{
-          scrollToBottom(messageRef);
-        }, 200);
-      },1000)
+      } 
     }).catch((err) => {
       console.log("login err", err)
     });
@@ -79,14 +104,12 @@ function OpenAi() {
             </div>
             {/* Chat Body */}
             <div className="chat-body">
-              <div  className="message-container" ref={messageRef}  >
+              <div  className="message-container pt-5" ref={messageRef}  >
                 {chatHistory.map((chat, index) => (
                   <div key={`${index}-chat-message`} className={`chatmsg-${index} message pb-3 pt-3 ${chat.sender ? 'sender':''}`}>
                     <div className="message-content">
                       <div className="message-box">
-                        <p className="message">
-                        {renderTextWithLinks(chat.content)}
-                        </p>
+                        <p className="message">{renderTextWithLinks(chat.content)}</p>
                       </div>
                     </div>
                   </div>
@@ -119,7 +142,7 @@ function OpenAi() {
                     type="text"
                     value={userQuestion}
                     onChange={(e) => setUserQuestion(e.target.value)}
-                    placeholder="Enter your question"
+                    placeholder="How may i help you !!"
                   />
                   <button type="submit" >
                     <i className="bi bi-send"></i>
