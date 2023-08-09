@@ -122,13 +122,13 @@ function OpenAi() {
                 {loading ? <div key={`chat-message`} className={`message pb-5 `}>
                   <div className="message-content ">
                     <div className="message-box">
-                      <table className="message">
+                      <pre className="message">
                         <div class="snippet ms-3" data-title="dot-flashing">
                           <div class="stage my-3 px-3">
                             <div class="dot-flashing"></div>
                           </div>
                         </div>
-                      </table>
+                      </pre>
                     </div>
                   </div>
                 </div> :''}
