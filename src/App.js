@@ -9,6 +9,7 @@ import Msgdata from './message/Msgdata';
 import PrivateRoute from './Router/PrivateRoute';
 import OpenAi from './openai/OpenAi';
 import { useEffect } from 'react';
+import Pdf from './openai/Pdf';
 
 
 // const socket =io("https://chat-appbackend.vercel.app");
@@ -25,19 +26,20 @@ function App() {
       // socket.disconnect(); // Clean up the socket connection on component unmount
     };
   }, []);
-  const URL=process.env.REACT_APP_BASE_URL
-  console.log("REACT_APP_BASE_URL ffff",URL)
+  const URL = process.env.REACT_APP_BASE_URL
+  console.log("REACT_APP_BASE_URL ffff", URL)
 
   return (
     <div>
       <UserContextProvider>
         <Router>
           <Routes>
-            <Route path='/reg' element={<Singup/>}> </Route>
-            <Route path='/' element={<Login/>}></Route>
-            <Route path="/ai" element={ <OpenAi/>}></Route>
-             <Route path="/msg" element={<Msgdata />}></Route>
-            <Route path="/join" element={<PrivateRoute><Reciver/></PrivateRoute>}></Route>
+            <Route path='/reg' element={<Singup />}> </Route>
+            <Route path='/' element={<Login />}></Route>
+            <Route path='/pdf' element={<Pdf />}></Route>
+            <Route path="/ai" element={<OpenAi />}></Route>
+            <Route path="/msg" element={<Msgdata />}></Route>
+            <Route path="/join" element={<PrivateRoute><Reciver /></PrivateRoute>}></Route>
           </Routes>
         </Router>
       </UserContextProvider>

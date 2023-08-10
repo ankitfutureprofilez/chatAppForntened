@@ -53,19 +53,19 @@ function OpenAi() {
     }
   }
 
-  useMemo(() => {
-    setTimeout(() => {
-      setLoading(true)
-    }, 3000);
+  // useMemo(() => {
+  //   setTimeout(() => {
+  //     setLoading(true)
+  //   }, 3000);
 
-    setTimeout(() => {
-      setChatHistory((prev) => [...prev, {
-        sender: false,
-        content: "I'm Future Profilez AI Assistant. How may i help you !!"
-      }]);
-      setLoading(false)
-    }, 5000);
-  }, []);
+  //   setTimeout(() => {
+  //     setChatHistory((prev) => [...prev, {
+  //       sender: false,
+  //       content: "I'm Future Profilez AI Assistant. How may i help you !!"
+  //     }]);
+  //     setLoading(false)
+  //   }, 5000);
+  // }, []);
 
 
 

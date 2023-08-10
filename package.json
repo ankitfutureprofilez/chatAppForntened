@@ -15,6 +15,7 @@
     "emoji-picker-react": "^4.4.9",
     "mdb-react-ui-kit": "^6.1.0",
     "mdbreact": "^5.2.0",
+    "pdfjs-dist": "^3.9.179",
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
