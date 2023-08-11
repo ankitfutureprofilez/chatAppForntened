@@ -46,13 +46,13 @@ function Header() {
                         </>
                            <>
                            <li><Link className="text-dark font-bold mt-2 mb-2" to="/multer">
-                                    <i class="bi bi-filetype-ai"></i>
+                                    <i class="bi bi-file-text"></i>
                                 </Link></li>
                            
                            </>
                             <>
                                 <li><Link className="text-dark font-bold mt-2 mb-2" to="/ai">
-                                <i class="bi bi-file-text"></i>
+                                <i class="bi bi-filetype-ai"></i>
                                 </Link></li>
                             </>
 
