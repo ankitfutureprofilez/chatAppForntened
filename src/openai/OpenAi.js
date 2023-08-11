@@ -38,34 +38,34 @@ function OpenAi() {
     });
   }
 
-  function convertLineBreak(e) {
-    const text = e.toString();
-    console.log("e", e)
-    if (text) {
-      return text.split('\n').map((line, index) => (
-        <React.Fragment key={index}>
-          {renderTextWithLinks(line)}
-          <br />
-        </React.Fragment>
-      ));
-    } else {
-      return null;
-    }
-  }
+  // function convertLineBreak(e) {
+  //   const text = e.toString();
+  //   console.log("e", e)
+  //   if (text) {
+  //     return text.split('\n').map((line, index) => (
+  //       <React.Fragment key={index}>
+  //         {renderTextWithLinks(line)}
+  //         <br />
+  //       </React.Fragment>
+  //     ));
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
-  // useMemo(() => {
-  //   setTimeout(() => {
-  //     setLoading(true)
-  //   }, 3000);
+  useMemo(() => {
+    setTimeout(() => {
+      setLoading(true)
+    }, 3000);
 
-  //   setTimeout(() => {
-  //     setChatHistory((prev) => [...prev, {
-  //       sender: false,
-  //       content: "I'm Future Profilez AI Assistant. How may i help you !!"
-  //     }]);
-  //     setLoading(false)
-  //   }, 5000);
-  // }, []);
+    setTimeout(() => {
+      setChatHistory((prev) => [...prev, {
+        sender: false,
+        content: "I'm Future Profilez AI Assistant. How may i help you !!"
+      }]);
+      setLoading(false)
+    }, 5000);
+  }, []);
 
 
 
@@ -135,8 +135,8 @@ function OpenAi() {
                   <div className="message-content">
                     <div className="message-box">
                       <p className="message">
-                      {convertLineBreak(chat.content)}
-                        {/* {renderTextWithLinks(chat.content)} */}
+                      {/* {convertLineBreak(chat.content)} */}
+                        {renderTextWithLinks(chat.content)}
                       </p>
                     </div>
                   </div>

@@ -10,6 +10,7 @@ import PrivateRoute from './Router/PrivateRoute';
 import OpenAi from './openai/OpenAi';
 import { useEffect } from 'react';
 import Multer from './openai/Multer';
+import Regex from './components/Regex';
 
 
 // const socket =io("https://chat-appbackend.vercel.app");
@@ -34,6 +35,7 @@ function App() {
       <UserContextProvider>
         <Router>
           <Routes>
+            <Route path ="/aaa" element ={<Regex/>}></Route>
             <Route path='/reg' element={<Singup />}> </Route>
             <Route path='/' element={<Login />}></Route>
             <Route path= "/multer" element={<Multer/>}></Route> 
