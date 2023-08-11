@@ -5,7 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import { PDFDocument } from 'pdfjs-dist';
-import OpenAi from "../Api/OpenAi";
+import axios from 'axios';
+import Api from "../Api/Api";
 
 
 function PdfView() {
@@ -68,35 +69,56 @@ function PdfView() {
 
     const newPlugin = defaultLayoutPlugin();
 
-    const [pdfFiles, setpdfFiles] = useState(null);
+    // const [pdfFiles, setpdfFiles] = useState(null);
 
-    async function handlePDF(e) {
-        const main = new OpenAi();
-        const fdata = new FormData;
-        fdata.append("file", e);
-        const resp = main.pdf(e);
-        resp.then((res) => {
-            if (res.data.status) {
-                console.log(res.data.msg)
-                if (res.data.user) {
-                }
-            } else {
-                console.error("status login error", res);
-            }
-        }).catch((err) => {
-            console.log("login err", err)
-        });
-    }
+    // async function handlePDF(e) {
+    //     const main = new OpenAi();
+    //     const fdata = new FormData;
+    //     fdata.append("file", e);
+    //     const resp = main.pdf(e);
+    //     resp.then((res) => {
+    //         if (res.data.status) {
+    //             console.log(res.data.msg)
+    //             if (res.data.user) {
+    //             }
+    //         } else {
+    //             console.error("status login error", res);
+    //         }
+    //     }).catch((err) => {
+    //         console.log("login err", err)
+    //     });
+    // }
 
-    const uploadPDF = async (e) => {
-        const selectedFile = await e.target.files[0];
-        handlePDF(selectedFile);
-    }
+    // const uploadPDF = async (e) => {
+    //     const selectedFile = await e.target.files[0];
+    //     handlePDF(selectedFile);
+    // }
+
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    const handleFileChange = (event) => {
+        setSelectedFile(event.target.files[0]);
+      };
+
+      const handleUpload = () => {
+        const formData = new Api();
+         const main= formData.views();
+        formData.append('file', selectedFile);
+    
+        axios.post('http://localhost:3000/upload', formData)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error('Error uploading file:', error);
+          });
+      };
+    
 
     return (
         <div className="container">
-            <form onSubmit={handleSubmit}>
-                <input type="file" className="form-control" onChange={uploadPDF} />
+            <form onSubmit={handleUpload}>
+                <input type="file" className="form-control" onChange={handleFileChange}/>
                 <button className="btn btn-success">View PDF</button>
             </form>
             <h2>View PDF</h2>

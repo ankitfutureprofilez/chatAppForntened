@@ -8,7 +8,7 @@ class OpenAi extends Component {
     }
 
 
-    async pdf(e) {
+    async Views(e) {
         return Api.post('/pdf', e);
     }
 

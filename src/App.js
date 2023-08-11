@@ -11,6 +11,7 @@ import OpenAi from './openai/OpenAi';
 import { useEffect } from 'react';
 import Pdf from './openai/Pdf';
 import PdfView from './openai/PdfView';
+import Multer from './openai/Multer';
 
 
 // const socket =io("https://chat-appbackend.vercel.app");
@@ -38,6 +39,7 @@ function App() {
             <Route path="/view" element={<PdfView/>}></Route>
             <Route path='/reg' element={<Singup />}> </Route>
             <Route path='/' element={<Login />}></Route>
+            <Route path= "/multer" element={<Multer/>}></Route> 
             <Route path='/pdf' element={<Pdf />}></Route>
             <Route path="/ai" element={<OpenAi />}></Route>
             <Route path="/msg" element={<Msgdata />}></Route>
