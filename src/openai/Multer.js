@@ -16,7 +16,9 @@ function Multer() {
 
         axios.post('http://localhost:8080/multer', formData)
             .then((response) => {
-                console.log(response.data);
+                const reader=response.data;
+
+                console.log(reader);
             })
             .catch((error) => {
                 console.error('Error uploading file:', error);
@@ -31,6 +33,9 @@ function Multer() {
                 <input type="file" accept=".pdf" onChange={handleFileChange} />
 
                 <button onClick={handleUpload}>Upload</button>
+            </div>
+            <div>
+               
             </div>
         </>
     );

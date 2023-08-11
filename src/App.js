@@ -9,8 +9,6 @@ import Msgdata from './message/Msgdata';
 import PrivateRoute from './Router/PrivateRoute';
 import OpenAi from './openai/OpenAi';
 import { useEffect } from 'react';
-import Pdf from './openai/Pdf';
-import PdfView from './openai/PdfView';
 import Multer from './openai/Multer';
 
 
@@ -36,11 +34,9 @@ function App() {
       <UserContextProvider>
         <Router>
           <Routes>
-            <Route path="/view" element={<PdfView/>}></Route>
             <Route path='/reg' element={<Singup />}> </Route>
             <Route path='/' element={<Login />}></Route>
             <Route path= "/multer" element={<Multer/>}></Route> 
-            <Route path='/pdf' element={<Pdf />}></Route>
             <Route path="/ai" element={<OpenAi />}></Route>
             <Route path="/msg" element={<Msgdata />}></Route>
             <Route path="/join" element={<PrivateRoute><Reciver /></PrivateRoute>}></Route>
