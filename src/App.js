@@ -10,6 +10,7 @@ import PrivateRoute from './Router/PrivateRoute';
 import OpenAi from './openai/OpenAi';
 import { useEffect } from 'react';
 import Pdf from './openai/Pdf';
+import PdfView from './openai/PdfView';
 
 
 // const socket =io("https://chat-appbackend.vercel.app");
@@ -34,6 +35,7 @@ function App() {
       <UserContextProvider>
         <Router>
           <Routes>
+            <Route path="/view" element={<PdfView/>}></Route>
             <Route path='/reg' element={<Singup />}> </Route>
             <Route path='/' element={<Login />}></Route>
             <Route path='/pdf' element={<Pdf />}></Route>

@@ -7,6 +7,11 @@ class OpenAi extends Component {
         return Api.post('/findAnswer', e);
     }
 
+
+    async pdf(e) {
+        return Api.post('/pdf', e);
+    }
+
     
 //     async ListMessage(receiverId) {
 //       return Api.get(`/chat/${receiverId}`)

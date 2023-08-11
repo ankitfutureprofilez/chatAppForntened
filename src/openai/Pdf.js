@@ -1,42 +1,41 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
+import { render } from "react-dom"
 
 class Pdf extends Component {
     constructor(props) {
         super(props);
         this.state = {
             fileName: "",
-            fileContent: "",
-        };
-    }
-
-    handleChange = e => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.readAsText(file);
-
-            reader.onload = () => {
-                this.setState({
-                    fileName: file.name,
-                    fileContent: reader.result,
-                });
-            };
-
-            reader.onerror = () => {
-                console.log("File error: ", reader.error);
-            };
+            fileContext: "",
         }
     }
+    handlechange = e => {
+        const file = e.target.files[0];
+        console.log("file",file)
+
+        const Reader = new FileReader();
+        console.log("render",Reader)
+        Reader.readAsText(file);
+        Reader.onload = () => {
+            this.setState({
+                fileName: file.name,
+                fileContext: Reader.result
+            });
+            Reader.onerror = () => {
+                console.log("fille error ", Reader.error)
+            }
+        }
+    }
+
 
     render() {
         return (
             <div>
-                <h2>File Reader</h2>
-                <input type="file" onChange={this.handleChange}></input>
+                <h2>File Reader </h2>
+                <input type="file" onChange={this.handlechange}></input>
                 <br />
                 <h5>{this.state.fileName}</h5>
-                <p>{this.state.fileContent}</p>
+                <p>{this.state.fileContext}</p>
             </div>
         );
     }

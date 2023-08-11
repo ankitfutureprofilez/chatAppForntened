@@ -121,3 +121,11 @@ img{max-width:100%;}
 .chat-footer{position:relative;}
 .chat-footer button{position:absolute;right:8px;top:22px;border-radius:12px;}
 .chat-footer{padding:15px 0;}
+#pdf-container {
+  width: 100px;
+  height: 900px;
+overflow-y: auto;
+display: flex;
+justify-content: center;
+align-items: center;
+}
