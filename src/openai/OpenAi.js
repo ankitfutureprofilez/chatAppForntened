@@ -1,7 +1,6 @@
 import React, { useState, useRef, useMemo } from "react";
 // import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bottom';
 import OpenAis from "../Api/OpenAi";
-;
 
 function OpenAi() {
   const [userQuestion, setUserQuestion] = useState('');
@@ -20,6 +19,7 @@ function OpenAi() {
     }
   }
   function renderTextWithLinks(text) {
+    console.log("text",text)
     const linkRegex = /(https?:\/\/[^\s]+)/g;
     return text && text.split(linkRegex).map((part, index) => {
       if (part.match(linkRegex)) {
