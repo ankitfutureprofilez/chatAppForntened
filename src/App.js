@@ -32,7 +32,13 @@ function App() {
 
   return (
     <div>
-      <UserContextProvider>
+        <div className="container">
+      <div className="content">
+        <h1>My Responsive PWA</h1>
+        <p>Welcome to my Progressive Web App.</p>
+      </div>
+    </div>
+      {/* <UserContextProvider>
         <Router>
           <Routes>
             <Route path ="/aaa" element ={<Regex/>}></Route>
@@ -44,7 +50,7 @@ function App() {
             <Route path="/join" element={<PrivateRoute><Reciver /></PrivateRoute>}></Route>
           </Routes>
         </Router>
-      </UserContextProvider>
+      </UserContextProvider> */}
     </div>
 
   );
