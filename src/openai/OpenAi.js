@@ -1,7 +1,6 @@
 import React, { useState, useRef, useMemo } from "react";
 // import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bottom';
 import OpenAis from "../Api/OpenAi";
-;
 
 function OpenAi() {
   const [userQuestion, setUserQuestion] = useState('');
@@ -19,8 +18,6 @@ function OpenAi() {
       });
     }
   }
-
-
 
   
   function renderTextWithLinks(text) {
@@ -50,25 +47,25 @@ function OpenAi() {
   //     ));
   //   } else {
   //     return null;
-  //   }
+  //   } 
   // }
 
-  useMemo(() => {
-    setTimeout(() => {
-      setLoading(true)
-    }, 3000);
+  // useMemo(() => {
+  //   setTimeout(() => {
+  //     setLoading(true)
+  //   }, 3000);
 
-    setTimeout(() => {
-      setChatHistory((prev) => [...prev, {
-        sender: false,
-        content: "I'm Future Profilez AI Assistant. How may i help you !!"
-      }]);
-      setLoading(false)
-    }, 5000);
-  }, []);
+  //   setTimeout(() => {
+  //     setChatHistory((prev) => [...prev, {
+  //       sender: false,
+  //       content: "I'm Future Profilez AI Assistant. How may i help you !!"
+  //     }]);
+  //     setLoading(false)
+  //   }, 5000);
+  // }, []);
 
 
-
+  const [prevQuestion, setPrevQuestion] = useState();
   async function handleQuestionSubmit(e) {
     e.preventDefault();
     let question = userQuestion;
@@ -82,7 +79,7 @@ function OpenAi() {
       scrollToBottom(messageRef);
     }, 500);
     const Main = new OpenAis();
-    const resp = Main.OpenAiChat({ question: question })
+    const resp = Main.OpenAiChat({ question: question, prevQuestion:prevQuestion})
     resp.then((res) => {
       if (res.data.data) {
         console.log("res.data.data", res.data.data)
@@ -100,7 +97,7 @@ function OpenAi() {
             scrollToBottom(messageRef);
           }, 200);
         }, 800);
-
+        setPrevQuestion(question);
       } else {
         setChatHistory(pv => [
           ...pv,
@@ -115,9 +112,6 @@ function OpenAi() {
       console.log("login err", err)
     });
   }
-
-
-
 
   return (
     <>
