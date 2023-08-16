@@ -4,7 +4,7 @@ class OpenAi extends Component {
 
     //const { loginUser } = useContext(UserContext);
     async OpenAiChat(e) {
-        return Api.post('/findAnswer', e);
+        return Api.post('/chain', e);
     }
 
 
