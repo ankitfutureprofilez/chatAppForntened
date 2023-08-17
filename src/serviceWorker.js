@@ -1,4 +1,6 @@
 // src/serviceWorker.js
+
+
 const CACHE_NAME = 'my-pwa-cache-v1';
 const urlsToCache = ['/', '/index.html', '/logo192.png'];
 
