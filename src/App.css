@@ -102,7 +102,7 @@ img{max-width:100%;}
 /* Styles for the receiver's (other user's) message */
 .message .test-event .message-content{background:#cdd9c1;}
 .message.mb-5.test-event{display:flex;align-self:flex-end;}
-.chat-footer input[type="text"]{width:100%;line-height:20px;overflow:hidden;outline:0;resize:none;border-radius:12px;padding:17px 22px;font-size:16px;background:#e6ebf5;border:none;display:block;box-sizing:border-box;}
+.chat-footer input[type="text"]{width:100%;line-height:20px;overflow:hidden;outline:0;resize:none;border-radius:12px;padding:17px 102px 17px 22px;font-size:16px;background:#e6ebf5;border:none;display:block;box-sizing:border-box;}
 .chat-footer{padding:15px;border-top:1px solid #ddd;display:flex;}
 .livechat{max-width:800px;}
 .chat-footer button{background:#2083c9;width:64px;color:#fff;font-size:25px;border:none;border-radius:0 5px 5px 0;}
