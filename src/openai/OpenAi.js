@@ -19,36 +19,59 @@ function OpenAi() {
     }
   }
   function renderTextWithLinks(text) {
-    console.log("text",text)
+    console.log("text", text);
     const linkRegex = /(https?:\/\/[^\s]+)/g;
-    return text && text.split(linkRegex).map((part, index) => {
-      if (part.match(linkRegex)) {
-        return (
-          <a href={part} key={index} target="_blank" rel="noopener noreferrer">
-            {part}
+    const emailRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+  
+    const parts = [];
+    let match;
+  
+    while ((match = new RegExp(`(${linkRegex.source}|${emailRegex.source})`).exec(text)) !== null) {
+      const beforeText = text.slice(0, match.index);
+      if (beforeText) {
+        parts.push(<span key={parts.length}>{beforeText}</span>);
+      }
+  
+      const linkOrEmail = match[0];
+      if (linkOrEmail.match(linkRegex)) {
+        parts.push(
+          <a href={linkOrEmail} key={parts.length} target="_blank" rel="noopener noreferrer">
+            {linkOrEmail}
           </a>
         );
-      } else {
-        return <span key={index}>{part}</span>;
+      } else if (linkOrEmail.match(emailRegex)) {
+        parts.push(
+          <a href={`mailto:${linkOrEmail}`} key={parts.length}>
+            {linkOrEmail}
+          </a>
+        );
       }
-    });
+  
+      text = text.slice(match.index + match[0].length);
+    }
+  
+    if (text) {
+      parts.push(<span key={parts.length}>{text}</span>);
+    }
+  
+    return parts;
   }
-
-  // function convertLineBreak(e) {
-  //   const text = e.toString();
-  //   console.log("e", e)
-  //   if (text) {
-  //     return text.split('\n').map((line, index) => (
-  //       <React.Fragment key={index}>
-  //         {renderTextWithLinks(line)}
-  //         <br />
-  //       </React.Fragment>
-  //     ));
-  //   } else {
-  //     return null;
-  //   } 
-  // }
-
+  
+  function convertLineBreak(e) {
+    const text = e.toString();
+    if (text) {
+      return text.split('\n').map((line, index) => (
+        <React.Fragment key={index}>
+          {renderTextWithLinks(line)}
+          <br />
+        </React.Fragment>
+      ));
+    } else {
+      return null;
+    } 
+  }
+  
+  
   // useMemo(() => {
   //   setTimeout(() => {
   //     setLoading(true)
@@ -128,8 +151,8 @@ function OpenAi() {
                   <div className="message-content">
                     <div className="message-box">
                       <p className="message">
-                      {/* {convertLineBreak(chat.content)} */}
-                        {renderTextWithLinks(chat.content)}
+                      {convertLineBreak(chat.content)}
+                        {/* {renderTextWithLinks(chat.content)} */}
                       </p>
                     </div>
                   </div>
