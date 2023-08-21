@@ -18,9 +18,8 @@ function OpenAi() {
       });
     }
   }
-
-  
   function renderTextWithLinks(text) {
+    console.log("text",text)
     const linkRegex = /(https?:\/\/[^\s]+)/g;
     return text && text.split(linkRegex).map((part, index) => {
       if (part.match(linkRegex)) {
