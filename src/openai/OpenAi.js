@@ -18,14 +18,14 @@ function OpenAi() {
       });
     }
   }
+
+
   function renderTextWithLinks(text) {
     console.log("text", text);
     const linkRegex = /(https?:\/\/[^\s]+)/g;
     const emailRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
-  
     const parts = [];
     let match;
-  
     while ((match = new RegExp(`(${linkRegex.source}|${emailRegex.source})`).exec(text)) !== null) {
       const beforeText = text.slice(0, match.index);
       if (beforeText) {
@@ -72,19 +72,19 @@ function OpenAi() {
   }
   
   
-  // useMemo(() => {
-  //   setTimeout(() => {
-  //     setLoading(true)
-  //   }, 3000);
+  useMemo(() => {
+    setTimeout(() => {
+      setLoading(true)
+    }, 1000);
 
-  //   setTimeout(() => {
-  //     setChatHistory((prev) => [...prev, {
-  //       sender: false,
-  //       content: "I'm Future Profilez AI Assistant. How may i help you !!"
-  //     }]);
-  //     setLoading(false)
-  //   }, 5000);
-  // }, []);
+    setTimeout(() => {
+      setChatHistory((prev) => [...prev, {
+        sender: false,
+        content: "Hi 👋 I'm an AI Assistant trained on our company information. How can I help you?"
+      }]);
+      setLoading(false)
+    }, 3000);
+  }, []);
 
 
   const [prevQuestion, setPrevQuestion] = useState();
@@ -140,8 +140,13 @@ function OpenAi() {
       <section className="livechat px-3 m-auto">
         <div className="chat-window">
           {/* Chat Header */}
-          <div className="chat-header">
-            <h3>FP GPT</h3>
+          <div className="chat-header d-flex align-items-center">
+          <img src="logo.png" height="50px" alt="Logo" className="logo-img" />
+          <div>
+              <h3>Future Profile</h3>
+              <h3>AI ASSITANT</h3>
+          </div>
+          
           </div>
           {/* Chat Body */}
           <div className="chat-body">

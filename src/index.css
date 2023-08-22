@@ -1,5 +1,5 @@
 .message.sender{justify-content:flex-end;width:auto;display:flex;}
-section.livechat .chat-body{height:calc(100vh - 140px) !important;}
+section.livechat .chat-body{height:calc(100vh - 170px) !important;}
 .welcomeMsg{width:100%;background:#e6ebf5;margin:100px auto;max-width:410px;padding:40px;border-radius:20px;text-align:center;}
 .welcomeMsg p{font-size:20px;font-weight:700;}
 body {
