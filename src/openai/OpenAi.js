@@ -88,6 +88,7 @@ function OpenAi() {
 
 
   const [prevQuestion, setPrevQuestion] = useState();
+  const [prevAnswer, setPrevAnswer] = useState();
   async function handleQuestionSubmit(e) {
     e.preventDefault();
     let question = userQuestion;
@@ -101,7 +102,7 @@ function OpenAi() {
       scrollToBottom(messageRef);
     }, 500);
     const Main = new OpenAis();
-    const resp = Main.OpenAiChat({ question: question, prevQuestion:prevQuestion})
+    const resp = Main.OpenAiChat({ question: question, memory:prevQuestion, ans:prevAnswer})
     resp.then((res) => {
       if (res.data.data) {
         console.log("res.data.data", res.data.data)
@@ -111,9 +112,9 @@ function OpenAi() {
             {
               sender: false,
               content: res.data.data,
-
             }
           ]);
+          setPrevAnswer(res.data.data)
           setLoading(false);
           setTimeout(() => {
             scrollToBottom(messageRef);
@@ -143,7 +144,6 @@ function OpenAi() {
           <div className="chat-header d-flex align-items-center">
           <img src="logo.png" height="50px" alt="Logo" className="logo-img" />
           <div>
-              <h3>Future Profile</h3>
               <h3>AI ASSITANT</h3>
           </div>
           

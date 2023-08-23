@@ -6,5 +6,5 @@ body {
   background: #e1e3eb !important;
 }
 section.livechat .message-container .message:not(.sender) .message-content{background:#fff !important;}
-section.livechat .chat-header{padding:15px 10px !important;border-bottom-right-radius:20px;border-bottom-left-radius:20px;}
+section.livechat .chat-header{padding:15px 15px !important;border-bottom-right-radius:20px;border-bottom-left-radius:20px;}
 section.livechat .chat-header h3{margin:0;}
