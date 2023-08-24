@@ -52,7 +52,14 @@ function Header() {
                            </>
                             <>
                                 <li><Link className="text-dark font-bold mt-2 mb-2" to="/ai">
+                              
                                 <i class="bi bi-filetype-ai"></i>
+                                </Link></li>
+
+                            </>
+                            <>
+                            <li><Link className="text-dark font-bold mt-2 mb-2" to="/employee">
+                            <i class="bi bi-person-add"></i>
                                 </Link></li>
                             </>
 

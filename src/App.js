@@ -11,6 +11,7 @@ import OpenAi from './openai/OpenAi';
 import { useEffect } from 'react';
 import Multer from './openai/Multer';
 import Regex from './components/Regex';
+import Employees from './components/Employees';
 
 
 // const socket =io("https://chat-appbackend.vercel.app");
@@ -31,17 +32,11 @@ function App() {
   console.log("REACT_APP_BASE_URL ffff", URL)
 
   return (
-    // <div>
-    //     <div className="container">
-    //   <div className="content">
-    //     <h1>My Responsive PWA</h1>
-    //     <p>Welcome to my Progressive Web App.</p>
-    //   </div>
-    // </div>
     <div>
        <UserContextProvider>
         <Router>
           <Routes>
+            <Route path ='/employee' element={<Employees></Employees>}></Route>
             <Route path ="/aaa" element ={<Regex/>}></Route>
             <Route path='/reg' element={<Singup />}> </Route>
             <Route path='/' element={<Login />}></Route>

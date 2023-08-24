@@ -145,3 +145,12 @@ align-items: center;
 .chat-header img {
   border-radius: 12px;
 }
+
+
+
+.flex{
+  display: flex;
+  justify-content: space-between;
+padding: 0.5rem;
+
+}
