@@ -18,53 +18,77 @@ function OpenAi() {
       });
     }
   }
+
+
   function renderTextWithLinks(text) {
-    console.log("text",text)
+    console.log("text", text);
     const linkRegex = /(https?:\/\/[^\s]+)/g;
-    return text && text.split(linkRegex).map((part, index) => {
-      if (part.match(linkRegex)) {
-        return (
-          <a href={part} key={index} target="_blank" rel="noopener noreferrer">
-            {part}
+    const emailRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+    const parts = [];
+    let match;
+    while ((match = new RegExp(`(${linkRegex.source}|${emailRegex.source})`).exec(text)) !== null) {
+      const beforeText = text.slice(0, match.index);
+      if (beforeText) {
+        parts.push(<span key={parts.length}>{beforeText}</span>);
+      }
+  
+      const linkOrEmail = match[0];
+      if (linkOrEmail.match(linkRegex)) {
+        parts.push(
+          <a href={linkOrEmail} key={parts.length} target="_blank" rel="noopener noreferrer">
+            {linkOrEmail}
           </a>
         );
-      } else {
-        return <span key={index}>{part}</span>;
+      } else if (linkOrEmail.match(emailRegex)) {
+        parts.push(
+          <a href={`mailto:${linkOrEmail}`} key={parts.length}>
+            {linkOrEmail}
+          </a>
+        );
       }
-    });
+  
+      text = text.slice(match.index + match[0].length);
+    }
+  
+    if (text) {
+      parts.push(<span key={parts.length}>{text}</span>);
+    }
+  
+    return parts;
   }
-
-  // function convertLineBreak(e) {
-  //   const text = e.toString();
-  //   console.log("e", e)
-  //   if (text) {
-  //     return text.split('\n').map((line, index) => (
-  //       <React.Fragment key={index}>
-  //         {renderTextWithLinks(line)}
-  //         <br />
-  //       </React.Fragment>
-  //     ));
-  //   } else {
-  //     return null;
-  //   }
-  // }
-
+  
+  function convertLineBreak(e) {
+    const text = e.toString();
+    if (text) {
+      return text.split('\n').map((line, index) => (
+        <React.Fragment key={index}>
+          {renderTextWithLinks(line)}
+          <br />
+        </React.Fragment>
+      ));
+    } else {
+      return null;
+    } 
+  }
+  
+  
   useMemo(() => {
     setTimeout(() => {
       setLoading(true)
-    }, 3000);
+    }, 1000);
 
     setTimeout(() => {
       setChatHistory((prev) => [...prev, {
         sender: false,
-        content: "I'm Future Profilez AI Assistant. How may i help you !!"
+        content: "Hi 👋 I'm an AI Assistant trained on our company information. How can I help you?"
       }]);
       setLoading(false)
-    }, 5000);
+    }, 3000);
   }, []);
 
 
-
+  const [prevQuestion, setPrevQuestion] = useState();
+  const [prevAnswer, setPrevAnswer] = useState();
   async function handleQuestionSubmit(e) {
     e.preventDefault();
     let question = userQuestion;
@@ -78,7 +102,7 @@ function OpenAi() {
       scrollToBottom(messageRef);
     }, 500);
     const Main = new OpenAis();
-    const resp = Main.OpenAiChat({ question: question })
+    const resp = Main.OpenAiChat({ question: question, memory:prevQuestion, ans:prevAnswer})
     resp.then((res) => {
       if (res.data.data) {
         console.log("res.data.data", res.data.data)
@@ -88,15 +112,15 @@ function OpenAi() {
             {
               sender: false,
               content: res.data.data,
-
             }
           ]);
+          setPrevAnswer(res.data.data)
           setLoading(false);
           setTimeout(() => {
             scrollToBottom(messageRef);
           }, 200);
         }, 800);
-
+        setPrevQuestion(question);
       } else {
         setChatHistory(pv => [
           ...pv,
@@ -112,16 +136,17 @@ function OpenAi() {
     });
   }
 
-
-
-
   return (
     <>
       <section className="livechat px-3 m-auto">
         <div className="chat-window">
           {/* Chat Header */}
-          <div className="chat-header">
-            <h3>FP GPT</h3>
+          <div className="chat-header d-flex align-items-center">
+          <img src="logo.png" height="50px" alt="Logo" className="logo-img" />
+          <div>
+              <h3>AI ASSITANT</h3>
+          </div>
+          
           </div>
           {/* Chat Body */}
           <div className="chat-body">
@@ -131,8 +156,8 @@ function OpenAi() {
                   <div className="message-content">
                     <div className="message-box">
                       <p className="message">
-                      {/* {convertLineBreak(chat.content)} */}
-                        {renderTextWithLinks(chat.content)}
+                      {convertLineBreak(chat.content)}
+                        {/* {renderTextWithLinks(chat.content)} */}
                       </p>
                     </div>
                   </div>
