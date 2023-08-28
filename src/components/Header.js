@@ -8,7 +8,7 @@ import { Toaster } from 'react-hot-toast';
 
 function Header() {
 
-    const { loginUser, setLoginUser } = useContext(UserContext)
+    const { loginUser, setLoginUser,cart } = useContext(UserContext)
     const Navigate = useNavigate()
     function handlelogout(e) {
         localStorage.removeItem('loginUser')
@@ -39,30 +39,42 @@ function Header() {
                 <ul>
                     {loginUser ? (
                         <>
-                        <>
-                        <li><Link className="text-dark font-bold mt-2 mb-2" to="/Join">
-                                <i className="bi bi-chat"></i>
-                            </Link></li>
-                        </>
-                           <>
-                           <li><Link className="text-dark font-bold mt-2 mb-2" to="/multer">
+                            <>
+                                <li><Link className="text-dark font-bold mt-2 mb-2" to="/Join">
+                                    <i className="bi bi-chat"></i>
+                                </Link></li>
+                            </>
+                            <>
+                                <li><Link className="text-dark font-bold mt-2 mb-2" to="/multer">
                                     <i class="bi bi-file-text"></i>
                                 </Link></li>
-                           
-                           </>
+
+                            </>
                             <>
                                 <li><Link className="text-dark font-bold mt-2 mb-2" to="/ai">
-                              
-                                <i class="bi bi-filetype-ai"></i>
+
+                                    <i class="bi bi-filetype-ai"></i>
                                 </Link></li>
 
                             </>
                             <>
-                            <li><Link className="text-dark font-bold mt-2 mb-2" to="/employee">
-                            <i class="bi bi-person-add"></i>
+                                <li><Link className="text-dark font-bold mt-2 mb-2" to="/employee">
+                                    <i class="bi bi-person-add"></i>
                                 </Link></li>
                             </>
-
+                            <>
+                                <li><Link className="text-dark font-bold mt-2 mb-2" to="/product">
+                                    <i class="bi bi-cart-plus"></i>
+                                </Link></li>
+                            </>
+                            <>
+                                <li><Link className="text-dark font-bold mt-2 mb-2" to="/productlist">
+                                    <i class="bi bi-cart-check"></i>
+                                </Link></li>
+                            </>
+                            <>
+                                <Link to='/cart'> <i className="bi bi-cart4 me-2" style={{ color: 'white', fontSize: '25px' }}>{cart.totalitems ? cart.totalitems : 0}</i></Link>
+                            </>
                         </>
                     ) : (
                         <>
@@ -95,10 +107,10 @@ function Header() {
             ) : (
                 <></>
             )}
-            
-              <Toaster
-              position="top-center"
-              reverseOrder={false}
+
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
             />
         </section>
     );

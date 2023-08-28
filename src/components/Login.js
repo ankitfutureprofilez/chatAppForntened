@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Singup from '../Api/Signup';
-import {Toaster, toast } from 'react-hot-toast';
+import { Toaster, toast } from 'react-hot-toast';
 import { UserContext } from '../context/UserContextProvider';
 
 
@@ -31,31 +31,61 @@ function Login() {
     async function handleForms(e) {
         const main = new Singup();
         const resp = main.Loginshow(Regs);
-        resp.then((res) => {
-            if (res.data.status) {
-                //  console.log("logged in user", res.data)
+        try {
+            const res = await resp;
+            console.log("res", res);
+        //     if(res.data){
+        //         if(res.data.status==="1"){
 
-                console.log(res.data.msg)
-                toast.success(res.data.msg);
-                navigate('/join');
-                if (res.data.user) {
-                    setLoginUser(res.data.user);
-                    localStorage.setItem("token", res.data.token);
+        //             console.log("logged in user", res.data);
+        //            console.log(res.data.msg);
+        //            toast.success(res.data.msg);
+        //            navigate('/join');
+        //            if (res.data.user) {
+        //                setLoginUser(res.data.user);
+        //                localStorage.setItem("token", res.data.token);
+        //        }
+        //         }
+        //         else if(res.data ){
+
+        //         }
+        // }
+        //     else{
+        //         toast.error(res.data.msg);
+        //     }
+            if(res.data){
+                if(res.data.user.role ===1 ){
+                    console.log("logged in user", res.data);
+                               console.log(res.data.msg);
+                               toast.success(res.data.msg);
+                               navigate('/join');
+                               if (res.data.user) {
+                                   setLoginUser(res.data.user);
+                                   localStorage.setItem("token", res.data.token);
                 }
-            } else {
-                console.error("status login error", res);
-                toast.error(res.data.msg);
             }
-        }).catch((err) => {
-            console.log("login err", err)
-        });
+            else  if(res.data.user.role ===0 ){
+                console.log("logged in user", res.data);
+                           console.log(res.data.msg);
+                           toast.success(res.data.msg);
+                           navigate('/products');
+                           if (res.data.user) {
+                               setLoginUser(res.data.user);
+                               localStorage.setItem("token", res.data.token);
+            }
+        }
     }
+         } catch (err) {
+            console.log("login err", err);
+        }
+    }
+    
 
 
     return (
         <section id="login" className='d-flex items-center justify-content-center'>
-           <div className='container m-auto'>
-            <div className='row'>
+            <div className='container m-auto'>
+                <div className='row'>
                     <div className="col-md-4">
 
                     </div>
@@ -95,30 +125,30 @@ function Login() {
                                     onChange={handleInputs}
                                     value={Regs.password} type="password" className="input_field" id="password_field" />
                             </div>
-                            <button title="Sign In" 
+                            <button title="Sign In"
                                 onClick={handleForms}
                                 className="sign-in_btn">
                                 <span>Login</span>
                             </button>
-                    
-                        <Link to='/reg'>
-                            <button title="Sign In" type="submit"
-                                className="btn btn-success ">
-                                <span>SingUp</span>
-                            </button>
-                        </Link>
+
+                            <Link to='/reg'>
+                                <button title="Sign In" type="submit"
+                                    className="btn btn-success ">
+                                    <span>SingUp</span>
+                                </button>
+                            </Link>
                         </div>
-                       
+
                         <Toaster
-              position="top-center"
-              reverseOrder={false}
-            />
+                            position="top-center"
+                            reverseOrder={false}
+                        />
                     </div>
                     <div className="col-md-4">
 
                     </div>
                 </div>
-           </div>
+            </div>
         </section>
 
 
