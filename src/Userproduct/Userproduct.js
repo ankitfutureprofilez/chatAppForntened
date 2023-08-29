@@ -21,15 +21,15 @@ function Userproduct() {
 
     return (
         <>
-            <section>
+            <section id ="product">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-1">
 <Header/>
                         </div>
-                        <div className="col-md-11">
+                        <div className="col-md-3">
                             <>
-                                <h2 style={{ textAlign: 'center' }}>Products </h2>
+                                <h2>Products </h2>
                                 <section id="productstr">
                                     
                                     {list.map((result) => (

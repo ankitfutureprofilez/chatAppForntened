@@ -35,7 +35,7 @@ function Userproductshow(props) {
         <section id ="str">
             <div className="container m-2">
                 <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-3">
                         <div className="card" style={{ width: "18rem" }}>
                             <img  src ={products.img} style={{ width: '300px' }} className="card-img-top" alt="..."  />
                             <div className="card-body">

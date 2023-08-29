@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -8,7 +8,12 @@ import { Toaster } from 'react-hot-toast';
 
 function Header() {
 
-    const { loginUser, setLoginUser,cart } = useContext(UserContext)
+    const { loginUser, setLoginUser, cart } = useContext(UserContext)
+
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart))
+    }, [cart])
+    console.log("addcart", cart)
     const Navigate = useNavigate()
     function handlelogout(e) {
         localStorage.removeItem('loginUser')
@@ -73,7 +78,9 @@ function Header() {
                                 </Link></li>
                             </>
                             <>
-                                <Link to='/cart'> <i className="bi bi-cart4 me-2" style={{ color: 'white', fontSize: '25px' }}>{cart.totalitems ? cart.totalitems : 0}</i></Link>
+                               
+                                    <Link to='/cart'> <i className="bi bi-cart4 me-2" style={{ color: 'white', fontSize: '25px' }}>{cart.totalitems ? cart.totalitems : 0}</i></Link>
+                               
                             </>
                         </>
                     ) : (

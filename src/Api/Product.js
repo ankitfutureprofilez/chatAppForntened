@@ -34,7 +34,7 @@ class Product extends Component {
     }
 
     async cartadd(e) {
-        return Api.post('/api/cart', e);
+        return Api.post('/api/carts',e);
     }
 
     render() {

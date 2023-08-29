@@ -154,3 +154,17 @@ align-items: center;
 padding: 0.5rem;
 
 }
+
+#productstr{
+  display: flex;
+}
+
+#product{
+  display: flex;
+}
+
+
+
+#product h2{
+text-align: center;
+}

@@ -1,39 +1,73 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContextProvider";
+import Product from "../Api/Product";
+import axios from "axios";
 
 function Cart() {
-    const [products, setProducts] = useState([]);
+    const [Products, setProducts] = useState([]);
     const { cart, setCart } = useContext(UserContext);
     const navigate = useNavigate();
+    let totalamount = 0;
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart))
+    }, [cart])
+
+    // useEffect(() => {
+    //     if (!cart.items) {
+    //         return;
+    //     }
+    //     async function fetchData() {
+    //         try {
+    //             const main =  new Product();
+    //             console.log("main",main);
+    //             const response = await main.cartadd({ ids: Object.keys(cart.items) }); // Use your cartadd function from Api
+    //             console.log("response", response);
+    //             setProducts(response);
+    //         } catch (error) {
+    //             console.error("Error:", error);
+    //         }
+    //     }
+
+
+    // }, []);
+
+
+
+
 
     useEffect(() => {
         if (!cart.items) {
             return;
         }
-        fetch('/api/cart', {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ids: Object.keys(cart.items) })
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log("data", data);
-                setProducts(data);
+        axios.post('http://localhost:8080/api/carts', { ids: Object.keys(cart.items) })
+            .then((res) => res.data) // Access the response data directly
+            .then((response) => {
+                console.log("data", response);
+                setProducts(response.data);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
             });
     }, [cart]);
 
-    const handlequantity = (id) => {
-        let quantity = cart.items[id] || 0;
-        return quantity;
-    };
-
-    const totalAmount = products.reduce((total, product) => {
-        return total + handlequantity(product._id) * product.price;
-    }, 0);
+    console.log("cart", cart);
+    console.log("Products", Products)
 
 
 
+    function handlequantity(id) {
+        let quantity = cart.items[id]
+        return quantity
+
+    }
+
+    function handleprice(id, price) {
+        let tprice = handlequantity(id) * price
+        totalamount = totalamount + tprice
+        return tprice
+
+    }
 
     function handleincrement(e, id) {
         let current_qnty = handlequantity(id)
@@ -77,61 +111,52 @@ function Cart() {
         setCart(window.localStorage.getItem('cart'))
         navigate('/products')
     }
-
     return (
         <section>
-            <Link to='/products'><button className="btn btn-warning" style={{ width: '100px' }}>Back</button></Link>
-
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        {products.length ? (
+                        <div className="title_container mb-3 mt-2 text-center">
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <img src="chat-logo.png" alt="Logo" height="60px" />
+                                <p className="title mr-2">Add To Cart </p>
+                            </div>
+                        </div>
+                        {Products.length ?
                             <table className="table table-hover">
                                 <thead>
                                     <tr>
                                         <th>S.no</th>
                                         <th>Product Name</th>
-                                        <th>Product Description</th>
-                                        <th>Product Quantity</th>
+                                        <th>Product Desciption</th>
+                                        <th >Product Quanity</th>
                                         <th>Product Price</th>
                                         <th>Product Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {products.map((result, key) => (
-                                        <tr key={result._id}>
+                                    {Products.map((result, key) => (
+                                        <tr>
                                             <td>{key + 1}</td>
-                                            <td>{result.name}</td>
-                                            <td>{result.desc}</td>
-                                            <td>
-                                                <button className="btn btn-danger" onClick={(e) => { handledecrement(e, result._id) }}>-</button>
-                                                {handlequantity(result._id)}
-                                                <button className="btn btn-success" onClick={(e) => { handleincrement(e, result._id) }}>+</button>
-                                            </td>
-                                            <td>{handlequantity(result._id) * result.price}</td>
-                                            <td>
-                                                <button className="btn btn-secondary" onClick={(e) => { handledelete(e, result._id) }}>
-                                                    <i className="bi bi-trash-fill"></i>
-                                                </button>
-                                            </td>
+                                            <td>{result.title}</td>
+                                            <td>{result.description}</td>
+                                            <td ><button className="btn btn-danger" onClick={(e) => { handledecrement(e, result._id) }}>-</button>{handlequantity(result._id)}<button className="btn btn-success" onClick={(e) => { handleincrement(e, result._id) }}>+</button></td>
+                                            <td>{handleprice(result._id, result.price)}</td>
+                                            <td><button className="btn btn-secondary" onClick={(e) => { handledelete(e, result._id) }}><i class="bi bi-trash-fill"></i></button></td>
                                         </tr>
                                     ))}
-                                    <tr>
-                                        <td colSpan="6">Total Amount: {totalAmount}</td>
-                                    </tr>
-                                    <tr>
-                                        <td colSpan="5">
-                                            <button className="form-control btn btn-outline-info" onClick={(e) => { handlecheckout(e) }}>CheckOut</button>
-                                        </td>
-                                    </tr>
+                                    <tr><td colSpan="6">Total Amount: {totalamount}</td></tr>
+                                    <tr><td colSpan="5"><button className="form-control btn btn-outline-info mt-2" onClick={(e) => { handlecheckout(e) }}>CheckOut</button></td></tr>
                                 </tbody>
                             </table>
-                        ) : (
-                            <h2><img src="empty.png" alt="" /></h2>
-                        )}
+                            : <h2><img src="empty.png" alt="" /></h2>
+                        }
                     </div>
                 </div>
             </div>
+
+            <Link to='/products'><button className="btn btn-warning" style={{ width: '100px' }}>Back</button></Link>
+
         </section>
     );
 }

@@ -2,13 +2,11 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Singup from './components/Singup';
 import Login from './components/Login';
-import io from "socket.io-client";
 import UserContextProvider from "./context/UserContextProvider";
 import Reciver from './message/Reciver';
-import Msgdata from './message/Msgdata';
 import PrivateRoute from './Router/PrivateRoute';
 import OpenAi from './openai/OpenAi';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Multer from './openai/Multer';
 import Regex from './components/Regex';
 import Employees from './components/Employees';
@@ -37,10 +35,14 @@ function App() {
   }, []);
   const URL = process.env.REACT_APP_BASE_URL
   console.log("REACT_APP_BASE_URL ffff", URL)
-
+  const[cart,setCart] = useState('')
+  useEffect(()=>{
+      localStorage.setItem('cart',JSON.stringify(cart))
+  },[cart])
+  
   return (
     <div>
-      <UserContextProvider>
+      <UserContextProvider value={{cart,setCart}}>
         <Router>
           <Routes>
             <Route path='/product' element={<Productadd />}></Route>
