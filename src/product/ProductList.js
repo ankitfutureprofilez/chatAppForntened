@@ -84,7 +84,7 @@ function ProductList() {
                                         <tr key={res._id}>
                                             <td>{key + 1}</td>
                                             <td>
-                                <img src ={res.img}/>
+                                <img src={res.img} alt="aaa"/>
                                               </td>
                                             <td>{res.title}</td>
                                             <td>{res.description}</td>
