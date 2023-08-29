@@ -83,7 +83,9 @@ function ProductList() {
                                     {list && list.map((res, key) => (
                                         <tr key={res._id}>
                                             <td>{key + 1}</td>
-                                            <td>{res.img}</td>
+                                            <td>
+                                <img src ={res.img}/>
+                                              </td>
                                             <td>{res.title}</td>
                                             <td>{res.description}</td>
                                             <td>{res.price}</td>

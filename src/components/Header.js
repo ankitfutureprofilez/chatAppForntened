@@ -78,6 +78,11 @@ function Header() {
                                 </Link></li>
                             </>
                             <>
+                                <li><Link className="text-dark font-bold mt-2 mb-2" to="/products">
+                                <i class="bi bi-bag-check-fill"></i>
+                                </Link></li>
+                            </>
+                            <>
                                
                                     <Link to='/cart'> <i className="bi bi-cart4 me-2" style={{ color: 'white', fontSize: '25px' }}>{cart.totalitems ? cart.totalitems : 0}</i></Link>
                                
