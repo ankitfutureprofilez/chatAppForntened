@@ -78,85 +78,76 @@ function Employees() {
 
                 <div className='container m-auto'>
 
+                        <h2 className="mb-4 text-start  ">Employee Data</h2>
                     <div className='row'>
-                        <div className="col-md-3">
-                        </div>
-                        <div className="col-md-6">
-                            <div className="form_container">
-                                <div className="title_container">
-                                    <div style={{ display: 'flex', alignItems: 'center'}}>
-                                        <img src="chat-logo.png" alt="Logo" height="60px" />
-                                        <p className="title mr-2">Employee's</p>
-                                    </div>
-                                </div>
            
-                                <div className="input_container  " >
+                                <div className="col-md-6 input_container  " >
                                     <label className="input_label" for="email_field">Name</label>
                                     <input placeholder="Name"
                                         name='name'
                                         defaultValue={Employee.name}
                                         onChange={handleInputs}
-                                        title="Inpit title"
+                                        
                                         type="text" className="form-control" />
                                 </div>
-                                <div className="input_container">
+                                <div className="col-md-6 input_container mb-4">
                                     <label className="input_label" for="email_field">Email</label>
                                     <input placeholder="Email"
                                         defaultValue={Employee.email}
                                         onChange={handleInputs}
                                         name="email"
-                                        title="Inpit title" type="Email" className="form-control" />
+                                         type="Email" className="form-control" />
                                 </div>
                   
-                                <div className="input_container">
+                                <div className="col-md-4 input_container mb-4">
                                     <label className="input_label" for="email_field">Mobile Number</label>
                                     <input placeholder="number"
                                         name="contact_number"
                                         defaultValue={Employee.contact_number}
                                         onChange={handleInputs}
-                                        title="Inpit title" type="number" className="form-control" />
+                                         type="number" className="form-control" />
                                 </div>
-                                <div className="input_container">
+                                <div className="col-md-4 input_container mb-4">
                                     <label className="input_label" for="email_field">Date Of Birth</label>
                                     <input placeholder="date of birth"
                                         name="date_of_birth"
                                         defaultValue={Employee.date_of_birth}
                                         onChange={handleInputs}
-                                        title="Inpit title" type="Date" className="form-control" />
+                                         type="Date" className="form-control" />
                                 </div>
-                                <div className="input_container">
+                                <div className="col-md-4 input_container mb-4">
                                     <label className="input_label" for="email_field">Joining Date</label>
                                     <input placeholder="Joining Date"
                                         name="joining_date"
                                         defaultValue={Employees.joining_date}
                                         onChange={handleInputs}
-                                        title="Inpit title" type="Date" className="form-control" />
+                                         type="Date" className="form-control" />
                                 </div>
-                                <div className="input_container">
+                                <div className="col-md-4 input_container mb-4">
                                     <label className="input_label" for="email_field">Qualification</label>
                                     <input placeholder="Qualification"
                                         name="qualification"
                                         defaultValue={Employee.qualification}
                                         onChange={handleInputs}
-                                        title="Inpit title" type="text" className="form-control" />
+                                         type="text" className="form-control" />
                                 </div>
-                                <div className="input_container">
+                                <div className="col-md-4 input_container mb-4">
                                     <label className="input_label" for="email_field">Work-Experince</label>
                                     <input placeholder="Work-Experince"
                                         name="work_experience"
                                         defaultValue={Employee.work_experience}
                                         onChange={handleInputs}
-                                        title="Inpit title" type="text" className="form-control" />
+                                         type="text" className="form-control" />
                                 </div>
-                                <div className="input_container">
+                                <div className="col-md-4 input_container mb-4">
                                     <label className="input_label" for="email_field">Work-Profile</label>
                                     <input placeholder="Work-Profile"
                                         name="work_profile"
                                         defaultValue={Employee.work_profile}
                                         onChange={handleInputs}
-                                        title="Inpit title" type="text" className="form-control" />
+                                         type="text" className="form-control" />
                                 </div>
-                                <div className="input_container">
+                                <div className="col-md-4 input_container mb-4">
                                     <label className="input_label" for="work_profile_field">Status</label>
                                     <select name="status"
                                         defaultValue={Employee.status}
@@ -167,7 +158,7 @@ function Employees() {
                                         <option value="In-Active">In-Active</option>
                                     </select>
                                 </div>
-                                <div className="input_container">
+                                <div className="col-md-4 input_container mb-4">
                                     <label className="input_label" for="work_profile_field">Team Leader </label>
                                     <select name="team_lead"
                                         defaultValue={Employee.team_lead}
@@ -178,7 +169,7 @@ function Employees() {
                                         <option value="No">No</option>
                                     </select>
                                 </div>
-                                <div className="input_container">
+                                <div className="col-md-4 input_container mb-4">
                                     <label className="input_label" for="work_profile_field">Work_place</label>
                                     <select
                                         name="work_place"
@@ -194,15 +185,11 @@ function Employees() {
                                 <button title="Sign In"
                                     type='submit'
                                     onClick={handleFormSubmit}
-                                    className="sign-in_btn">
-                                    <span>Employee Registration</span>
+                                    className="btn bg-primary mainbtn">
+                                    <span>Submit</span>
                                 </button>
                             </div>
                         </div>
-                        <div className="col-md-3">
-                        </div>
-                    </div>
-                </div>
             </section>
         </>
     );
