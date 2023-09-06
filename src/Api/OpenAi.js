@@ -10,7 +10,6 @@ class OpenAi extends Component {
     // async OpenAiChat(e) {
     //     return Api.post('/chain', e);
     // }
-
     
     // async OpenAiChat(e) {
     //     return Api.post('/findAnswer', e);
