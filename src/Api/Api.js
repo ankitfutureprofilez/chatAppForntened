@@ -10,5 +10,4 @@ let Api = axios.create({
     'Authorization': `Bearer ${tokens}`
   }
 });
-
 export default Api;
