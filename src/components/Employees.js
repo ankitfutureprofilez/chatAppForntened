@@ -103,6 +103,7 @@ function Employees() {
         className="d-flex items-center justify-content-center"
       >
         <div className="container m-auto">
+          <div>
           <h2 className="mb-4 text-start  ">Employee Data</h2>
           <div className="row">
             <div className="col-md-6 input_container">
@@ -272,8 +273,7 @@ function Employees() {
               </select>
             </div>
           </div>
-        </div>
-            <button
+          <button
               title="Sign In"
               type="submit"
               onClick={handleFormSubmit}
@@ -281,6 +281,9 @@ function Employees() {
             >
               <span>Submit</span>
             </button>
+          </div>
+        </div>
+           
             <Toaster position="top-center" reverseOrder={false} />
       </section>
     </>
