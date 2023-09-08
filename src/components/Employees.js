@@ -232,12 +232,12 @@ function Employees() {
                 title="Input title"
                 className="form-control"
               >
+                <option value="None">None </option>
                 <option value="HTML">HTML </option>
                 <option value="WordPress">WordPress </option>
                 <option value="PHP">PHP </option>
                 <option value="SEO">SEO </option>
                 <option value="shopify">Shopify </option>
-                <option value="Nan">Nan </option>
               </select>
             </div>
 
