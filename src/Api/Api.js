@@ -9,6 +9,7 @@ let Api = axios.create({
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${tokens}`
   }
+  
 });
 
 export default Api;
