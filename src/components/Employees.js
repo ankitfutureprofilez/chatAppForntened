@@ -17,7 +17,7 @@ function Employees() {
     contact_number: "",
     team_lead: "No",
     work_place: "On Site",
-    position: "",
+    position: "None",
   });
 
   const months = [
