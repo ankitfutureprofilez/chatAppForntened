@@ -159,13 +159,12 @@ function Employees() {
                                 defaultValue={Employee.position}
                                 onChange={handleInputs}
                                 title="Input title" className="form-control">
-                                <option value='..on Choose'>..on choose</option>
                                 <option value="HTML">HTML </option>
                                 <option value="WordPress">WordPress </option>
                                 <option value="PHP">PHP </option>
                                 <option value="SEO">SEO </option>
                                 <option value="shopify">Shopify </option>
-                                <option value="Null">Null </option>
+                                <option value="Nan">Nan </option>
                             </select>
                         </div>
 
@@ -175,9 +174,10 @@ function Employees() {
                                 defaultValue={Employee.team_lead}
                                 onChange={handleInputs}
                                 title="Input title" className="form-control">
-                                <option value='..on Choose'>..on choose</option>
                                 <option value="Yes">Yes </option>
                                 <option value="No">No</option>
+                                <option value="Nan">Nan </option>
+
                             </select>
                         </div>
                         <div className="col-md-4 input_container mb-4">
@@ -187,10 +187,11 @@ function Employees() {
                                 defaultValue={Employee.work_place}
                                 onChange={handleInputs}
                                 title="Input title" className="form-control">
-                                <option value='..on Choose'>..on choose</option>
                                 <option value="On_site">On_site</option>
                                 <option value="Hybrid">Hybrid</option>
                                 <option value="remote">remote</option>
+                                <option value="Nan">Nan </option>
+
                             </select>
                         </div>
                         <button title="Sign In"
