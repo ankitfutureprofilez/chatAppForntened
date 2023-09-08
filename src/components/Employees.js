@@ -15,7 +15,8 @@ function Employees() {
         status: "",
         contact_number: '',
         team_lead: "",
-        work_place: ''
+        work_place: '',
+        position:""
     });
 
     const months = [
@@ -46,6 +47,7 @@ function Employees() {
         console.log("main", main)
         const fdata = new FormData();
         fdata.append("name", Employees.name);
+        fdata.append("position", Employees.position);
         fdata.append("email", Employees.email);
         var dt = new Date(Employees.date_of_birth);
         const newdate = dt.getDate() + " " + months[dt.getMonth()] + " " + dt.getFullYear();
@@ -126,6 +128,15 @@ function Employees() {
                                 onChange={handleInputs}
                                     type="text" className="form-control" />
                         </div>
+
+                        {/* <div className="col-md-4 input_container mb-4">
+                            <label className="input_label" for="email_field">Previous Position</label>
+                            <input placeholder="Previous Position"
+                                name="position"
+                                defaultValue={Employee.position}
+                                onChange={handleInputs}
+                                    type="text" className="form-control" />
+                        </div> */}
                         <div className="col-md-4 input_container mb-4">
                             <label className="input_label" for="email_field">Work-Experince</label>
                             <input placeholder="Work-Experince"
@@ -143,16 +154,20 @@ function Employees() {
                                     type="text" className="form-control" />
                         </div>
                         <div className="col-md-4 input_container mb-4">
-                            <label className="input_label" for="work_profile_field">Status</label>
-                            <select name="status"
-                                defaultValue={Employee.status}
+                            <label className="input_label" for="work_profile_field">Previous Position</label>
+                            <select name="position"
+                                defaultValue={Employee.position}
                                 onChange={handleInputs}
                                 title="Input title" className="form-control">
                                 <option value='..on Choose'>..on choose</option>
-                                <option value="Active">Active </option>
-                                <option value="In-Active">In-Active</option>
+                                <option value="HTML">HTML </option>
+                                <option value="WordPress">WordPress </option>
+                                <option value="PHP">PHP </option>
+                                <option value="SEO">SEO </option>
+                                <option value="shopify">Shopify </option>
                             </select>
                         </div>
+
                         <div className="col-md-4 input_container mb-4">
                             <label className="input_label" for="work_profile_field">Team Leader </label>
                             <select name="team_lead"
