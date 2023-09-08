@@ -15,8 +15,8 @@ function Employees() {
     work_profile: "",
     status: "Active",
     contact_number: "",
-    team_lead: "",
-    work_place: "",
+    team_lead: "No",
+    work_place: "On Site",
     position: "",
   });
 
