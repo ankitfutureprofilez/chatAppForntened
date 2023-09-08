@@ -31,7 +31,6 @@ function OpenAi() {
       if (beforeText) {
         parts.push(<span key={parts.length}>{beforeText}</span>);
       }
-  
       const linkOrEmail = match[0];
       if (linkOrEmail.match(linkRegex)) {
         parts.push(
@@ -46,14 +45,11 @@ function OpenAi() {
           </a>
         );
       }
-  
       text = text.slice(match.index + match[0].length);
     }
-  
     if (text) {
       parts.push(<span key={parts.length}>{text}</span>);
     }
-  
     return parts;
   }
   
@@ -83,7 +79,7 @@ function OpenAi() {
         content: "Hi 👋 I'm an AI Assistant trained on our company information. How can I help you?"
       }]);
       setLoading(false)
-    }, 3000);
+    }, 2000);
   }, []);
 
 
