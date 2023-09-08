@@ -165,6 +165,7 @@ function Employees() {
                                 <option value="PHP">PHP </option>
                                 <option value="SEO">SEO </option>
                                 <option value="shopify">Shopify </option>
+                                <option value="Null">Null </option>
                             </select>
                         </div>
 
