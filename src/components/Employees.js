@@ -13,7 +13,7 @@ function Employees() {
     qualification: "",
     work_experience: "",
     work_profile: "",
-    status: "",
+    status: "Active",
     contact_number: "",
     team_lead: "",
     work_place: "",
@@ -43,7 +43,24 @@ function Employees() {
   };
 
   const handleFormSubmit = async (e) => {
+
+    const emptyFieldsArray = () => {
+        const emptyFields = [];
+        for (const key in Employeedata) {
+          if (Employeedata[key] === "") {
+            emptyFields.push(key);
+            toast.error(`${key} can not be empty.`)
+          }
+        } 
+       return emptyFields
+      };
+
+      const emptyFields = emptyFieldsArray();
     e.preventDefault();
+    if(emptyFields && emptyFields.length){
+        return false
+    }
+
     const main = new Employee();
     console.log("main", main);
     const fdata = new FormData();
@@ -237,7 +254,6 @@ function Employees() {
               >
                 <option value="Yes">Yes </option>
                 <option value="No">No</option>
-                <option value="Nan">Nan </option>
               </select>
             </div>
             <div className="col-md-4 input_container mb-4">
@@ -254,7 +270,6 @@ function Employees() {
                 <option value="On_site">On_site</option>
                 <option value="Hybrid">Hybrid</option>
                 <option value="remote">remote</option>
-                <option value="Nan">Nan </option>
               </select>
             </div>
             <button
