@@ -223,7 +223,6 @@ function Employees() {
               </select>
             </div>
 
-            </div>
             <div className="col-md-4 input_container mb-4">
               <label className="input_label" for="work_profile_field">
                 Past Position
@@ -285,6 +284,7 @@ function Employees() {
               <span>Submit</span>
             </button>
             <Toaster position="top-center" reverseOrder={false} />
+          </div>
           </div>
       </section>
     </>
