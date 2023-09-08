@@ -173,7 +173,7 @@ function Employees() {
                 className="form-control"
               />
             </div>
-            
+
             <div className="col-md-4 input_container mb-4">
               <label className="input_label" for="email_field">
                 Education Qualification
@@ -205,14 +205,24 @@ function Employees() {
               <label className="input_label" for="email_field">
                 Current Working Profile
               </label>
-              <input
-                placeholder="Work-Profile"
-                name="work_profile"
+              <select
+                name="Work profile"
                 defaultValue={Employeedata.work_profile}
                 onChange={handleInputs}
-                type="text"
-                className="form-control"
-              />
+                title="Input title"
+                className="form-control" >
+                <option value="None">None</option>
+                <option value="HTML">HTML</option>
+                <option value="WordPress">WordPress </option>
+                <option value="laravel">Laravel</option>
+                <option value="PHP">PHP </option>
+                <option value="SEO">SEO </option>
+                <option value="shopify">Shopify </option>
+                <option value="marketing">Marketing </option>
+                <option value="QA">QA</option>
+              </select>
+            </div>
+
             </div>
             <div className="col-md-4 input_container mb-4">
               <label className="input_label" for="work_profile_field">
