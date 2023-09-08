@@ -1,8 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import Employee from "../Api/Employee";
-import { Toaster, toast } from 'react-hot-toast';
-
+import { Toaster, toast } from "react-hot-toast";
 
 function Employees() {
   const [Employeedata, setEmployees] = useState({
@@ -43,22 +42,21 @@ function Employees() {
   };
 
   const handleFormSubmit = async (e) => {
-
     const emptyFieldsArray = () => {
-        const emptyFields = [];
-        for (const key in Employeedata) {
-          if (Employeedata[key] === "") {
-            emptyFields.push(key);
-            toast.error(`${key} can not be empty.`)
-          }
-        } 
-       return emptyFields
-      };
+      const emptyFields = [];
+      for (const key in Employeedata) {
+        if (Employeedata[key] === "") {
+          emptyFields.push(key);
+          toast.error(`${key} can not be empty.`);
+        }
+      }
+      return emptyFields;
+    };
 
-      const emptyFields = emptyFieldsArray();
+    const emptyFields = emptyFieldsArray();
     e.preventDefault();
-    if(emptyFields && emptyFields.length){
-        return false
+    if (emptyFields && emptyFields.length) {
+      return false;
     }
 
     const main = new Employee();
@@ -86,9 +84,9 @@ function Employees() {
     response
       .then((res) => {
         if (res) {
-            toast.success(res && res.data && res.data.msg);
+          toast.success(res && res.data && res.data.msg);
         } else {
-            toast.error(res && res.data && res.data.msg);
+          toast.error(res && res.data && res.data.msg);
         }
         console.log(fdata);
       })
@@ -252,6 +250,7 @@ function Employees() {
                 title="Input title"
                 className="form-control"
               >
+               
                 <option value="Yes">Yes </option>
                 <option value="No">No</option>
               </select>
@@ -285,7 +284,7 @@ function Employees() {
         </div>
       </section>
     </>
-  );
+  ); 
 }
 
 export default Employees;
