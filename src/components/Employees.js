@@ -173,9 +173,10 @@ function Employees() {
                 className="form-control"
               />
             </div>
+            
             <div className="col-md-4 input_container mb-4">
               <label className="input_label" for="email_field">
-                Qualification
+                Education Qualification
               </label>
               <input
                 placeholder="Qualification"
@@ -186,18 +187,10 @@ function Employees() {
                 className="form-control"
               />
             </div>
-
-            {/* <div className="col-md-4 input_container mb-4">
-                            <label className="input_label" for="email_field">Previous Position</label>
-                            <input placeholder="Previous Position"
-                                name="position"
-                                defaultValue={Employee.position}
-                                onChange={handleInputs}
-                                    type="text" className="form-control" />
-                        </div> */}
+            
             <div className="col-md-4 input_container mb-4">
               <label className="input_label" for="email_field">
-                Work-Experince
+                Work Experience
               </label>
               <input
                 placeholder="Work-Experince"
@@ -210,7 +203,7 @@ function Employees() {
             </div>
             <div className="col-md-4 input_container mb-4">
               <label className="input_label" for="email_field">
-                Work-Profile
+                Current Working Profile
               </label>
               <input
                 placeholder="Work-Profile"
@@ -223,42 +216,43 @@ function Employees() {
             </div>
             <div className="col-md-4 input_container mb-4">
               <label className="input_label" for="work_profile_field">
-                Previous Position
+                Past Position
               </label>
               <select
                 name="position"
                 defaultValue={Employeedata.position}
                 onChange={handleInputs}
                 title="Input title"
-                className="form-control"
-              >
-                <option value="None">None </option>
-                <option value="HTML">HTML </option>
+                className="form-control" >
+                <option value="None">None</option>
+                <option value="HTML">HTML</option>
                 <option value="WordPress">WordPress </option>
+                <option value="laravel">Laravel</option>
                 <option value="PHP">PHP </option>
                 <option value="SEO">SEO </option>
                 <option value="shopify">Shopify </option>
+                <option value="marketing">Marketing </option>
+                <option value="QA">QA</option>
               </select>
             </div>
 
             <div className="col-md-4 input_container mb-4">
               <label className="input_label" for="work_profile_field">
-                Team Leader{" "}
+                Team Leader
               </label>
               <select
                 name="team_lead"
                 defaultValue={Employeedata.team_lead}
                 onChange={handleInputs}
                 title="Input title"
-                className="form-control"
-              >
+                className="form-control" >
                 <option value="Yes">Yes </option>
                 <option value="No">No</option>
               </select>
             </div>
             <div className="col-md-4 input_container mb-4">
               <label className="input_label" for="work_profile_field">
-                Work_place
+                Working Type
               </label>
               <select
                 name="work_place"
