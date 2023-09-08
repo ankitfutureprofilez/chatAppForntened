@@ -286,7 +286,6 @@ function Employees() {
             </button>
             <Toaster position="top-center" reverseOrder={false} />
           </div>
-        </div>
       </section>
     </>
   );
