@@ -20,7 +20,7 @@ function Reciver(props) {
     const [selectedUserId, setSelectedUserId] = useState("");
     const [selectRecive, setSelectrecive] = useState("")
    
-    const socket = io("https://chat-appbackend.vercel.app");
+    const socket = io("http://localhost:8080");
 
     // Helper function to wrap the first letter of a username in a <div>
     const wrapFirstLetterInDiv = (username) => {
@@ -65,7 +65,7 @@ function Reciver(props) {
                         <Header />
                     </div>
                 </div>
-                <div className="sidebar-chats">
+                <div className={`${selectedUsername ? "selected" : ''} sidebar-chats`}>
                     <div className="px-4 pt-4">
                         <h4 className="mt-0 mb-4">Chats</h4>
                         <MDBCol className="mb-3">
@@ -73,13 +73,13 @@ function Reciver(props) {
                         </MDBCol>
                     </div>
                     <div className="px-2">
-
                         <div ref={listRef} className="chat-message-list">
                             <ListGroup as="ul" className="border-0" >
                                 {list && list.map((User) => (
                                     <ListGroup.Item
                                         className={(loginUser && loginUser.userId) === (User && User.userId) ? `d-none` : ''}
-                                        as="li" key={User.userId} onClick={() => handleSendButtonClick(User.username, User.userId)}>
+                                        as="li" key={User.userId} 
+                                        onClick={() => handleSendButtonClick(User.username, User.userId)}>
                                         {/* Use the helper function to display the modified username */}
                                         <div className="rightactions d-flex align-items-center" >
                                             <div className="user-avatar">
@@ -88,7 +88,7 @@ function Reciver(props) {
 
                                             <div className="user-details ps-2">
                                                 <h6 className="mb-0 text-capitalize" >{User.name}</h6>
-                                                <p className="mb-0" >@{User.username}</p>
+                                                {/* <p className="mb-0" >@{User.username}</p> */}
                                             </div>
                                         </div>
                                     </ListGroup.Item>
@@ -97,9 +97,9 @@ function Reciver(props) {
                         </div>
                     </div>
                 </div>
-                <div className="chat_panel">
+                <div className={`${selectedUsername ? "selected" : ''} chat_panel`}>
                     <Msgdata socket={socket}  username={selectedUsername} userId={selectedUserId} receiveId={selectRecive} /></div>
-            </div>
+                </div>
         </section>
     );
 }

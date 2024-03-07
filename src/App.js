@@ -15,6 +15,7 @@ import ProductList from './product/ProductList';
 import ProductUpdate from './product/ProductUpdate';
 import Userproductshow from './Userproduct/Userproductshow';
 import Userproduct from './Userproduct/Userproduct';
+import { io } from 'socket.io-client';
 import Cart from './product/Cart';
 
 
@@ -24,32 +25,32 @@ import Cart from './product/Cart';
 function App() {
 
   useEffect(() => {
-    // const socket = io("https://chat-appbackend.vercel.app");
+    const socket = io("http://localhost:8080/");
     // Socket.io events can be handled here
     // For example: socket.on('event', (data) => { /* handle the event */ });
 
     return () => {
-      // socket.disconnect(); // Clean up the socket connection on component unmount
+      socket.disconnect(); // Clean up the socket connection on component unmount
     };
   }, []);
   const URL = process.env.REACT_APP_BASE_URL
   console.log("REACT_APP_BASE_URL ffff", URL)
-  const[cart,setCart] = useState('')
-  useEffect(()=>{
-      localStorage.setItem('cart',JSON.stringify(cart))
-  },[cart])
-  
+  const [cart, setCart] = useState('')
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }, [cart])
+
   return (
     <div>
-      <UserContextProvider value={{cart,setCart}}>
+      <UserContextProvider value={{ cart, setCart }}>
         <Router>
           <Routes>
             <Route path='/product' element={<Productadd />}></Route>
             <Route path='/Productlist' element={<ProductList />}></Route>
             <Route path="/productupdate" element={<ProductUpdate />}></Route>
-            <Route path='/products' element={<Userproduct/>}></Route>
-            <Route path ='/cart' element={<Cart/>}></Route>
-            <Route path ='/productshow' element ={<Userproductshow/>}></Route>
+            <Route path='/products' element={<Userproduct />}></Route>
+            <Route path='/cart' element={<Cart />}></Route>
+            <Route path='/productshow' element={<Userproductshow />}></Route>
             <Route path='/employee' element={<Employees></Employees>}></Route>
             <Route path="/aaa" element={<Regex />}></Route>
             <Route path='/reg' element={<Singup />}> </Route>
